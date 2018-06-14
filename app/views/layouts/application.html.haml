@@ -1,0 +1,26 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title BingoLingua
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body
+    %header
+      %ul#menu
+        %li
+          %a{:href => "/"} Home
+        %li
+          %a{:href => "/games"} Play a game
+        - if current_user.try(:admin?)
+          %li
+            %a{:href => "/admin"} Admin panel
+        - if user_signed_in?
+          %li
+            %a
+              Hi, #{current_user.email}
+            = link_to "Log Out", destroy_user_session_path, method: :get
+    %p.notice= notice
+    %p.alert= alert
+    = yield
