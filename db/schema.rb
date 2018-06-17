@@ -10,7 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_14_080117) do
+ActiveRecord::Schema.define(version: 2018_06_17_110844) do
+
+  create_table "cards", force: :cascade do |t|
+    t.string "picture"
+    t.string "sound"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "test_id"
+    t.index ["test_id"], name: "index_cards_on_test_id"
+  end
+
+  create_table "cards_users", id: false, force: :cascade do |t|
+    t.integer "card_id", null: false
+    t.integer "user_id", null: false
+    t.index ["card_id", "user_id"], name: "index_cards_users_on_card_id_and_user_id"
+    t.index ["user_id", "card_id"], name: "index_cards_users_on_user_id_and_card_id"
+  end
+
+  create_table "test_results", force: :cascade do |t|
+    t.integer "attempts"
+    t.integer "last_result"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.integer "test_id"
+    t.index ["test_id"], name: "index_test_results_on_test_id"
+    t.index ["user_id"], name: "index_test_results_on_user_id"
+  end
+
+# Could not dump table "tests" because of following StandardError
+#   Unknown type 'has_many' for column 'card'
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false

@@ -33,6 +33,8 @@ gem 'haml-rails'
 gem 'devise'
 # For admin panel
 gem "administrate"
+# For images in admin panel
+gem 'administrate-field-image'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
