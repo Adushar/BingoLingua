@@ -23,6 +23,14 @@ By default, it renders:
   </title>
   <%= render "stylesheet" %>
   <%= csrf_meta_tags %>
+  <style>
+    body {padding: 0;}
+    /* Limit image size in admin panel */
+    .attribute-data img {
+      max-width: 500px;
+      max-height: 500px;
+    }
+  </style>
 </head>
 <body>
   <%= render "icons" %>

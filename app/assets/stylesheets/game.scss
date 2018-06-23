@@ -1,3 +1,32 @@
-// Place all the styles related to the game controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.connectedSortable {
+  border: 1px solid #eee;
+  list-style-type: none;
+  padding: 0;
+  display: table;
+  margin: 10px auto;
+  width: 100px;
+  height: 100px;
+}
+.connectedSortable li {
+  float: left;
+  width: 100px;
+  height: 100px;
+}
+.ui-state-highlight {
+  height: 1.5em;
+  line-height: 1.2em;
+ }
+
+/* For card-images  */
+.ui-sortable img {
+  width: 100px;
+  height: 100px;
+  border: 1px solid #eee;
+  overflow: hidden;
+}
+
+/* For bootstrap popup */
+.btn-group-vertical {
+  width: 100%;
+  button {text-align: left;}
+}

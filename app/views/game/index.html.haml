@@ -1,1 +1,6 @@
-%h1 Morning
+%h1 Free Tests
+- @free_tests.each do |free_test|
+  = link_to free_test.name, game_path(free_test)
+%h1 Payed Tests
+- @subscribe_tests.each do |subscribe_tests|
+  = link_to subscribe_tests.name, game_path(subscribe_tests)

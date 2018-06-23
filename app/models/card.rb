@@ -1,4 +1,5 @@
 class Card < ApplicationRecord
+  has_many :cards_users
+  has_many :users, :through => :cards_users
   belongs_to :test
-  has_and_belongs_to_many :users
 end

@@ -2,25 +2,40 @@
 %html
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    = Gon::Base.render_data
     %title BingoLingua
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    %script{:src => "/resources/jquery-1.10.2.min.js"}
+    %script{:src => "/resources/jquery-ui.min.js"}
+    %script{:src => "/resources/jquery-fsortable.js"}
+    %script{:src => "/resources/jquery.ui.touch-punch.min.js"}
+    %script{:src => "/resources/game.js"}
     = csrf_meta_tags
   %body
-    %header
-      %ul#menu
-        %li
-          %a{:href => "/"} Home
-        %li
-          %a{:href => "/games"} Play a game
-        - if current_user.try(:admin?)
-          %li
-            %a{:href => "/admin"} Admin panel
-        - if user_signed_in?
-          %li
-            %a
-              Hi, #{current_user.email}
-            = link_to "Log Out", destroy_user_session_path, method: :get
-    %p.notice= notice
-    %p.alert= alert
+    %nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.fixed-top
+      %a.navbar-brand{:href => "/"} BingoLingua
+      %button.navbar-toggler{"aria-controls" => "navbarNav", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarNav", "data-toggle" => "collapse", :type => "button"}
+        %span.navbar-toggler-icon
+      #navbarNav.collapse.navbar-collapse
+        %ul.navbar-nav
+          %li.nav-item
+            %a.nav-link{:href => "/game"} Play a game
+          - if current_user.try(:admin?)
+            %li.nav-item
+              %a.nav-link{:href => "/admin"} Admin panel
+        %ul.navbar-nav.ml-auto
+          - if current_user
+            %span.nav-link= current_user.email
+          %li.nav-item
+            - if current_user
+              = link_to "Log Out", destroy_user_session_path, class: "nav-link", method: :get
+            - else
+              = link_to "Log In", new_user_session_path, class: "nav-link"
+    - if notice.present?
+      .alert.alert-info{:role => "alert"}
+        = notice
+    - if alert.present?
+      .alert.alert-warning{:role => "alert"}
+        = alert
     = yield

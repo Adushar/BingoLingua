@@ -35,6 +35,12 @@ gem 'devise'
 gem "administrate"
 # For images in admin panel
 gem 'administrate-field-image'
+# Bootstrap
+gem 'bootstrap'
+# Jquery
+gem 'jquery-rails'
+# Gon
+gem 'gon'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
