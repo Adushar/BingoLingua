@@ -1,9 +1,14 @@
 @import "bootstrap";
+@import "font-awesome";
 @import "game";
 
-body {
-  // padding for fixed header
-  padding-top: 56px;
+.not_drag {
+  user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
 }
 
 #content .inactive {
@@ -20,29 +25,60 @@ ul#menu {
 // for side bar
 
 .sidenav {
-    height: 100%;
-    width: 200px;
-    position: fixed;
-    z-index: 0;
-    top: 0;
-    left: 0;
-    background-color: #111;
-    overflow-x: hidden;
-    padding-top: 60px;
+  height: 100%;
+  width: 100px;
+  position: fixed;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  li {padding: 5px 0;}
+  .text-center {
+    margin: 4.5px auto 0;
+    list-style-type: none;
+  }
+}
+
+.sidenav .bottom {
+  margin-top: auto;
+}
+
+.sidenav {
+  i {font-size: 30px;}
+  span {
+    font-size: 25px;
+    vertical-align: unset;
+  }
+  i, span {
+    color: #818181;
+  }
 }
 
 .sidenav a {
-    padding: 6px 6px 6px 32px;
-    text-decoration: none;
-    font-size: 18px;
-    color: #818181;
-    display: block;
+  padding: 0;
+  text-decoration: none;
+  font-size: 18px;
+  color: #818181;
 }
 
-.sidenav a:hover {
+.sidenav a:hover i {
     color: #f1f1f1;
 }
 
-.main {
-    margin-left: 200px; /* Same as the width of the sidenav */
+.card_block {
+  text-align: center;
+  max-width: 150px;
+  i.star {
+    color: rgba(115, 109, 115, 0.7);
+    position: absolute;
+    top: 12%;
+    transform: translateX(30px);
+    z-index: 5;
+  }
+  i.star:hover {
+    color: #dfff00;
+  }
 }

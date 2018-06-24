@@ -2,36 +2,53 @@
 // Sidebar
 :css
   body {
-  padding-left: 200px;
+  padding-left: 100px;
   }
-.sidenav
-  %a{:href => "#"} Back
-  %a{:href => "#"} Check
+%ul.sidenav.d-md-flex.d-none.navbar-fixed-left
+  %li.text-center
+    %a{:href => "/"}
+      = fa_icon "chevron-circle-left"
+    %span#number_of_part 1
+    %a{:href => "/"}
+      = fa_icon "chevron-circle-right"
+  %li.text-center.bottom
+    %a{:href => "/"}
+      = fa_icon "check-circle"
+  %li.text-center
+    %a{"data-toggle" => "modal", :href => ".level-of-difficulty-modal-sm"}
+      = fa_icon "cog"
   / Button trigger modal
-  %a{"data-toggle" => "modal", :href => ".level-of-difficulty-modal-sm"} Game modes
 
-// Game
 .container
   .row
-    .col-2
-      %ul#sortable1.connectedSortable
-        %li.ui-state-default
-          %img{:src => "https://smhttp-ssl-17653.nexcesscdn.net/media/catalog/product/cache/1/thumbnail/9df78eab33525d08d6e5fb8d27136e95/f/t/ft053-b.jpg"}
-    .col-2
-      %ul.connectedSortable
-        %li.ui-state-default
-          %img{:src => "https://smhttp-ssl-17653.nexcesscdn.net/media/catalog/product/cache/1/thumbnail/9df78eab33525d08d6e5fb8d27136e95/f/t/ft053-b.jpg"}
-    .col-2
-      %ul.connectedSortable
-        %li.ui-state-default
-          %img{:src => "https://smhttp-ssl-17653.nexcesscdn.net/media/catalog/product/cache/1/thumbnail/9df78eab33525d08d6e5fb8d27136e95/f/t/ft053-b.jpg"}
-  .row
-    .col-2
-      %ul#sortable2.connectedSortable.target
-    .col-2
-      %ul#sortable3.connectedSortable.target
-    .col-2
-      %ul#sortable4.connectedSortable.target
+    - @cards.limit(25).each do |card|
+      .card_block.col-xl-2.col-lg-2.col-md-3.col-5.mx-auto
+        %a{:oclick => ""}
+          = fa_icon "star-o", class: "star"
+        = image_tag card.picture, class: "card not_drag", "onclick" => "playSound(\"#{card.sound}\");"
+
+// Game
+-# .container
+-#   .row
+-#     .col-2
+-#       %ul#sortable1.connectedSortable
+-#         %li.ui-state-default
+-#           %img{:src => "https://smhttp-ssl-17653.nexcesscdn.net/media/catalog/product/cache/1/thumbnail/9df78eab33525d08d6e5fb8d27136e95/f/t/ft053-b.jpg"}
+-#     .col-2
+-#       %ul.connectedSortable
+-#         %li.ui-state-default
+-#           %img{:src => "https://smhttp-ssl-17653.nexcesscdn.net/media/catalog/product/cache/1/thumbnail/9df78eab33525d08d6e5fb8d27136e95/f/t/ft053-b.jpg"}
+-#     .col-2
+-#       %ul.connectedSortable
+-#         %li.ui-state-default
+-#           %img{:src => "https://smhttp-ssl-17653.nexcesscdn.net/media/catalog/product/cache/1/thumbnail/9df78eab33525d08d6e5fb8d27136e95/f/t/ft053-b.jpg"}
+-#   .row
+-#     .col-2
+-#       %ul#sortable2.connectedSortable.target
+-#     .col-2
+-#       %ul#sortable3.connectedSortable.target
+-#     .col-2
+-#       %ul#sortable4.connectedSortable.target
 
 / Modal
 .modal.fade.level-of-difficulty-modal-sm{"aria-hidden" => "true", "aria-labelledby" => "mySmallModalLabel", :role => "dialog", :tabindex => "-1"}

@@ -11,6 +11,8 @@ class UserDashboard < Administrate::BaseDashboard
     id: Field::Number,
     email: Field::Email,
     encrypted_password: Field::String,
+    password: Field::String,
+    password_confirmation: Field::String,
     reset_password_token: Field::String,
     reset_password_sent_at: Field::DateTime,
     remember_created_at: Field::DateTime,
@@ -23,6 +25,7 @@ class UserDashboard < Administrate::BaseDashboard
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
     admin: Field::Boolean,
+    cards: Field::HasMany,
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -52,6 +55,7 @@ class UserDashboard < Administrate::BaseDashboard
     :created_at,
     :updated_at,
     :admin,
+    :cards,
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -59,9 +63,9 @@ class UserDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
     :email,
-    :encrypted_password,
     :subscribe_ends,
     :admin,
+    :cards,
   ].freeze
 
   # Overwrite this method to customize how users are displayed

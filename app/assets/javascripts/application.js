@@ -17,3 +17,10 @@
 //= require jquery3
 //= require popper
 //= require bootstrap-sprockets
+
+function playSound(soundfile) {
+
+  $("#delete_me").remove();
+  $('body').append('<audio id="delete_me" src="' + soundfile + '" autostart="false" ></audio>');
+  $("#delete_me")[0].play();
+};

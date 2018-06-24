@@ -11,9 +11,10 @@
     %script{:src => "/resources/jquery-fsortable.js"}
     %script{:src => "/resources/jquery.ui.touch-punch.min.js"}
     %script{:src => "/resources/game.js"}
+    %meta{:content => "width=device-width,  initial-scale=1.0, minimum-scale: .5, maximum-scale: 5.0", :name => "viewport"}/
     = csrf_meta_tags
   %body
-    %nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.fixed-top
+    %nav.navbar.navbar-expand-md.navbar-dark.bg-dark.navbar-fixed-top
       %a.navbar-brand{:href => "/"} BingoLingua
       %button.navbar-toggler{"aria-controls" => "navbarNav", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarNav", "data-toggle" => "collapse", :type => "button"}
         %span.navbar-toggler-icon
@@ -26,12 +27,15 @@
               %a.nav-link{:href => "/admin"} Admin panel
         %ul.navbar-nav.ml-auto
           - if current_user
-            %span.nav-link= current_user.email
+            %span.nav-link.d-md-block.d-none= current_user.email
           %li.nav-item
             - if current_user
               = link_to "Log Out", destroy_user_session_path, class: "nav-link", method: :get
             - else
               = link_to "Log In", new_user_session_path, class: "nav-link"
+        %ul.navbar-nav.d-md-none.d-block
+          %li.nav-item
+            = link_to "LogIn", new_user_session_path, class: "nav-link"
     - if notice.present?
       .alert.alert-info{:role => "alert"}
         = notice

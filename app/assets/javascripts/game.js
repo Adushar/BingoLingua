@@ -1,5 +1,5 @@
 document.addEventListener("turbolinks:load", function() {
-  if (gon.cards.length >= gon.numer_of_tasks) {
+  if (typeof gon.cards !== 'undefined' && gon.cards.length >= gon.numer_of_tasks) {
     var random_cards = getRandom( gon.cards, gon.numer_of_tasks )
   }
   $( function() {
@@ -27,6 +27,9 @@ document.addEventListener("turbolinks:load", function() {
         if (cancelRequired) {
             $(this).sortable('cancel');
         }
+      },
+      update: function( event, ui ) {
+        playSound("/sounds/drop.mp3");
       }
     }).disableSelection();
   });

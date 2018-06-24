@@ -6,7 +6,7 @@ class GameController < ApplicationController
 
   def show
     @test = Test.find(params[:id])
-    gon.cards = @test.cards
+    @cards = gon.cards = @test.cards
     # Redirect if it isn`t free, user is logged in and subscribe is ended, but this user isn`t admin
     if ( !@test.free && current_user && !(User.subscribe_active(current_user.id)) && !current_user.admin? )
       render :file => "#{Rails.root}/public/pay.html",  layout: false
@@ -22,7 +22,7 @@ class GameController < ApplicationController
     when 3
       gon.numer_of_tasks = 5
     when 4
-      #gon.selected_cards = 
+      gon.selected_cards = User.find(current_user.id)
     end
   end
 end

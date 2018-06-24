@@ -10,16 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_23_151036) do
+ActiveRecord::Schema.define(version: 2018_06_23_171254) do
 
 # Could not dump table "cards" because of following StandardError
 #   Unknown type 'has_many' for column 'users'
 
-  create_table "cards_users", id: false, force: :cascade do |t|
-    t.integer "card_id", null: false
-    t.integer "user_id", null: false
-    t.index ["card_id", "user_id"], name: "index_cards_users_on_card_id_and_user_id"
-    t.index ["user_id", "card_id"], name: "index_cards_users_on_user_id_and_card_id"
+  create_table "selected_cards", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "card_id"
+    t.index ["user_id", "card_id"], name: "index_selected_cards_on_user_id_and_card_id"
   end
 
   create_table "test_results", force: :cascade do |t|

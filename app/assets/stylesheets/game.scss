@@ -18,7 +18,10 @@
  }
 
 /* For card-images  */
-.ui-sortable img {
+img.card {
+  margin: 10px auto;
+}
+.connectedSortable img, img.card {
   width: 100px;
   height: 100px;
   border: 1px solid #eee;
