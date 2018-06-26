@@ -6,12 +6,12 @@
     %title BingoLingua
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
-    %script{:src => "/resources/jquery-1.10.2.min.js"}
     %script{:src => "/resources/jquery-ui.min.js"}
     %script{:src => "/resources/jquery-fsortable.js"}
     %script{:src => "/resources/jquery.ui.touch-punch.min.js"}
     %script{:src => "/resources/game.js"}
     %meta{:content => "width=device-width,  initial-scale=1.0, minimum-scale: .5, maximum-scale: 5.0", :name => "viewport"}/
+    = action_cable_meta_tag
     = csrf_meta_tags
   %body
     %nav.navbar.navbar-expand-md.navbar-dark.bg-dark.navbar-fixed-top

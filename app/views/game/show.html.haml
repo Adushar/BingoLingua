@@ -6,10 +6,10 @@
   }
 %ul.sidenav.d-md-flex.d-none.navbar-fixed-left
   %li.text-center
-    %a{:href => "/"}
+    %a#back{:href => "/"}
       = fa_icon "chevron-circle-left"
     %span#number_of_part 1
-    %a{:href => "/"}
+    %a#next
       = fa_icon "chevron-circle-right"
   %li.text-center.bottom
     %a{:href => "/"}
@@ -18,37 +18,37 @@
     %a{"data-toggle" => "modal", :href => ".level-of-difficulty-modal-sm"}
       = fa_icon "cog"
   / Button trigger modal
-
-.container
-  .row
-    - @cards.limit(25).each do |card|
-      .card_block.col-xl-2.col-lg-2.col-md-3.col-5.mx-auto
-        %a{:oclick => ""}
-          = fa_icon "star-o", class: "star"
-        = image_tag card.picture, class: "card not_drag", "onclick" => "playSound(\"#{card.sound}\");"
-
-// Game
--# .container
--#   .row
--#     .col-2
--#       %ul#sortable1.connectedSortable
--#         %li.ui-state-default
--#           %img{:src => "https://smhttp-ssl-17653.nexcesscdn.net/media/catalog/product/cache/1/thumbnail/9df78eab33525d08d6e5fb8d27136e95/f/t/ft053-b.jpg"}
--#     .col-2
--#       %ul.connectedSortable
--#         %li.ui-state-default
--#           %img{:src => "https://smhttp-ssl-17653.nexcesscdn.net/media/catalog/product/cache/1/thumbnail/9df78eab33525d08d6e5fb8d27136e95/f/t/ft053-b.jpg"}
--#     .col-2
--#       %ul.connectedSortable
--#         %li.ui-state-default
--#           %img{:src => "https://smhttp-ssl-17653.nexcesscdn.net/media/catalog/product/cache/1/thumbnail/9df78eab33525d08d6e5fb8d27136e95/f/t/ft053-b.jpg"}
--#   .row
--#     .col-2
--#       %ul#sortable2.connectedSortable.target
--#     .col-2
--#       %ul#sortable3.connectedSortable.target
--#     .col-2
--#       %ul#sortable4.connectedSortable.target
+.block-slide#block_slide_1
+  .container
+    .row
+      - @cards[0...25].each do |card|
+        .card_block.col-xl-2.col-lg-2.col-md-3.col-5.mx-auto
+          = link_to game_path(card_id: card.id), method: :put, remote: true do
+            = fa_icon "star-o", class: "star #{'active' if card.users.exists?(current_user.id)}"
+          = image_tag card.picture, class: "card not_drag", "onclick" => "playSound(\"#{card.sound}\");", id: ("card_#{card.id}")
+  .test_part
+    // Game
+    .container
+      .row
+        .col-2
+          %ul#sortable1.connectedSortable
+            %li.ui-state-default
+              %img{:src => "https://smhttp-ssl-17653.nexcesscdn.net/media/catalog/product/cache/1/thumbnail/9df78eab33525d08d6e5fb8d27136e95/f/t/ft053-b.jpg"}
+        .col-2
+          %ul.connectedSortable
+            %li.ui-state-default
+              %img{:src => "https://smhttp-ssl-17653.nexcesscdn.net/media/catalog/product/cache/1/thumbnail/9df78eab33525d08d6e5fb8d27136e95/f/t/ft053-b.jpg"}
+        .col-2
+          %ul.connectedSortable
+            %li.ui-state-default
+              %img{:src => "https://smhttp-ssl-17653.nexcesscdn.net/media/catalog/product/cache/1/thumbnail/9df78eab33525d08d6e5fb8d27136e95/f/t/ft053-b.jpg"}
+      .row
+        .col-2
+          %ul#sortable2.connectedSortable.target
+        .col-2
+          %ul#sortable3.connectedSortable.target
+        .col-2
+          %ul#sortable4.connectedSortable.target
 
 / Modal
 .modal.fade.level-of-difficulty-modal-sm{"aria-hidden" => "true", "aria-labelledby" => "mySmallModalLabel", :role => "dialog", :tabindex => "-1"}
@@ -60,10 +60,9 @@
           %span{"aria-hidden" => "true"} ×
       .modal-body
         .btn-group-vertical{"aria-label" => "Basic example", :role => "group"}
-          %button.btn.btn-secondary{:type => "button"} Easy
-          %button.btn.btn-secondary{:type => "button"} Medium
-          %button.btn.btn-secondary{:type => "button"} Harder
-          %button.btn.btn-secondary{:type => "button"} The hardest
-          %button.btn.btn-secondary{:type => "button"} Selected cards
+          %button{:type => "button", "data-level" => "1", :class => "btn btn-secondary #{'btn-active' if cookies[:level] == '1'}"} Easy
+          %button{:type => "button", "data-level" => "2", :class => "btn btn-secondary #{'btn-active' if cookies[:level] == '2'}"} Medium
+          %button{:type => "button", "data-level" => "3", :class => "btn btn-secondary #{'btn-active' if cookies[:level] == '3'}"} Hard
+          %button{:type => "button", "data-level" => "5", :class => "btn btn-secondary #{'btn-active' if cookies[:level] == '4'}"} Selected cards
       .modal-footer
         %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"} Close

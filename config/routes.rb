@@ -9,6 +9,6 @@ Rails.application.routes.draw do
     end
   devise_for :users
   root "game#index"
-  resources :game, only: [:index, :show]
+  resources :game, only: [:index, :show, :update]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

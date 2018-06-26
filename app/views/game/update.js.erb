@@ -1,0 +1,6 @@
+var star = $('#card_<%= card.id %>').siblings('a').children('i.fa')
+if (<%= exist %> == true) {
+  $(star).addClass('active');
+} else {
+  $(star).removeClass('active');
+}

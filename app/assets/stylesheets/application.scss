@@ -11,6 +11,9 @@
   -ms-user-select: none;
 }
 
+
+.btn-active { @extend .btn-secondary:hover; }
+
 #content .inactive {
   pointer-events: none;
   opacity: 0.5;
@@ -78,7 +81,10 @@ ul#menu {
     transform: translateX(30px);
     z-index: 5;
   }
-  i.star:hover {
-    color: #dfff00;
+  i.star:hover, i.active {
+    color: #ffef00 !important;
+  }
+  i.active:before {
+    content: "\f005";
   }
 }
