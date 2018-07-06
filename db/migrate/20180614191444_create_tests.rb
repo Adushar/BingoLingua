@@ -1,4 +1,4 @@
-class CreateTests < ActiveRecord::Migration[5.2]
+class CreateTests < ActiveRecord::Migration[5.1]
   def change
     create_table :tests do |t|
       t.boolean :free

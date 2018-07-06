@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_23_171254) do
+ActiveRecord::Schema.define(version: 20180623171254) do
 
 # Could not dump table "cards" because of following StandardError
 #   Unknown type 'has_many' for column 'users'

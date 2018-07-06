@@ -1,5 +1,7 @@
 @import "bootstrap";
 @import "font-awesome";
+@import 'slick';
+@import 'slick-theme';
 @import "game";
 
 .not_drag {
@@ -11,6 +13,9 @@
   -ms-user-select: none;
 }
 
+[data-text]::after {
+  content: attr(data-text);
+}
 
 .btn-active { @extend .btn-secondary:hover; }
 

@@ -9,6 +9,7 @@
     %script{:src => "/resources/jquery-ui.min.js"}
     %script{:src => "/resources/jquery-fsortable.js"}
     %script{:src => "/resources/jquery.ui.touch-punch.min.js"}
+    %script{:src => "/resources/howler.core.js"}
     %script{:src => "/resources/game.js"}
     %meta{:content => "width=device-width,  initial-scale=1.0, minimum-scale: .5, maximum-scale: 5.0", :name => "viewport"}/
     = action_cable_meta_tag
@@ -28,10 +29,13 @@
         %ul.navbar-nav.ml-auto
           - if current_user
             %span.nav-link.d-md-block.d-none= current_user.email
-          %li.nav-item
-            - if current_user
+          - if current_user
+            %li.nav-item
               = link_to "Log Out", destroy_user_session_path, class: "nav-link", method: :get
-            - else
+          - else
+            %li.nav-item
+              = link_to "Sign Up", new_user_registration_path, class: "nav-link"
+            %li.nav-item
               = link_to "Log In", new_user_session_path, class: "nav-link"
         %ul.navbar-nav.d-md-none.d-block
           %li.nav-item

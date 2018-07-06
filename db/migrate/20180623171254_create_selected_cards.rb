@@ -1,4 +1,4 @@
-class CreateSelectedCards < ActiveRecord::Migration[5.2]
+class CreateSelectedCards < ActiveRecord::Migration[5.1]
   def change
     create_table :selected_cards do |t|
       t.integer :user_id

@@ -1,5 +1,4 @@
 class User < ActiveRecord::Base
-  after_initialize :default_values
   has_many :selected_cards
   has_many :cards, :through => :selected_cards
   has_many :test_results
@@ -12,8 +11,4 @@ class User < ActiveRecord::Base
   def self.subscribe_active(id)
     return !User.find(id).subscribe_ends.past?
   end
-  private
-   def default_values
-     self.subscribe_ends ||= Time.now
-   end
 end
