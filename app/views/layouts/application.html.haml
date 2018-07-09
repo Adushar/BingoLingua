@@ -23,6 +23,9 @@
         %ul.navbar-nav
           %li.nav-item
             %a.nav-link{:href => "/game"} Play a game
+          - if current_user
+            %li.nav-item
+              %a.nav-link{:href => "/chat"} Chat
           - if current_user.try(:admin?)
             %li.nav-item
               %a.nav-link{:href => "/admin"} Admin panel

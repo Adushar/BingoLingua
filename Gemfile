@@ -33,6 +33,8 @@ gem "jquery-slick-rails"
 gem 'gon'
 # Font awesome
 gem "font-awesome-rails"
+# Recording activity
+gem 'public_activity'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'

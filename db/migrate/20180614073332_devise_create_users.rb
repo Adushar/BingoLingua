@@ -30,6 +30,8 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.1]
       # t.string   :unlock_token # Only if unlock strategy is :email or :both
       # t.datetime :locked_at
 
+      t.string :first_name, null: false
+      t.string :last_name, null: false
       # Date when subscribe ends
       t.datetime :subscribe_ends, default: -> { 'CURRENT_TIMESTAMP' }
       t.timestamps null: false

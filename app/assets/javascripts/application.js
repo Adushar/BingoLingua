@@ -19,7 +19,7 @@
 //= require_tree .
 //= require popper
 
-var playlist = function(audio_arr, onPlay, data, e) {
+var playlist = function(audio_arr, onPlay, data, endFunc, e) {
   // initialisation:
     pCount = 0;
     playlistUrls = audio_arr, // audio list
@@ -31,6 +31,7 @@ var playlist = function(audio_arr, onPlay, data, e) {
     if (loop === true ) { pCount = (pCount + 1 !== howlerBank.length)? pCount + 1 : 0; }
     else { pCount = pCount + 1; }
     if (howlerBank[pCount]) {howlerBank[pCount].play()};
+    if (endFunc) {endFunc();}
   };
 
   // build up howlerBank:
@@ -65,6 +66,7 @@ function GenerateTest(cards, random_cards) {
   var empty_row = $('<div />').attr('class','row');
   var check_row = $('<div />').attr('class','row example');
   var only_sound_array = cards.map(function(item){return item.sound;});
+  console.log([cards, random_cards]);
   playlist(
     only_sound_array,
     function(e) {$('.container.test_part > .row:nth-child(2) > .col-2:nth-child('+(pCount+1)+') .target').addClass("temp_black");
@@ -82,6 +84,98 @@ function GenerateTest(cards, random_cards) {
   $(obj).append(check_row);
 }
 
+send_answer = function(answer) {
+  var test_id, test_part, url;
+  url = window.location.pathname;
+  test_id = url.substring(url.lastIndexOf('/') + 1);
+  test_part = parseInt($('.slick-current .block-slide').attr("data-test-part"));
+  return $.ajax({
+    url: '/check_answer/' + test_id,
+    type: 'get',
+    data: {
+      user_answer: "[" + answer + "]"
+    },
+    success: function(data) {
+      console.log(data);
+      return GenerateAnswer(JSON.parse(data["cards"]), data["errors"]);
+    },
+    error: function(xhr) {
+      return console.log("Ops, smth got wrong(");
+    }
+  });
+};
+
+SearchForSortable = function() {
+  var cancelRequired;
+  cancelRequired = void 0;
+  cancelRequired = void 0;
+  $('.connectedSortable').sortable({
+    connectWith: '.connectedSortable',
+    receive: function(event, ui) {
+      if ($(this).children().length > 1) {
+        $(ui.sender).sortable('cancel');
+      }
+    },
+    over: function(event, ui) {
+      if ($(this).children().length > 1) {
+        $(ui.placeholder).css('display', 'none');
+      } else {
+        $(ui.placeholder).css('display', '');
+      }
+    },
+    beforeStop: function(event, ui) {
+      cancelRequired = $(this).children().length > 1;
+    },
+    stop: function() {
+      var card_obj, user_answer_array, wrap_obj;
+      card_obj = $('.container.test_part > .row:nth-child(2) > .col-2 > ul.target > li');
+      wrap_obj = $('.container.test_part > .row:nth-child(2) > .col-2 > ul.target');
+      user_answer_array = card_obj.map(function() {
+        return $(this).attr('data-id');
+      }).get();
+      if (card_obj.length === wrap_obj.length) {
+        send_answer(user_answer_array);
+      }
+      return;
+      if (cancelRequired) {
+        $(this).sortable('cancel');
+      }
+    },
+    update: function(event, ui) {
+      return playSound('/sounds/drop.mp3');
+    }
+  }).disableSelection();
+};
+
+cards_refresh = function() {
+    var test_id, test_part, url;
+    url = window.location.pathname;
+    test_id = url.substring(url.lastIndexOf('/') + 1);
+    test_part = parseInt($('.slick-current .block-slide').attr("data-test-part"));
+    return $.ajax({
+      url: '/cards_refresh/' + test_id,
+      type: 'get',
+      data: {
+        test_part: test_part
+      },
+      success: function(data) {
+        console.log(getCookie('level') === "4");
+        if (JSON.parse(data["cards"]).length < 4 && getCookie('level') === "4") {
+          return alert("Selected cards isn't enough. You need to choose " + (4 - JSON.parse(data["cards"]).length) + " more card(s)");
+        } else {
+          stopMusic();
+          $(".slider-block").hide();
+          $(".container.test_part").html();
+          GenerateTest(JSON.parse(data["cards"]), JSON.parse(data["mixed_cards"]));
+          return SearchForSortable();
+        }
+      },
+      error: function(xhr) {
+        return console.log("Ops, smth got wrong(");
+      }
+    });
+  };
+
 function GenerateAnswer(cards, errors) {
   var only_sound_array = cards.map(function(item){return item[0];});
   console.log(only_sound_array);
@@ -94,6 +188,7 @@ function GenerateAnswer(cards, errors) {
       var answer_row = $('.row:nth-child(2) > .col-2 > ul.target > li.ui-state-default').eq(pCount)
       var success_img = `<i class="fa fa-check img_over good" aria-hidden="true"></i>`;
       var fail_img = `<i class="fa fa-times img_over bad" aria-hidden="true"></i>`;
+      // var card_description = `<h2 class="full-width">Its bow</h2>`
       if (errors && errors[pCount] == false) {
         answer_row.append(fail_img);
         console.log(errors[pCount]);
@@ -102,10 +197,28 @@ function GenerateAnswer(cards, errors) {
         console.log(true);
       }
       $('.row.example > .col-2 > ul.target').eq(pCount).html(current_li);
+    }, null, function(e) {
+      if (pCount == cards.length) {
+        setTimeout(function() {
+          cards_refresh();
+        }, 1000);
+      }
     }
   );
-
 }
+
+function finish_test() {
+  var test_id, url;
+  url = window.location.pathname;
+  test_id = url.substring(url.lastIndexOf('/') + 1);
+  return $.ajax({
+    url: '/finish_test/' + test_id,
+    type: 'get',
+    error: function(xhr) {
+      return console.log("Ops, smth got wrong(");
+    }
+  });
+};
 
 // Here is standart cookie stuff
 function setCookie(cname, cvalue, exdays) {

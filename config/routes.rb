@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   namespace :admin do
       resources :users
       resources :tests
@@ -11,6 +12,8 @@ Rails.application.routes.draw do
   root "game#index"
   resources :game, only: [:index, :show, :update]
   get 'cards_refresh/:id/' => 'game#get_cards', :via => :get
-  get 'check_answer/' => 'game#check_answer', :via => :get
+  get 'check_answer/:id' => 'game#check_answer', :via => :get
+  get 'finish_test/:id' => 'game#finish_test', :via => :get
+  resources :chat, only: [:index]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

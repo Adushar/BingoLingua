@@ -1,0 +1,26 @@
+- if activity.trackable_type == "User" && !User.where(id: activity.trackable_id).empty?
+  - name_array = [User.find(activity.trackable_id).first_name, User.find(activity.trackable_id).last_name]
+  - name = name_array.join(" ")
+  - logo_name = name_array[0][0]+name_array[1][0]
+  - p_text = "#{name} joined to us"
+- elsif activity.trackable_type == "TestResult" && !User.where(id: activity.owner_id).empty? && !TestResult.where(id: activity.trackable_id).empty?
+  - name_array = [User.find(activity.owner_id).first_name, User.find(activity.owner_id).last_name]
+  - name = name_array.join(" ")
+  - logo_name = name_array[0][0]+name_array[1][0]
+  - test_name = TestResult.find(activity.trackable_id).test.name
+  - p_text = "#{name} finished #{test_name.downcase} with result #{TestResult.find(activity.trackable_id).last_result}"
+-elsif activity.trackable_type == "Test" && !User.where(id: activity.owner_id).empty?
+  - name_array = [User.find(activity.owner_id).first_name, User.find(activity.owner_id).last_name]
+  - name = name_array.join(" ")
+  - logo_name = name_array[0][0]+name_array[1][0]
+  - test_name = Test.find(activity.trackable_id).name
+  - p_text = "#{name} has just created #{test_name.downcase}. Try it"
+
+
+
+- if name_array
+  .container
+    .picture= logo_name.upcase
+    %p
+      = p_text
+    %span.time-right= distance_of_time_in_words(Time.now, activity.updated_at) + " ago"

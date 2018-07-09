@@ -16,7 +16,7 @@
       = fa_icon "refresh"
   %li.text-center.bottom
     %a#check_btn
-      = fa_icon "check-circle"
+      = fa_icon "play-circle"
   %li.text-center
     %a{"data-toggle" => "modal", :href => ".level-of-difficulty-modal-sm"}
       = fa_icon "cog"
@@ -25,12 +25,11 @@
   - @cards.in_groups(4).each_with_index do |cards_part, i|
     = content_tag(:div, "Hello world!", class: "block-slide", id: ('block_slide_' + (i+1).to_s), "data-test-part" => (i+1) ) do
       .container
-        .row
+        .row.mx-auto
           = render partial: "game/card", collection: cards_part, as: :card
 // Game
 .container.test_part
 
-= session[:order]
 / Modal
 .modal.fade.level-of-difficulty-modal-sm{"aria-hidden" => "true", "aria-labelledby" => "mySmallModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-dialog.modal-sm
