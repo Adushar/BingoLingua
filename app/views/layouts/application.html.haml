@@ -26,6 +26,8 @@
           - if current_user
             %li.nav-item
               %a.nav-link{:href => "/chat"} Chat
+          %li.nav-item
+            %a.nav-link{:href => "/top"} Top 10
           - if current_user.try(:admin?)
             %li.nav-item
               %a.nav-link{:href => "/admin"} Admin panel
