@@ -72,9 +72,9 @@ function GenerateTest(cards, random_cards) {
     function(e) {$('.container.test_part > .row:nth-child(2) > .col-2:nth-child('+(pCount+1)+') .target').addClass("temp_black");
   });
   $.each( random_cards, function( index, value ) {
-    var current_ul_li = `<div class="col-2"><ul class="connectedSortable"><li class="ui-state-default"  data-id="`+value.id+`"><img src="${value.picture}"></li></ul></div>`;
-    var empty_ul_li = `<div class="col-2"><ul class="connectedSortable target"></ul></div>`
-    var example_ul_li = `<div class="col-2"><ul class="exampleSortable target"></ul></div>`
+    var current_ul_li = '<div class="col-2"><ul class="connectedSortable"><li class="ui-state-default"  data-id="'+value.id+'"><img src="${value.picture}"></li></ul></div>';
+    var empty_ul_li = '<div class="col-2"><ul class="connectedSortable target"></ul></div>'
+    var example_ul_li = '<div class="col-2"><ul class="exampleSortable target"></ul></div>'
     $(row).append(current_ul_li);
     $(empty_row).append(empty_ul_li);
     $(check_row).append(example_ul_li);
@@ -184,11 +184,11 @@ function GenerateAnswer(cards, errors) {
   playlist(
     only_sound_array,
     function(e) {
-      var current_li = `<li class="ui-state-default"><img src="${cards[pCount][1]}"></li>`;
+      var current_li = '<li class="ui-state-default"><img src="${cards[pCount][1]}"></li>';
       var answer_row = $('.row:nth-child(2) > .col-2 > ul.target > li.ui-state-default').eq(pCount)
-      var success_img = `<i class="fa fa-check img_over good" aria-hidden="true"></i>`;
-      var fail_img = `<i class="fa fa-times img_over bad" aria-hidden="true"></i>`;
-      // var card_description = `<h2 class="full-width">Its bow</h2>`
+      var success_img = '<i class="fa fa-check img_over good" aria-hidden="true"></i>';
+      var fail_img = '<i class="fa fa-times img_over bad" aria-hidden="true"></i>';
+      // var card_description = '<h2 class="full-width">Its bow</h2>'
       if (errors && errors[pCount] == false) {
         answer_row.append(fail_img);
         console.log(errors[pCount]);
