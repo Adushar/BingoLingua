@@ -16,7 +16,6 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 
 # Haml gem. Reed more: https://www.rubydoc.info/gems/haml-rails/0.9.0
-gem 'activestorage'
 gem 'haml-rails'
 # Devise for auth
 gem 'devise'
