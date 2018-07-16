@@ -8,7 +8,7 @@ require 'mina/rvm'
 #   repository   - Git repo to clone from. (needed by mina/git)
 #   branch       - Branch name to deploy. (needed by mina/git)
 
-set :application_name, 'BingoLingua'
+set :application_name, 'BingoLinguo'
 set :domain, '188.166.60.112'
 set :user, 'deployer'
 set :deploy_to, "/home/#{fetch(:user)}/app"
