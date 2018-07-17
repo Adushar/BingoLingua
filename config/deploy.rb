@@ -2,6 +2,7 @@ require 'mina/rails'
 require 'mina/git'
 require 'mina/rvm'
 require 'mina/unicorn'
+require 'mina/nginx'
 
 # Basic settings:
 #   domain       - The hostname to SSH to.
