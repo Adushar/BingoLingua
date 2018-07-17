@@ -35,6 +35,8 @@ gem "font-awesome-rails"
 # Recording activity
 gem 'public_activity'
 
+gem 'mina-unicorn', :require => false
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
@@ -72,7 +74,6 @@ end
 
 group :production do
   gem 'pg'
-  gem 'unicorn'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

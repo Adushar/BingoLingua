@@ -1,6 +1,7 @@
 require 'mina/rails'
 require 'mina/git'
 require 'mina/rvm'
+require 'mina/unicorn'
 
 # Basic settings:
 #   domain       - The hostname to SSH to.
@@ -15,6 +16,7 @@ set :deploy_to, "/home/#{fetch(:user)}/app"
 set :repository, 'git@github.com:Adushar/BingoLingua.git'
 set :branch, 'master'
 set :rvm_use_path, '$HOME/.rvm/scripts/rvm'
+set :shared_paths, ['tmp/sockets', 'tmp/pids']
 
 # Optional settings:
 #   set :user, 'foobar'          # Username in the server to SSH to.
