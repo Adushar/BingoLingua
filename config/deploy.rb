@@ -18,6 +18,9 @@ set :repository, 'git@github.com:Adushar/BingoLingua.git'
 set :branch, 'master'
 set :rvm_use_path, '$HOME/.rvm/scripts/rvm'
 set :shared_paths, ['tmp/sockets', 'tmp/pids']
+set :nginx_socket_path, "/home/deployer/app/shared/unicorn.sock"
+set :server_name, "BingoLinguo"
+set :current_path, "/home/deployer/app/current"
 
 # Optional settings:
 #   set :user, 'foobar'          # Username in the server to SSH to.
