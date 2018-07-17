@@ -35,7 +35,6 @@ gem "font-awesome-rails"
 # Recording activity
 gem 'public_activity'
 gem 'unicorn'
-gem 'mina-nginx', :require => false
 gem 'mina-unicorn', :require => false
 
 # Use ActiveStorage variant
