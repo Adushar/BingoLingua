@@ -9,8 +9,7 @@ worker_processes 2
 preload_app true
 timeout 30
 
-listen '127.0.0.1:4000'
-listen '188.166.60.112:80'
+listen File.join(app_path, 'shared/unicorn.sock'), :backlog => 64
 # Set up socket location
 listen "#{shared_dir}/unicorn.sock", :backlog => 64
 
