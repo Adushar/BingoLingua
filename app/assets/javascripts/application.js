@@ -72,7 +72,7 @@ function GenerateTest(cards, random_cards) {
     function(e) {$('.container.test_part > .row:nth-child(2) > .col-2:nth-child('+(pCount+1)+') .target').addClass("temp_black");
   });
   $.each( random_cards, function( index, value ) {
-    var current_ul_li = '<div class="col-2"><ul class="connectedSortable"><li class="ui-state-default"  data-id="'+value.id+'"><img src="${value.picture}"></li></ul></div>';
+    var current_ul_li = '<div class="col-2"><ul class="connectedSortable"><li class="ui-state-default"  data-id="'+value.id+'"><img src="'+value.picture+'"></li></ul></div>';
     var empty_ul_li = '<div class="col-2"><ul class="connectedSortable target"></ul></div>'
     var example_ul_li = '<div class="col-2"><ul class="exampleSortable target"></ul></div>'
     $(row).append(current_ul_li);

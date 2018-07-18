@@ -2,7 +2,6 @@ require 'mina/rails'
 require 'mina/git'
 require 'mina/rvm'
 require 'mina/unicorn'
-require 'mina/nginx'
 
 # Basic settings:
 #   domain       - The hostname to SSH to.
@@ -81,9 +80,9 @@ task :deploy do
     invoke :'deploy:link_shared_paths'
     invoke :'bundle:install'
     invoke :'rails:db_migrate'
-    invoke :'rails:seed'
     invoke :'rails:assets_precompile'
     invoke :'deploy:cleanup'
+    # For seed run `mina "rake[db:seed]" -v`
 
     on :launch do
       # command "sudo service #{fetch(:user)} restart"

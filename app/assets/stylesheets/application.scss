@@ -4,6 +4,9 @@
 @import 'slick-theme';
 @import "game";
 @import "chat";
+.devise {
+  @import "devise";
+}
 
 .not_drag {
   user-drag: none;
