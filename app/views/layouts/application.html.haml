@@ -3,7 +3,7 @@
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     = Gon::Base.render_data
-    %title BingoLingua
+    %title BingoLinguo
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     %script{:src => "/resources/jquery-ui.min.js"}
@@ -16,7 +16,7 @@
     = csrf_meta_tags
   %body
     %nav.navbar.navbar-expand-md.navbar-dark.bg-dark.navbar-fixed-top
-      %a.navbar-brand{:href => "/"} BingoLingua
+      %a.navbar-brand{:href => "/"} BingoLinguo
       %button.navbar-toggler{"aria-controls" => "navbarNav", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarNav", "data-toggle" => "collapse", :type => "button"}
         %span.navbar-toggler-icon
       #navbarNav.collapse.navbar-collapse
