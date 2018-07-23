@@ -14,7 +14,7 @@ $screen-xl-min: 1200px;
   display: none;
 }
 
-.test_part > .row > .col-3 {
+.test_part > .row > .col-2 {
   max-width: 170px;
 }
 
@@ -35,9 +35,13 @@ $screen-xl-min: 1200px;
   .test_part .connectedSortable img {
     height: 100%;
   }
-  .test_part > .row > .col-3 {
+  .test_part > .row > .col-2 {
     padding: 0;
+    margin: auto 5px;
     max-width: 144px;
+  }
+  .img_over {
+    font-size: 17vw;
   }
 }
 

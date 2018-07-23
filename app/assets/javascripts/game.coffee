@@ -15,6 +15,8 @@ document.addEventListener 'turbolinks:load', ->
     $('.check_btn').removeClass('check_btn')
     $('#iconed_btn').wrap('<a onclick="finish_test(); location.reload();">').parent().html('<i class="fa fa-stop-circle"></i>')
     $("#texted_btn").wrap('<a onclick="finish_test(); location.reload();">').html('Stop')
+    $('#texted_btn, button.btn.btn-secondary.mx-3[data-target=".level-of-difficulty-modal-sm"]').removeClass("mx-3")
+    $('.col-6.d-from-md-none').not(".text-right").css("padding", "0 5px")
 
   SearchForSortable()
 
@@ -26,3 +28,12 @@ document.addEventListener 'turbolinks:load', ->
       $(this).addClass 'btn-active'
       $('.level-of-difficulty-modal-sm').modal 'hide'
     cards_refresh();
+
+  equalize = ->
+    maxWidth = 0
+    console.log "1"
+    $('.test_part .ui-sortable').each ->
+      if $(this).width() > maxWidth
+        maxWidth = $(this).width()
+      return
+    $('.test_part .ui-sortable').width maxWidth
