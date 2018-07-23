@@ -28,10 +28,12 @@ var playlist = function(audio_arr, onPlay, data, endFunc, e) {
 
   // playing i+1 audio (= chaining audio files)
   var onEnd = function(e) {
-    if (loop === true ) { pCount = (pCount + 1 !== howlerBank.length)? pCount + 1 : 0; }
-    else { pCount = pCount + 1; }
-    if (howlerBank[pCount]) {howlerBank[pCount].play()};
-    if (endFunc) {endFunc();}
+    setTimeout(function(){
+      if (loop === true ) { pCount = (pCount + 1 !== howlerBank.length)? pCount + 1 : 0; }
+      else { pCount = pCount + 1; }
+      if (howlerBank[pCount]) {howlerBank[pCount].play()};
+      if (endFunc) {endFunc();}
+    }, 1000);
   };
 
   // build up howlerBank:
@@ -69,12 +71,12 @@ function GenerateTest(cards, random_cards) {
   console.log([cards, random_cards]);
   playlist(
     only_sound_array,
-    function(e) {$('.container.test_part > .row:nth-child(2) > .col-2:nth-child('+(pCount+1)+') .target').addClass("temp_black");
+    function(e) {$('.container.test_part > .row:nth-child(2) > .col-3:nth-child('+(pCount+1)+') .target').addClass("temp_black");
   });
   $.each( random_cards, function( index, value ) {
-    var current_ul_li = '<div class="col-2"><ul class="connectedSortable"><li class="ui-state-default"  data-id="'+value.id+'"><img src="'+value.picture+'"></li></ul></div>';
-    var empty_ul_li = '<div class="col-2"><ul class="connectedSortable target"></ul></div>'
-    var example_ul_li = '<div class="col-2"><ul class="exampleSortable target"></ul></div>'
+    var current_ul_li = '<div class="col-3"><ul class="connectedSortable"><li class="ui-state-default"  data-id="'+value.id+'"><img src="'+value.picture+'"></li></ul></div>';
+    var empty_ul_li = '<div class="col-3"><ul class="connectedSortable target"></ul></div>'
+    var example_ul_li = '<div class="col-3"><ul class="exampleSortable target"></ul></div>'
     $(row).append(current_ul_li);
     $(empty_row).append(empty_ul_li);
     $(check_row).append(example_ul_li);
@@ -128,8 +130,8 @@ SearchForSortable = function() {
     },
     stop: function() {
       var card_obj, user_answer_array, wrap_obj;
-      card_obj = $('.container.test_part > .row:nth-child(2) > .col-2 > ul.target > li');
-      wrap_obj = $('.container.test_part > .row:nth-child(2) > .col-2 > ul.target');
+      card_obj = $('.container.test_part > .row:nth-child(2) > .col-3 > ul.target > li');
+      wrap_obj = $('.container.test_part > .row:nth-child(2) > .col-3 > ul.target');
       user_answer_array = card_obj.map(function() {
         return $(this).attr('data-id');
       }).get();
@@ -184,11 +186,13 @@ function GenerateAnswer(cards, errors) {
   playlist(
     only_sound_array,
     function(e) {
-      var current_li = '<li class="ui-state-default"><img src="${cards[pCount][1]}"></li>';
-      var answer_row = $('.row:nth-child(2) > .col-2 > ul.target > li.ui-state-default').eq(pCount)
+      var current_li = '<li class="ui-state-default"><img src="'+cards[pCount][1]+'"></li>';
+      var answer_row = $('.row:nth-child(2) > .col-3 > ul.target > li.ui-state-default').eq(pCount)
       var success_img = '<i class="fa fa-check img_over good" aria-hidden="true"></i>';
       var fail_img = '<i class="fa fa-times img_over bad" aria-hidden="true"></i>';
       // var card_description = '<h2 class="full-width">Its bow</h2>'
+
+      $('.connectedSortable').sortable('disable');
       if (errors && errors[pCount] == false) {
         answer_row.append(fail_img);
         console.log(errors[pCount]);
@@ -196,7 +200,7 @@ function GenerateAnswer(cards, errors) {
         answer_row.append(success_img);
         console.log(true);
       }
-      $('.row.example > .col-2 > ul.target').eq(pCount).html(current_li);
+      $('.row.example > .col-3 > ul.target').eq(pCount).html(current_li);
     }, null, function(e) {
       if (pCount == cards.length) {
         setTimeout(function() {

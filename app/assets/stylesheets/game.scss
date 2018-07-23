@@ -1,3 +1,6 @@
+$block_size: calc(20vh - 18px);
+$img_size: calc(20vh - 20px);
+
 .connectedSortable, .exampleSortable {
   border: 1px solid #eee;
   list-style-type: none;
@@ -49,12 +52,23 @@ img.card {
   margin: 10px auto;
 }
 .connectedSortable img, img.card, .exampleSortable img {
-  width: 150px;
-  height: 150px;
+  width: 100%;
+  height: auto;
   border: 9px solid #eee;
   background: white;
   overflow: hidden;
 }
+
+// .slider-block {
+//   .card_block {
+//     height: $block_size;
+//     width: $block_size;
+//   }
+//   .connectedSortable img, img.card, .exampleSortable img {
+//     height: $img_size;
+//     width: $img_size;
+//   }
+// }
 
 /* For bootstrap popup */
 .btn-group-vertical {

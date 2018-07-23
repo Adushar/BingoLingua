@@ -4,7 +4,7 @@
   body {
   padding-left: 100px;
   }
-%ul.sidenav.d-md-flex.d-none.navbar-fixed-left
+%ul.sidenav.navbar-fixed-left
   %li.text-center
     %a#back
       = fa_icon "chevron-circle-left"
@@ -15,12 +15,18 @@
     %a#refresh_btn
       = fa_icon "refresh"
   %li.text-center.bottom
-    %a#check_btn
+    %a.check_btn#iconed_btn
       = fa_icon "play-circle"
   %li.text-center
     %a{"data-toggle" => "modal", :href => ".level-of-difficulty-modal-sm"}
       = fa_icon "cog"
   / Button trigger modal
+.container.mt-2
+  .row
+    .col-6.d-from-md-none
+      %button.check_btn#texted_btn.btn.btn-success.mx-3{:type => "button"} Play
+    .col-6.d-from-md-none.text-right
+      %button.btn.btn-secondary.mx-3.check_btn{:type => "button", "data-toggle" => "modal", "data-target" => ".level-of-difficulty-modal-sm"} Level
 .slider-block
   - @cards.in_groups(4).each_with_index do |cards_part, i|
     = content_tag(:div, "Hello world!", class: "block-slide", id: ('block_slide_' + (i+1).to_s), "data-test-part" => (i+1) ) do

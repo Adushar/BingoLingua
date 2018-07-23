@@ -9,10 +9,12 @@ document.addEventListener 'turbolinks:load', ->
     i = (if currentSlide then currentSlide else 0) + 1
     $('#number_of_part').attr "data-text", i
 
-  $('#check_btn').click ->
+  $('.check_btn').click ->
     cards_refresh();
     $("#refresh_btn").show()
-    $(this).wrap('<a onclick="finish_test(); location.reload();">').parent().html('<i class="fa fa-stop-circle"></i>')
+    $('.check_btn').removeClass('check_btn')
+    $('#iconed_btn').wrap('<a onclick="finish_test(); location.reload();">').parent().html('<i class="fa fa-stop-circle"></i>')
+    $("#texted_btn").wrap('<a onclick="finish_test(); location.reload();">').html('Stop')
 
   SearchForSortable()
 

@@ -33,7 +33,7 @@
               %a.nav-link{:href => "/admin"} Admin panel
         %ul.navbar-nav.ml-auto
           - if current_user
-            %span.nav-link.d-md-block.d-none= current_user.email
+            .picture.nav-link= (current_user.first_name[0]+current_user.last_name[0]).upcase
           - if current_user
             %li.nav-item
               = link_to "Log Out", destroy_user_session_path, class: "nav-link", method: :get
@@ -42,9 +42,6 @@
               = link_to "Sign Up", new_user_registration_path, class: "nav-link"
             %li.nav-item
               = link_to "Log In", new_user_session_path, class: "nav-link"
-        %ul.navbar-nav.d-md-none.d-block
-          %li.nav-item
-            = link_to "LogIn", new_user_session_path, class: "nav-link"
     - if notice.present?
       .alert.alert-info{:role => "alert"}
         = notice

@@ -28,20 +28,6 @@
       display: table;
   }
 
-  /* Style images */
-  .container .picture {
-    text-align: center;
-    float: left;
-    margin-right: 20px;
-    border-radius: 50%;
-    height: 50px;
-    width: 50px;
-    font-size: 20px;
-    line-height: 50px;
-    color: white;
-    background: blue;
-  }
-
   /* Style the right image */
   .container img.right {
       float: right;
@@ -60,4 +46,25 @@
       float: left;
       color: #999;
   }
+}
+
+/* Style images */
+.chat .container .picture, .picture.nav-link {
+  text-align: center;
+  float: left;
+  margin-right: 20px;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  font-size: 20px;
+  line-height: 50px;
+  color: white;
+  background: blue;
+}
+
+.picture.nav-link {
+  padding: 0;
+  margin: 0;
+  color: white !important;
+  background: #9d9c91;
 }
