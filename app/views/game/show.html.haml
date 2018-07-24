@@ -29,7 +29,7 @@
       %button.btn.btn-secondary.mx-3.check_btn{:type => "button", "data-toggle" => "modal", "data-target" => ".level-of-difficulty-modal-sm"} Level
 .slider-block
   - @cards.in_groups(4).each_with_index do |cards_part, i|
-    = content_tag(:div, "Hello world!", class: "block-slide", id: ('block_slide_' + (i+1).to_s), "data-test-part" => (i+1) ) do
+    = content_tag(:div, class: "block-slide", id: ('block_slide_' + (i+1).to_s), "data-test-part" => (i+1) ) do
       .container
         .row.mx-auto
           = render partial: "game/card", collection: cards_part, as: :card

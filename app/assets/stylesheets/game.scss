@@ -48,10 +48,20 @@ $img_size: calc(20vh - 20px);
  }
 
 /* For card-images  */
-img.card {
+.test_card {
+  background: #eee;
+  margin: 5px;
+}
+
+h2.description.card.not_drag {
+  height: calc(100% - 3rem - 12px);
+  min-height: calc(100% - 3rem - 12px)
+}
+
+img.card, .description.card.not_drag {
   margin: 10px auto;
 }
-.connectedSortable img, img.card, .exampleSortable img {
+.connectedSortable img, img.card, .exampleSortable img, .description.card.not_drag {
   width: 100%;
   height: auto;
   border: 9px solid #eee;

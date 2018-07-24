@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180706202908) do
+ActiveRecord::Schema.define(version: 20180723194002) do
 
   create_table "activities", force: :cascade do |t|
     t.string "trackable_type"
@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 20180706202908) do
   end
 
 # Could not dump table "tests" because of following StandardError
-#   Unknown type 'has_many' for column 'card'
+#   Unknown type '' for column 'card'
 
 # Could not dump table "users" because of following StandardError
 #   Unknown type 'has_many' for column 'cards'

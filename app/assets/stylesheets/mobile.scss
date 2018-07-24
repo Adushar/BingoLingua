@@ -43,9 +43,20 @@ $screen-xl-min: 1200px;
   .img_over {
     font-size: 17vw;
   }
+  .test_card {
+    background: #eee;
+  }
 }
 
 @media (max-width: #{$screen-sm-min}) {
+  .test_card {
+    margin: 5px 0;
+  }
+  h2.description.card.not_drag {
+    min-height: 300px;
+    line-height: 300px;
+  }
+
 }
 
 @media (max-width: 360px) {
