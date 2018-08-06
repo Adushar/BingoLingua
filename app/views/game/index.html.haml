@@ -5,8 +5,7 @@
 - @subscribe_tests.each do |subscribe_tests|
   = link_to subscribe_tests.name, game_path(subscribe_tests)
 
-
-.container
+.container.test_menu
   .row.mx-auto
     - @free_tests.each_with_index do |test_part, i|
       .card_block.test_card.col-xl-2.col-lg-2.col-md-3.col-12.text-center

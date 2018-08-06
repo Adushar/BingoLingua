@@ -29,11 +29,10 @@ document.addEventListener 'turbolinks:load', ->
       $('.level-of-difficulty-modal-sm').modal 'hide'
     cards_refresh();
 
-  equalize = ->
-    maxWidth = 0
-    console.log "1"
-    $('.test_part .ui-sortable').each ->
-      if $(this).width() > maxWidth
-        maxWidth = $(this).width()
-      return
-    $('.test_part .ui-sortable').width maxWidth
+  maxWidth = 0
+  console.log "1"
+  $('.test_menu .card.not_drag').each ->
+    if $(this).width() > maxWidth
+      maxWidth = $(this).width()
+    return
+  $('.test_menu .card.not_drag').height maxWidth
