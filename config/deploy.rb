@@ -90,7 +90,8 @@ task :deploy do
   end
 
   # you can use `run :local` to run tasks on local machine before of after the deploy scripts
-  run(:local){ command "mina unicorn:restart" }
+  run(:local){ command "mina unicorn:stop" }
+  run(:local){ command "mina unicorn:start" }
 end
 
 # For help in making your deploy script, see the Mina documentation:
