@@ -28,11 +28,3 @@ document.addEventListener 'turbolinks:load', ->
       $(this).addClass 'btn-active'
       $('.level-of-difficulty-modal-sm').modal 'hide'
     cards_refresh();
-
-  maxWidth = 0
-  console.log "1"
-  $('.test_menu .card.not_drag').each ->
-    if $(this).width() > maxWidth
-      maxWidth = $(this).width()
-    return
-  $('.test_menu .card.not_drag').height maxWidth

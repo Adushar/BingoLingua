@@ -1,17 +1,15 @@
-%h1 Free Tests
-- @free_tests.each do |free_test|
-  = link_to free_test.name, game_path(free_test)
-%h1 Payed Tests
-- @subscribe_tests.each do |subscribe_tests|
-  = link_to subscribe_tests.name, game_path(subscribe_tests)
-
+%h2.m-2 Free Tests
 .container.test_menu
   .row.mx-auto
     - @free_tests.each_with_index do |test_part, i|
       .card_block.test_card.col-xl-2.col-lg-2.col-md-3.col-12.text-center
-        - if test_part.picture.empty?
-          %h2.description.card.not_drag No image
-          %p.description= test_part.name
-        - else
-          = image_tag test_part.picture, class: "card not_drag", id: ("card_#{test_part.id}")
-          %p.description= test_part.name
+        = link_to game_path(test_part), style: "color:#000000 !important; text-decoration:none;" do
+          - if test_part.picture.empty?
+            %h2.description.card.not_drag No image
+            %p.description= test_part.name
+          - else
+            = image_tag test_part.picture, class: "card not_drag", id: ("card_#{test_part.id}")
+            %p.description= test_part.name
+%h2.m-2 Payed Tests
+- @subscribe_tests.each do |subscribe_tests|
+  = link_to subscribe_tests.name, game_path(subscribe_tests)
