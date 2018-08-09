@@ -18,3 +18,23 @@ Test.create!({free: true, name: "Test 1"})
   ])
 }
 PublicActivity.enabled = true
+
+def parse_cards
+  PublicActivity.enabled = false
+  Test.create!({free: false, name: "Test 1"})
+  files = Dir.glob("../../shared/public/uploads/1/*.mp3")
+  create_array = []
+  files.each do |e|
+    filename = File.basename(e, ".*")
+    puts filename
+    sound = File.basename(e).gsub(/\s+/, '%20')
+    image_file = Dir.glob("../../shared/public/uploads/1/#{filename}.*g").first
+    if !image_file.nil?
+      image ||= File.basename(image_file).gsub(/\s+/, '%20')
+      create_array << {picture: "/uploads/1/#{image}", sound: "/uploads/1/#{sound}", test: Test.last}
+    end
+  end
+  Card.create!(create_array)
+  PublicActivity.enabled = true
+end
+parse_cards
