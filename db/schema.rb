@@ -31,8 +31,14 @@ ActiveRecord::Schema.define(version: 20180723194002) do
     t.index ["trackable_type", "trackable_id"], name: "index_activities_on_trackable_type_and_trackable_id"
   end
 
-# Could not dump table "cards" because of following StandardError
-#   Unknown type 'has_many' for column 'users'
+  create_table "cards", force: :cascade do |t|
+    t.string "picture"
+    t.string "sound"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "test_id"
+    t.index ["test_id"], name: "index_cards_on_test_id"
+  end
 
   create_table "selected_cards", force: :cascade do |t|
     t.integer "user_id"
@@ -52,9 +58,27 @@ ActiveRecord::Schema.define(version: 20180723194002) do
   end
 
 # Could not dump table "tests" because of following StandardError
-#   Unknown type '' for column 'card'
-
-# Could not dump table "users" because of following StandardError
 #   Unknown type 'has_many' for column 'cards'
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string "current_sign_in_ip"
+    t.string "last_sign_in_ip"
+    t.string "first_name", null: false
+    t.string "last_name", null: false
+    t.datetime "subscribe_ends"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "admin", default: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
 
 end
