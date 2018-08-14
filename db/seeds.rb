@@ -8,33 +8,20 @@
 PublicActivity.enabled = false
 User.create!({:first_name => "Guy", :last_name => "Bad", :email => "guy@gmail.com", :admin => true, :password => "sdjjks7dbjvs56567jhbciwed", :password_confirmation => "sdjjks7dbjvs56567jhbciwed" })
 Test.create!({free: true, name: "Test 1"})
-20.times {
-  Card.create!([
-    {picture: "https://southboundvapes.com/wp-content/uploads/2016/04/Natural-red-apple.jpg", sound: "/sounds/example.mp3", test: Test.last},
-    {picture: "http://www.ogio.com/dw/image/v2/AADH_PRD/on/demandware.static/-/Sites-CGI-ItemMaster/en_US/v1529727192519/sits/ogio-bags-travel-2017-layover/ogio-bags-travel-2017-layover_15264___1.png", sound: "/sounds/example.mp3", test: Test.last},
-    {picture: "https://cdn.shopify.com/s/files/1/0474/3081/products/2580_1400x.jpg", sound: "/sounds/example.mp3", test: Test.last},
-    {picture: "http://cdn.shopify.com/s/files/1/2011/3293/products/zombie-garden-gnome_1024x1024.jpg?v=1515570862", sound: "/sounds/example.mp3", test: Test.last},
-    {picture: "https://i.pinimg.com/736x/98/f4/da/98f4dad0c89c7ce98565079e516edc59.jpg", sound: "/sounds/example.mp3", test: Test.last}
-  ])
-}
-PublicActivity.enabled = true
 
-def parse_cards
-  PublicActivity.enabled = false
-  Test.create!({free: false, name: "Test 1"})
-  files = Dir.glob("../../shared/public/uploads/1/*.mp3")
-  create_array = []
-  files.each do |e|
-    filename = File.basename(e, ".*")
-    puts filename
-    sound = File.basename(e).gsub(/\s+/, '%20')
-    image_file = Dir.glob("../../shared/public/uploads/1/#{filename}.*g").first
-    if !image_file.nil?
-      image ||= File.basename(image_file).gsub(/\s+/, '%20')
-      create_array << {picture: "/uploads/1/#{image}", sound: "/uploads/1/#{sound}", test: Test.last}
-    end
+Test.create!({free: false, name: "Test 1"})
+files = Dir.glob("../../shared/public/uploads/1/*.mp3")
+create_array = []
+files.each do |e|
+  filename = File.basename(e, ".*")
+  puts filename
+  sound = File.basename(e).gsub(/\s+/, '%20')
+  image_file = Dir.glob("../../shared/public/uploads/1/#{filename}.*g").first
+  if !image_file.nil?
+    image ||= File.basename(image_file).gsub(/\s+/, '%20')
+    create_array << {picture: "/uploads/1/#{image}", sound: "/uploads/1/#{sound}", test: Test.last}
   end
-  Card.create!(create_array)
-  PublicActivity.enabled = true
 end
-parse_cards
+Card.create!(create_array)
+
+PublicActivity.enabled = true
