@@ -19,6 +19,14 @@ class CreateStructure < ActiveRecord::Migration[5.1]
       t.index ["trackable_type", "trackable_id"], name: "index_activities_on_trackable_type_and_trackable_id"
     end
 
+    create_table :tests do |t|
+      t.boolean :free
+      t.string :name
+      t.string :picture, :default => ""
+
+      t.timestamps
+    end
+
     create_table "cards", force: :cascade do |t|
       t.string "picture"
       t.string "sound"

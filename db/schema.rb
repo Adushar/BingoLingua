@@ -261,6 +261,14 @@ ActiveRecord::Schema.define(version: 20180814163630) do
     t.index ["user_id"], name: "index_test_results_on_user_id"
   end
 
+  create_table "tests", force: :cascade do |t|
+    t.boolean "free"
+    t.string "name"
+    t.string "picture", default: ""
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "universities", force: :cascade do |t|
     t.bigint "user_id"
     t.string "name"
