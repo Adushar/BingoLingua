@@ -52,11 +52,20 @@ $screen-xl-min: 1200px;
   .test_card {
     margin: 5px 0;
   }
+  .connectedSortable img, img.card, .exampleSortable img, .description.card.not_drag {
+    height: 90%;
+  }
   h2.description.card.not_drag {
     min-height: 300px;
     line-height: 300px;
   }
+}
 
+@media screen and (max-width: #{$screen-sm-min}) and (min-width: 475px) {
+  .card_block.col-6 {
+    flex: 0 0 33.33%;
+    max-width: 33.33%;
+  }
 }
 
 @media (max-width: 360px) {

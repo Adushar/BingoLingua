@@ -63,10 +63,11 @@ img.card, .description.card.not_drag {
 }
 .connectedSortable img, img.card, .exampleSortable img, .description.card.not_drag {
   width: 100%;
-  height: auto;
+  height: 80%;
   border: 9px solid #eee;
   background: white;
   overflow: hidden;
+  min-height: 110px;
 }
 
 // .slider-block {
