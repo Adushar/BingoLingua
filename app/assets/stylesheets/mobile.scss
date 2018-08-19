@@ -86,5 +86,8 @@ $screen-xl-min: 1200px;
   }
 }
 
-@media (max-width: 360px) {
+@media (max-width: 320px) {
+  .slides_btns > .row > .col-2 {
+    margin: 1px;
+  }
 }

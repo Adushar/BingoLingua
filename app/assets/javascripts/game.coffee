@@ -4,6 +4,15 @@ document.addEventListener 'turbolinks:load', ->
     nextArrow: $("#next")
     infinite: false
   });
+  if $.urlParam("slide")
+    $('.slider-block').slick('slickGoTo', parseInt($.urlParam("slide")) );
+    cards_refresh();
+    $("#refresh_btn").show()
+    $('.check_btn').removeClass('check_btn')
+    $('#iconed_btn').wrap('<a onclick="finish_test(); location.reload();">').parent().html('<i class="fa fa-stop-circle"></i>')
+    $("#texted_btn").wrap('<a onclick="finish_test(); location.reload();">').html('Stop')
+    $('#texted_btn, button.btn.btn-secondary.mx-3[data-target=".level-of-difficulty-modal-sm"]').removeClass("mx-3")
+    $('.col-6.d-from-md-none').not(".text-right").css("padding", "0 5px")
   $('.slider-block').on 'init reInit afterChange', (event, slick, currentSlide, nextSlide) ->
     #currentSlide is undefined on init -- set it to 0 in this case (currentSlide is 0 based)
     i = (if currentSlide then currentSlide else 0) + 1

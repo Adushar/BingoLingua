@@ -44,6 +44,19 @@ $img_size: calc(20vh - 20px);
     margin: auto calc(2vw + 5px);
   }
 }
+.slides_btns > .row > .col-2 {
+  display: table;
+  padding: 0;
+  width: initial;
+  margin: 0 10px 0 0;
+  flex-basis: unset;
+  min-width: -moz-min-content;
+  min-width: -webkit-min-content;
+  > button {
+    padding: 5px;
+  }
+}
+
 .ui-state-default {
   height: inherit;
 }

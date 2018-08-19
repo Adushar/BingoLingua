@@ -21,6 +21,16 @@
     %a{"data-toggle" => "modal", :href => ".level-of-difficulty-modal-sm"}
       = fa_icon "cog"
   / Button trigger modal
+.container.mt-2.slides_btns
+  .row{:style => "padding: 5px 30px;"}
+    .col-2
+      %button.btn{:onclick => "if (document.getElementsByClassName('fa-stop-circle')[0] ) {finish_test();} window.location.search = '?slide=0'"} 1-50
+    .col-2
+      %button.btn{:onclick => "if (document.getElementsByClassName('fa-stop-circle')[0] ) {finish_test();} window.location.search = '?slide=1'"} 51-100
+    .col-2
+      %button.btn{:onclick => "if (document.getElementsByClassName('fa-stop-circle')[0] ) {finish_test();} window.location.search = '?slide=2'"} 101-150
+    .col-2
+      %button.btn{:onclick => "if (document.getElementsByClassName('fa-stop-circle')[0] ) {finish_test();} window.location.search = '?slide=3'"} 151-200
 .container.mt-2
   .row
     .col-6.d-from-md-none
