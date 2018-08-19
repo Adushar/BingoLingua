@@ -7,8 +7,9 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 PublicActivity.enabled = false
 User.create!({:first_name => "Guy", :last_name => "Bad", :email => "guy@gmail.com", :admin => true, :password => "sdjjks7dbjvs56567jhbciwed", :password_confirmation => "sdjjks7dbjvs56567jhbciwed" })
-Test.create!({free: true, name: "Test 1"})
-
+puts "User guy created"
+Test.create!({free: true, name: "Test 1 - food"})
+puts "Created Test 1 - food"
 # Test.create!({free: false, name: "Test 1"})
 # files = Dir.glob("../../shared/public/uploads/1/*.mp3")
 # create_array = []

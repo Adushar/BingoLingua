@@ -7,8 +7,20 @@ $img_size: calc(20vh - 20px);
   padding: 0;
   display: table;
   margin: 10px auto;
-  width: 150px;
-  height: 150px;
+  width: 15vw;
+  height: 13vw;
+}
+.full-width {
+  position: absolute;
+  top: 0;
+  line-height: 13vw;
+  margin: 0;
+  padding: 2.5px 0;
+  width: 100%;
+  text-align: center;
+  font-size: 25px;
+  font-weight: bolder;
+  text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white;
 }
 .temp_black {
   background: rgba(193, 189, 189, 0.6);
@@ -17,18 +29,23 @@ $img_size: calc(20vh - 20px);
   position: absolute;
   left: 0;
   right: 0;
-  margin: auto;
-  font-size: 150px;
+  font-size: calc(13vw + 5px);
 }
 .good {
   color: green;
-  /* we dont need to align this alement because it is squere */
-  width: 100%;
+  &:before {
+    margin: auto 1vw;
+  }
 }
 .bad {
   color: red;
   /* But this need */
-  width: 80%;
+  &:before {
+    margin: auto calc(2vw + 5px);
+  }
+}
+.ui-state-default {
+  height: inherit;
 }
 .bage {
   margin: auto;
@@ -39,8 +56,8 @@ $img_size: calc(20vh - 20px);
 .connectedSortable li {
   position: relative;
   float: left;
-  width: 150px;
-  height: 150px;
+  width: 15vw;
+  height: 13vw;
 }
 .ui-state-highlight {
   height: 1.5em;
@@ -51,6 +68,10 @@ $img_size: calc(20vh - 20px);
 .test_card {
   background: #eee;
   margin: 5px;
+}
+
+.test_part > .row {
+  margin-bottom: 20px;
 }
 
 h2.description.card.not_drag {
@@ -67,7 +88,15 @@ img.card, .description.card.not_drag {
   border: 9px solid #eee;
   background: white;
   overflow: hidden;
-  min-height: 110px;
+  min-height: 100px;
+}
+
+.connectedSortable, .exampleSortable {
+  margin-top: 2px;
+  margin-bottom: 0;
+  img {
+    height: 100%;
+  }
 }
 
 // .slider-block {

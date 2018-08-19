@@ -24,6 +24,7 @@ var playlist = function(audio_arr, onPlay, data, endFunc, e) {
     pCount = 0;
     playlistUrls = audio_arr, // audio list
     howlerBank = [],
+    volume = 1,
     loop = false;
 
   // playing i+1 audio (= chaining audio files)
@@ -33,12 +34,15 @@ var playlist = function(audio_arr, onPlay, data, endFunc, e) {
       else { pCount = pCount + 1; }
       if (howlerBank[pCount]) {howlerBank[pCount].play()};
       if (endFunc) {endFunc();}
+      if (audio_arr.length == pCount) {
+        SearchForSortable();
+      }
     }, 1000);
   };
 
   // build up howlerBank:
   playlistUrls.forEach(function(current, i) {
-    howlerBank.push(new Howl({ urls: [playlistUrls[i]], onend: onEnd, onplay: onPlay, buffer: true }))
+    howlerBank.push(new Howl({ urls: [playlistUrls[i]], onend: onEnd, onplay: onPlay, buffer: true, volume: volume }))
   });
 
   // initiate the whole :
@@ -53,7 +57,7 @@ var equalize = function() {
       maxWidth = $(this).width();
     }
   });
-  $('.test_part .col-2 > ul').width(maxWidth);
+  $('.test_part .col > ul').width(maxWidth);
 };
 
 function stopMusic() {
@@ -82,12 +86,12 @@ function GenerateTest(cards, random_cards) {
   console.log([cards, random_cards]);
   playlist(
     only_sound_array,
-    function(e) {$('.container.test_part > .row:nth-child(2) > .col-2:nth-child('+(pCount+1)+') .target').addClass("temp_black");
+    function(e) {$('.container.test_part > .row:nth-child(2) > .col:nth-child('+(pCount+1)+') .target').addClass("temp_black");
   });
   $.each( random_cards, function( index, value ) {
-    var current_ul_li = '<div class="col-2"><ul class="connectedSortable"><li class="ui-state-default"  data-id="'+value.id+'"><img src="'+value.picture+'"></li></ul></div>';
-    var empty_ul_li = '<div class="col-2"><ul class="connectedSortable target"></ul></div>'
-    var example_ul_li = '<div class="col-2"><ul class="exampleSortable target"></ul></div>'
+    var current_ul_li = '<div class="col"><ul class="connectedSortable"><li class="ui-state-default"  data-id="'+value.id+'"><img src="'+value.picture+'"></li></ul></div>';
+    var empty_ul_li = '<div class="col"><ul class="connectedSortable target"></ul></div>'
+    var example_ul_li = '<div class="col"><ul class="exampleSortable target"></ul></div>'
     $(row).append(current_ul_li);
     $(empty_row).append(empty_ul_li);
     $(check_row).append(example_ul_li);
@@ -141,8 +145,8 @@ SearchForSortable = function() {
     },
     stop: function() {
       var card_obj, user_answer_array, wrap_obj;
-      card_obj = $('.container.test_part > .row:nth-child(2) > .col-2 > ul.target > li');
-      wrap_obj = $('.container.test_part > .row:nth-child(2) > .col-2 > ul.target');
+      card_obj = $('.container.test_part > .row:nth-child(2) > .col > ul.target > li');
+      wrap_obj = $('.container.test_part > .row:nth-child(2) > .col > ul.target');
       user_answer_array = card_obj.map(function() {
         return $(this).attr('data-id');
       }).get();
@@ -158,7 +162,7 @@ SearchForSortable = function() {
       return playSound('/sounds/drop.mp3');
     }
   }).disableSelection();
-  equalize();
+  // equalize();
 };
 
 cards_refresh = function() {
@@ -181,7 +185,6 @@ cards_refresh = function() {
           $(".slider-block").hide();
           $(".container.test_part").html();
           GenerateTest(JSON.parse(data["cards"]), JSON.parse(data["mixed_cards"]));
-          return SearchForSortable();
         }
       },
       error: function(xhr) {
@@ -198,8 +201,9 @@ function GenerateAnswer(cards, errors) {
   playlist(
     only_sound_array,
     function(e) {
-      var current_li = '<li class="ui-state-default"><img src="'+cards[pCount][1]+'"></li>';
-      var answer_row = $('.row:nth-child(2) > .col-2 > ul.target > li.ui-state-default').eq(pCount)
+      var sound_url = cards[pCount][1]
+      var current_li = '<li class="ui-state-default position-relative"><img src="'+sound_url+'"><p class="full-width text-capitalize">'+decodeURIComponent(sound_url.match(/([^\/]+)(?=\.\w+$)/)[0]);+'</p></li>';
+      var answer_row = $('.row:nth-child(2) > .col > ul.target > li.ui-state-default').eq(pCount)
       var success_img = '<i class="fa fa-check img_over good" aria-hidden="true"></i>';
       var fail_img = '<i class="fa fa-times img_over bad" aria-hidden="true"></i>';
       // var card_description = '<h2 class="full-width">Its bow</h2>'
@@ -212,7 +216,7 @@ function GenerateAnswer(cards, errors) {
         answer_row.append(success_img);
         console.log(true);
       }
-      $('.row.example > .col-2 > ul.target').eq(pCount).html(current_li);
+      $('.row.example > .col > ul.target').eq(pCount).html(current_li);
     }, null, function(e) {
       if (pCount == cards.length) {
         setTimeout(function() {

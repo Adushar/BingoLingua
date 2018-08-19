@@ -18,8 +18,6 @@ document.addEventListener 'turbolinks:load', ->
     $('#texted_btn, button.btn.btn-secondary.mx-3[data-target=".level-of-difficulty-modal-sm"]').removeClass("mx-3")
     $('.col-6.d-from-md-none').not(".text-right").css("padding", "0 5px")
 
-  SearchForSortable()
-
   $('.btn-group-vertical .btn').click ->
     level = $(this).attr('data-level')
     if getCookie('level') != level and getCookie('level')

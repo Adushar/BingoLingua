@@ -14,8 +14,8 @@ $screen-xl-min: 1200px;
   display: none;
 }
 
-.test_part > .row > .col-2 {
-  max-width: 170px;
+.test_part > .row > .col {
+  max-width: inherit;
 }
 
 @media (max-width: #{$screen-lg-min}) {
@@ -35,16 +35,22 @@ $screen-xl-min: 1200px;
   .test_part .connectedSortable img {
     height: 100%;
   }
-  .test_part > .row > .col-2 {
+  .test_part > .row > .col {
     padding: 0;
-    margin: auto 5px;
-    max-width: 144px;
+    margin-left: 2px;
+    margin-right: 2px;
+    max-width: initial;
   }
   .img_over {
     font-size: 17vw;
   }
   .test_card {
     background: #eee;
+  }
+  .img_over {
+    &:before {
+      margin: auto 2vw;
+    }
   }
 }
 
@@ -58,6 +64,18 @@ $screen-xl-min: 1200px;
   h2.description.card.not_drag {
     min-height: 300px;
     line-height: 300px;
+  }
+  .test_part > .row > .col {
+    width: 100px;
+    max-width: 100px;
+  }
+  .img_over {
+    font-size: 100px;
+  }
+  .good {
+    &:before  {
+      margin: auto;
+    }
   }
 }
 
