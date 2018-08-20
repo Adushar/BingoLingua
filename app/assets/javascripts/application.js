@@ -232,32 +232,35 @@ function GenerateAnswer(cards, errors) {
         setTimeout(function() {
           var random_number = Math.floor(Math.random() * 2);
           var bad_result = errors ? errors.includes(false) : false
-          console.log("------------------");
-          console.log(errors);
-          console.log(bad_result);
-          $('.good_result, .good_result_image_1, .bad_result_image_1, .good_result_image_2, .bad_result_image_2').hide();
+          $('.good_result, .good_result_image_1, .bad_result_image_1, .good_result_image_2, .bad_result_image_2, .bad_result').hide();
+          console.log(random_number);
           switch(random_number) {
             case 0:
               if (bad_result) {
+                var sound = "/sounds/sorry.mp3"
                 $('.bad_result').show();
                 $('.bad_result_image_1').show();
               } else {
+                var sound = "/sounds/excellent.mp3"
                 $('.good_result').show();
                 $('.good_result_image_1').show();
               }
             break;
             case 1:
               if (bad_result) {
+                var sound = "/sounds/too_bad.mp3"
                 $('.bad_result').show();
                 $('.bad_result_image_2').show();
               } else {
+                var sound = "/sounds/wonderful.mp3"
                 $('.good_result').show();
                 $('.good_result_image_2').show();
               }
             break;
           }
           $("#try_again").modal();
-          console.log("Hey guys, lets call the success popup");
+          $("#delete_me").remove();
+          playSound(sound);
         }, 1000);
       }
     }
