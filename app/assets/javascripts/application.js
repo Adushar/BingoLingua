@@ -231,28 +231,28 @@ function GenerateAnswer(cards, errors) {
       if (pCount == cards.length) {
         setTimeout(function() {
           var random_number = Math.floor(Math.random() * 2);
-          var good_result = errors[pCount] == false || false
+          var bad_result = errors ? errors.includes(false) : false
           console.log("------------------");
-          console.log(good_result);
-          console.log(random_number);
+          console.log(errors);
+          console.log(bad_result);
           $('.good_result, .good_result_image_1, .bad_result_image_1, .good_result_image_2, .bad_result_image_2').hide();
           switch(random_number) {
             case 0:
-              if (good_result) {
-                $('.good_result').show();
-                $('.good_result_image_1').show();
-              } else {
+              if (bad_result) {
                 $('.bad_result').show();
                 $('.bad_result_image_1').show();
+              } else {
+                $('.good_result').show();
+                $('.good_result_image_1').show();
               }
             break;
             case 1:
-              if (good_result) {
-                $('.good_result').show();
-                $('.good_result_image_2').show();
-              } else {
+              if (bad_result) {
                 $('.bad_result').show();
                 $('.bad_result_image_2').show();
+              } else {
+                $('.good_result').show();
+                $('.good_result_image_2').show();
               }
             break;
           }
