@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
 @import "bootstrap";
 @import "font-awesome";
 @import 'slick';
@@ -104,5 +105,18 @@ ul.navbar-nav.ml-auto > .nav-item > .nav-link {
   }
 }
 
+footer {
+  > * {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: .9rem;
+  }
+  a, a:hover {
+    color: #fff;
+  }
+  .deep-purple.accent-2 {
+    background-color: #7c4dff!important;
+  }
+}
 // Import in the end to overwrite rools without important
 @import "mobile";

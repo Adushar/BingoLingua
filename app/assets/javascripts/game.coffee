@@ -13,6 +13,7 @@ document.addEventListener 'turbolinks:load', ->
     $("#texted_btn").wrap('<a onclick="finish_test(); location.reload();">').html('Stop')
     $('#texted_btn, button.btn.btn-secondary.mx-3[data-target=".level-of-difficulty-modal-sm"]').removeClass("mx-3")
     $('.col-6.d-from-md-none').not(".text-right").css("padding", "0 5px")
+    window.history.replaceState(null, null, window.location.pathname);
   $('.slider-block').on 'init reInit afterChange', (event, slick, currentSlide, nextSlide) ->
     #currentSlide is undefined on init -- set it to 0 in this case (currentSlide is 0 based)
     i = (if currentSlide then currentSlide else 0) + 1
