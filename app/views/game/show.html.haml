@@ -63,3 +63,22 @@
             %button{:type => "button", "data-level" => "4", :class => "btn btn-secondary #{'btn-active' if cookies[:level] == '4'}"} Selected cards
       .modal-footer
         %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"} Close
+
+#try_again.modal
+  .modal-dialog
+    .modal-content
+      / Modal Header
+      .modal-header
+        %h4.modal-title.good_result Modal Heading
+        %h4.modal-title.bad_result Modal Heading
+        %button.close{"data-dismiss" => "modal", :type => "button"} ×
+      / Modal body
+      .modal-body
+        %img.good_result_image_1{:src => "https://www.stampsdirect.co.uk/media/product/25c/well-done-dog-pre-inked-stamp-45d.png", :style => "width:  100%;"}/
+        %img.good_result_image_2{:src => "https://www.stampsdirect.co.uk/media/product/283/well-done-dino-pre-inked-square-deskmate-stamp-a4a.png", :style => "width:  100%;"}/
+        %img.bad_result_image_1{:src => "https://pics.me.me/failure-isproof-that-you-tried-now-go-try-again-11173247.png", :style => "width:  100%;"}/
+        %img.bad_result_image_2{:src => "http://apikabu.ru/img_n/2012-10_5/4m4.png", :style => "width:  100%;"}/
+      / Modal footer
+      .modal-footer
+        %button.btn.btn-danger{"data-dismiss" => "modal", :onclick => "finish_test(); location.reload();"} Give up
+        %button.btn.btn-success{"data-dismiss" => "modal", :onclick => "cards_refresh();"} Try again

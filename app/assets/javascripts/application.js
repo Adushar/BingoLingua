@@ -230,7 +230,34 @@ function GenerateAnswer(cards, errors) {
     }, null, function(e) {
       if (pCount == cards.length) {
         setTimeout(function() {
-          cards_refresh();
+          var random_number = Math.floor(Math.random() * 2);
+          var good_result = errors[pCount] == false || false
+          console.log("------------------");
+          console.log(good_result);
+          console.log(random_number);
+          $('.good_result, .good_result_image_1, .bad_result_image_1, .good_result_image_2, .bad_result_image_2').hide();
+          switch(random_number) {
+            case 0:
+              if (good_result) {
+                $('.good_result').show();
+                $('.good_result_image_1').show();
+              } else {
+                $('.bad_result').show();
+                $('.bad_result_image_1').show();
+              }
+            break;
+            case 1:
+              if (good_result) {
+                $('.good_result').show();
+                $('.good_result_image_2').show();
+              } else {
+                $('.bad_result').show();
+                $('.bad_result_image_2').show();
+              }
+            break;
+          }
+          $("#try_again").modal();
+          console.log("Hey guys, lets call the success popup");
         }, 1000);
       }
     }
