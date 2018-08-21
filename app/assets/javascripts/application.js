@@ -180,6 +180,7 @@ cards_refresh = function() {
     url = window.location.pathname;
     test_id = url.substring(url.lastIndexOf('/') + 1);
     test_part = parseInt($('.slick-current .block-slide').attr("data-test-part"));
+    $("#refresh_btn").hide();
     return $.ajax({
       url: '/cards_refresh/' + test_id,
       type: 'get',
@@ -261,6 +262,7 @@ function GenerateAnswer(cards, errors) {
           $("#try_again").modal();
           $("#delete_me").remove();
           playSound(sound);
+          $("#refresh_btn").show();
         }, 1000);
       }
     }

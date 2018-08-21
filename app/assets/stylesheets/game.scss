@@ -1,6 +1,14 @@
 $block_size: calc(20vh - 18px);
 $img_size: calc(20vh - 20px);
 
+#try_again .modal-body {
+  text-align: center;
+  img {
+    height: 20vw;
+    max-width: 100%;
+  }
+}
+
 .connectedSortable, .exampleSortable {
   border: 1px solid #eee;
   list-style-type: none;

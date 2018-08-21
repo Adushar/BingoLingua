@@ -7,7 +7,6 @@ document.addEventListener 'turbolinks:load', ->
   if $.urlParam("slide")
     $('.slider-block').slick('slickGoTo', parseInt($.urlParam("slide")) );
     cards_refresh();
-    $("#refresh_btn").show()
     $('.check_btn').removeClass('check_btn')
     $('#iconed_btn').wrap('<a onclick="finish_test(); location.reload();">').parent().html('<i class="fa fa-stop-circle"></i>')
     $("#texted_btn").wrap('<a onclick="finish_test(); location.reload();">').html('Stop')
@@ -21,7 +20,6 @@ document.addEventListener 'turbolinks:load', ->
 
   $('.check_btn').click ->
     cards_refresh();
-    $("#refresh_btn").show()
     $('.check_btn').removeClass('check_btn')
     $('#iconed_btn').wrap('<a onclick="finish_test(); location.reload();">').parent().html('<i class="fa fa-stop-circle"></i>')
     $("#texted_btn").wrap('<a onclick="finish_test(); location.reload();">').html('Stop')
