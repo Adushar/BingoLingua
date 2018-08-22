@@ -80,6 +80,11 @@ $screen-xl-min: 1200px;
 }
 
 @media screen and (max-width: #{$screen-sm-min}) and (min-width: 475px) {
+  .full-width {
+    line-height: 1em;
+    font-size: 19px;
+  }
+
   .card_block.col-6 {
     flex: 0 0 33.33%;
     max-width: 33.33%;
