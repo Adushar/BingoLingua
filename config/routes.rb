@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
+  get 'page/index'
+
   namespace :admin do
       resources :users
       resources :tests
       resources :test_results
       resources :cards
+      resources :pages
 
       root to: "users#index"
     end
@@ -17,5 +20,7 @@ Rails.application.routes.draw do
 
   resources :chat, only: [:index]
   resources :top, only: [:index]
+
+  get '/:url', to: 'page#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

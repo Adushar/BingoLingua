@@ -22,6 +22,8 @@ gem 'devise'
 gem "administrate"
 # For images in admin panel
 gem 'administrate-field-image'
+# For code generator in admin panel
+gem "administrate-field-ckeditor", "~> 0.0.9"
 # Bootstrap
 gem 'bootstrap'
 # Jquery
