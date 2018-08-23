@@ -10,7 +10,7 @@ class PageDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     url: Field::String,
-    code: Administrate::Field::Ckeditor,
+    code: Field::Ckeditor,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
