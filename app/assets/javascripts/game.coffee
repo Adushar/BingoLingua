@@ -9,7 +9,7 @@ document.addEventListener 'turbolinks:load', ->
     cards_refresh();
     $('.check_btn').removeClass('check_btn')
     $('#iconed_btn').wrap('<a onclick="finish_test(); location.reload();">').parent().html('<i class="fa fa-stop-circle"></i>')
-    $("#texted_btn").wrap('<a onclick="finish_test(); location.reload();">').html('Stop')
+    $("#texted_btn").wrap('<a onclick="finish_test(); location.reload();">').html('Finish')
     $('#texted_btn, button.btn.btn-secondary.mx-3[data-target=".level-of-difficulty-modal-sm"]').removeClass("mx-3")
     $('.col-6.d-from-md-none').not(".text-right").css("padding", "0 5px")
     window.history.replaceState(null, null, window.location.pathname);
@@ -22,7 +22,7 @@ document.addEventListener 'turbolinks:load', ->
     cards_refresh();
     $('.check_btn').removeClass('check_btn')
     $('#iconed_btn').wrap('<a onclick="finish_test(); location.reload();">').parent().html('<i class="fa fa-stop-circle"></i>')
-    $("#texted_btn").wrap('<a onclick="finish_test(); location.reload();">').html('Stop')
+    $("#texted_btn").wrap('<a onclick="finish_test(); location.reload();">').html('Finish')
     $('#texted_btn, button.btn.btn-secondary.mx-3[data-target=".level-of-difficulty-modal-sm"]').removeClass("mx-3")
     $('.col-6.d-from-md-none').not(".text-right").css("padding", "0 5px")
 

@@ -6,6 +6,7 @@ $img_size: calc(20vh - 20px);
   img {
     height: 20vw;
     max-width: 100%;
+    min-height: 150px;
   }
 }
 

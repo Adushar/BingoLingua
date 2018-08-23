@@ -39,14 +39,14 @@ var playlist = function(audio_arr, onPlay, data, endFunc, e) {
 
   // playing i+1 audio (= chaining audio files)
   var onEnd = function(e) {
+    if (loop === true ) { pCount = (pCount + 1 !== howlerBank.length)? pCount + 1 : 0; }
+    else { pCount = pCount + 1; }
+    if (audio_arr.length == pCount) {
+      SearchForSortable();
+    }
     setTimeout(function(){
-      if (loop === true ) { pCount = (pCount + 1 !== howlerBank.length)? pCount + 1 : 0; }
-      else { pCount = pCount + 1; }
       if (howlerBank[pCount]) {howlerBank[pCount].play()};
       if (endFunc) {endFunc();}
-      if (audio_arr.length == pCount) {
-        SearchForSortable();
-      }
     }, 1000);
   };
 
@@ -181,6 +181,7 @@ cards_refresh = function() {
     test_id = url.substring(url.lastIndexOf('/') + 1);
     test_part = parseInt($('.slick-current .block-slide').attr("data-test-part"));
     $("#refresh_btn").hide();
+    $("#refresh_txt_btn").remove();
     return $.ajax({
       url: '/cards_refresh/' + test_id,
       type: 'get',
@@ -263,6 +264,7 @@ function GenerateAnswer(cards, errors) {
           $("#delete_me").remove();
           playSound(sound);
           $("#refresh_btn").show();
+          $(".col-6.d-from-md-none:first-of-type").append(`<a onclick="cards_refresh();"><button class="btn btn-success" id="refresh_txt_btn" type="button">Reset</button></a>`)
         }, 1000);
       }
     }
