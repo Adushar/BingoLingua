@@ -264,7 +264,7 @@ function GenerateAnswer(cards, errors) {
           $("#delete_me").remove();
           playSound(sound);
           $("#refresh_btn").show();
-          $(".col-6.d-from-md-none:first-of-type").append(`<a onclick="cards_refresh();"><button class="btn btn-success" id="refresh_txt_btn" type="button">Reset</button></a>`)
+          $(".col-6.d-from-md-none:first-of-type").append('<a onclick="cards_refresh();"><button class="btn btn-success" id="refresh_txt_btn" type="button">Reset</button></a>')
         }, 1000);
       }
     }
