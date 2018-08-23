@@ -1,0 +1,2 @@
+module MultipleLoadHelper
+end

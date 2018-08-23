@@ -1,0 +1,8 @@
+= form_tag multiple_load_index_path, method: "POST", class: "w-75 mx-auto my-3" do
+  .form-group
+    = label_tag :test
+    = select_tag "test", options_from_collection_for_select(@test, "id", "name"), class: "form-control"
+  .form-group
+    = label_tag :path_name
+    = number_field_tag 'path_name', 1, min: 1, class: "form-control"
+  = submit_tag "Submit", :class => "btn btn-primary"
