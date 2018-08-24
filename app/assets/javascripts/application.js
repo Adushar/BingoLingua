@@ -71,11 +71,13 @@ var equalize = function() {
 };
 
 function stopMusic() {
+  var sound = document.getElementById("delete_me");
   if (typeof howlerBank !== 'undefined') {
     howlerBank.forEach(function(obj) {
       obj.stop();
     });
   }
+  sound.pause();
 }
 
 function playSound(soundfile) {
