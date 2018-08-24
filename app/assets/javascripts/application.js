@@ -77,7 +77,9 @@ function stopMusic() {
       obj.stop();
     });
   }
-  sound.pause();
+  if (sound) {
+    sound.pause();
+  }
 }
 
 function playSound(soundfile) {
