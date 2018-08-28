@@ -10,7 +10,19 @@
           - else
             = image_tag test_part.picture, class: "card not_drag", id: ("card_#{test_part.id}")
             %p.description= test_part.name
+  = paginate @free_tests, :param_name => :free_tests
+
 %h2.m-2 For BingoLinguo club members
-%button.btn.btn-warning{:type => "button"} Subscription
-- @subscribe_tests.each do |subscribe_tests|
-  = link_to subscribe_tests.name, game_path(subscribe_tests)
+%button.btn.btn-warning.mx-2{:type => "button"} Subscription
+.container.test_menu
+  .row.mx-auto
+    - @subscribe_tests.each_with_index do |test_part, i|
+      .card_block.test_card.col-xl-2.col-lg-2.col-md-3.col-12.text-center
+        = link_to game_path(test_part), style: "color:#000000 !important; text-decoration:none;" do
+          - if test_part.picture.empty?
+            %h2.description.card.not_drag No image
+            %p.description= test_part.name
+          - else
+            = image_tag test_part.picture, class: "card not_drag", id: ("card_#{test_part.id}")
+            %p.description= test_part.name
+  = paginate @subscribe_tests, :param_name => :subscribe_tests

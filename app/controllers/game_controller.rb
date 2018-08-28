@@ -1,7 +1,7 @@
 class GameController < ApplicationController
   def index
-    @free_tests = Test.where(free: true)
-    @subscribe_tests = Test.where(free: false)
+    @free_tests = Test.where(free: true).page(params[:free_tests]).per(15)
+    @subscribe_tests = Test.where(free: false).page(params[:subscribe_tests]).per(15)
   end
 
   def show

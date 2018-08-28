@@ -120,5 +120,14 @@ footer {
     background-color: #7c4dff!important;
   }
 }
+
+nav.pagination {
+  margin: 10px 0;
+  display: block;
+  text-align: right;
+  span {
+    padding: 3px;
+  }
+}
 // Import in the end to overwrite rools without important
 @import "mobile";

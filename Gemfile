@@ -36,6 +36,8 @@ gem 'gon'
 gem "font-awesome-rails"
 # Recording activity
 gem 'public_activity'
+# Pagination
+gem 'kaminari'
 gem 'unicorn'
 gem 'mina-unicorn', :require => false
 
