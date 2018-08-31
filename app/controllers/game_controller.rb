@@ -1,8 +1,5 @@
 class GameController < ApplicationController
   def index
-    set_meta_tags title: 'Made by LinguaLand with ❤',
-              description: 'Play a new card game with LinguaLand. Improve your perception skills and memory with fun. You have a great opportunity to challenge yourself online and for free! Test your knowledge,  assess your abilities, study well!',
-              keywords: 'card game, study, school, LinguoLand,test, online, free'
     @free_tests = Test.where(free: true).page(params[:free_tests]).per(15)
     @subscribe_tests = Test.where(free: false).page(params[:subscribe_tests]).per(15)
   end
