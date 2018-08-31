@@ -1,1 +1,21 @@
-# See http://www.robotstxt.org/robotstxt.html for documentation on how to use the robots.txt file
+User-agent: *
+Disallow: /admin/
+Disallow: /cards_refresh/
+Disallow: /check_answer/
+Disallow: /finish_test/
+Crawl-Delay: 5
+
+User-agent: GoogleBot
+Disallow: /admin/
+Disallow: /cards_refresh/
+Disallow: /check_answer/
+Disallow: /finish_test/
+
+User-agent: Yandex
+Disallow: /admin/
+Disallow: /cards_refresh/
+Disallow: /check_answer/
+Disallow: /finish_test/
+
+Sitemap: http://bingolinguo.club/sitemap.xml
+Host: http://bingolinguo.club

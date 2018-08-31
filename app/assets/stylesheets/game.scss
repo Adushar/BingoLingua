@@ -111,6 +111,7 @@ img.card, .description.card.not_drag {
   background: white;
   overflow: hidden;
   min-height: 100px;
+  object-fit: cover;
 }
 
 .connectedSortable, .exampleSortable {
