@@ -10,6 +10,8 @@ module BingoLingua
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
+    config.middleware.use Rack::Deflater
+
 
     Rails.application.config.assets.precompile += %w(ckeditor/* ckeditor/lang/*)
 
