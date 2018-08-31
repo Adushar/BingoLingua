@@ -10,10 +10,10 @@ module BingoLingua
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
+    config.assets.precompile += %w( *.js *.css )
+    config.serve_static_assets = true
     config.middleware.use Rack::Deflater
-
-
-    Rails.application.config.assets.precompile += %w(ckeditor/* ckeditor/lang/*)
+    config.assets.precompile += %w(ckeditor/* ckeditor/lang/*)
 
 
     # Settings in config/environments/* take precedence over those specified here.
