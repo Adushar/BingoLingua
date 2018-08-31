@@ -3,13 +3,13 @@
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     = Gon::Base.render_data
-    = display_meta_tags site: 'BingoLinguo', title: 'Made by LinguaLand with ❤', description: 'Play a new card game with LinguaLand. Improve your perception skills and memory with fun. You have a great opportunity to challenge yourself online and for free! Test your knowledge,  assess your abilities, study well!', keywords: 'card game, study, school, LinguoLand,test, online, free'
+    = display_meta_tags site: 'BingoLinguo', title: 'Made by LinguaLand with ❤', description: 'Play a new card game with LinguaLand. Improve your perception skills and memory with fun. You have a great opportunity to challenge yourself online and for free! Test your knowledge,  assess your abilities, study well!', keywords: 'Card game , study, LinguaLand, school, play, test, online, free, picto, pictures, student, develop, improve, skills, level, vocabulary, icon game, fun, easy, challenge  yourself, memorizing, schoolwork, assessment, check your knowledge, quiz, trial and error, clever, headpiece, quick, fast, points, memory, mind, homework, understand, intellectual, work, perception, игра, карточки, пиктограмма, память, ум, развитие, учеба, просто, уровень, задание, лексика, тест, восприятие, смекалка, картинки, школа, задание, оценка, бесплатно, онлайн, словарь, сайт, навык, умение, базовый курс, студент, ребенок, ученик, проверка, знание, зачет, очки, слова, тема, язык, обучение'
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     %script{:src => "/resources/jquery-ui.min.js"}
     %script{:src => "/resources/jquery-fsortable.js"}
     %script{:src => "/resources/jquery.ui.touch-punch.min.js"}
-    %script{:src => "/resources/howler.core.js"}
+    %script{:src => "/resources/howler.core.min.js.gz"}
     %meta{:content => "width=device-width,  initial-scale=1.0, minimum-scale: .5, maximum-scale: 5.0", :name => "viewport"}/
     = action_cable_meta_tag
     = csrf_meta_tags
