@@ -33,4 +33,6 @@ document.addEventListener 'turbolinks:load', ->
       $('.btn-active').removeClass 'btn-active'
       $(this).addClass 'btn-active'
       $('.level-of-difficulty-modal-sm').modal 'hide'
-    cards_refresh();
+    if $('.fa.fa-stop-circle').length
+      finish_test();
+    location.reload();
