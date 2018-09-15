@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get 'page/index'
+  resources :js_log, only: [:create]
 
   namespace :admin do
       resources :users

@@ -1,0 +1,2 @@
+class JsLog < ApplicationRecord
+end
