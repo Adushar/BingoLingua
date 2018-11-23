@@ -1,10 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 @import "bootstrap";
+@import "dataTables/jquery.dataTables";
 @import "font-awesome";
 @import 'slick';
 @import 'slick-theme';
 @import "game";
 @import "chat";
+@import "personal_account";
 .devise {
   @import "devise";
 }

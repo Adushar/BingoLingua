@@ -1,0 +1,41 @@
+$medium: 768px;
+
+#personal_account {
+  &> div > div, &> div > .row > div {
+    margin: 10px 0 20px 0;
+    padding: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    p {
+      margin: 0;
+    }
+    @media screen and (max-width: $medium) {
+      margin: 5px 0;
+    }
+    @media screen and (min-width: $medium) {
+      margin: 10px 0;
+      &.notifications-colomn {padding-left: 10px !important;}
+    }
+  }
+  .result {
+    text-align: left;
+  }
+
+  .row .row.col-md-6 {
+    box-shadow: none;
+  }
+}
+
+.ring {
+  padding: 40px;
+  margin: auto;
+  text-align: center;
+  border: 5px solid grey;
+  border-radius: 100%;
+  width: 200px;
+  height: 200px;
+  h2 {
+    line-height: 120px;
+    margin: 0;
+  }
+}

@@ -26,6 +26,7 @@ gem 'administrate-field-image'
 gem "administrate-field-ckeditor", "~> 0.0.9"
 # Bootstrap
 gem 'bootstrap'
+gem 'jquery-datatables-rails', '~> 3.4.0'
 # Jquery
 gem 'jquery-rails'
 # Slider

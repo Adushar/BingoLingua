@@ -1,0 +1,114 @@
+.row.mx-0#personal_account
+  .row.col-sm-3.col-md-12.mx-auto
+    .user-score.col-md-6
+      %h1 Your score
+      .ring
+        %h2= @score
+    .notifications-colomn.row.col-md-6.p-0
+      .subscribe-ends.w-100.my-sm-0
+        %p= @subscribe_days_left.html_safe
+      .edit-account.w-100
+        %a{:href => "/users/edit"} Edit account data
+      .result.w-100.my-sm-0
+        %h1 You have played:
+        %ul#selector
+          %li= "#{@result[:cards]} cards"
+          %li= "#{@result[:tests]} tests"
+          %li= "learned #{@result[:words]} new words"
+  .col-sm-9.col-md-12.mx-auto
+    %table.table#top_users
+      %thead
+        %tr
+          %th{:scope => "col"} #
+          %th{:scope => "col"} Full name
+          %th{:scope => "col"} Points
+      %tbody
+        - @top_users.each_with_index do |user, index|
+          %tr
+            %th{:scope => "row"}= index + 1
+            %td= user.full_name
+            %td= user.scores
+
+    %table.table#learned_words
+      %thead
+        %tr
+          %th{:scope => "col"} #
+          %th{:scope => "col"} First
+          %th{:scope => "col"} Last
+          %th{:scope => "col"} Handle
+      %tbody
+        %tr
+          %th{:scope => "row"} 1
+          %td Mark
+          %td Otto
+          %td @mdo
+        %tr
+          %th{:scope => "row"} 2
+          %td Jacob
+          %td Thornton
+          %td @fat
+        %tr
+          %th{:scope => "row"} 3
+          %td Larry
+          %td the Bird
+          %td @twitter
+        %tr
+          %th{:scope => "row"} 1
+          %td Mark
+          %td Otto
+          %td @mdo
+        %tr
+          %th{:scope => "row"} 2
+          %td Jacob
+          %td Thornton
+          %td @fat
+        %tr
+          %th{:scope => "row"} 3
+          %td Larry
+          %td the Bird
+          %td @twitter
+        %tr
+          %th{:scope => "row"} 1
+          %td Mark
+          %td Otto
+          %td @mdo
+        %tr
+          %th{:scope => "row"} 2
+          %td Jacob
+          %td Thornton
+          %td @fat
+        %tr
+          %th{:scope => "row"} 3
+          %td Larry
+          %td the Bird
+          %td @twitter
+        %tr
+          %th{:scope => "row"} 1
+          %td Mark
+          %td Otto
+          %td @mdo
+        %tr
+          %th{:scope => "row"} 2
+          %td Jacob
+          %td Thornton
+          %td @fat
+        %tr
+          %th{:scope => "row"} 3
+          %td Larry
+          %td the Bird
+          %td @twitter
+        %tr
+          %th{:scope => "row"} 1
+          %td Mark
+          %td Otto
+          %td @mdo
+        %tr
+          %th{:scope => "row"} 2
+          %td Jacob
+          %td Thornton
+          %td @fat
+        %tr
+          %th{:scope => "row"} 3
+          %td Larry
+          %td the Bird
+          %td @twitter

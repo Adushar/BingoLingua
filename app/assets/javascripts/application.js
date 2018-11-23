@@ -16,6 +16,7 @@
 //= require jquery.slick
 //= require jquery.fittext.js
 //= require jquery_ujs
+//= require dataTables/jquery.dataTables
 //= require turbolinks
 //= require_tree .
 //= require popper
