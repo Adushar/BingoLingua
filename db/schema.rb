@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180915182826) do
+ActiveRecord::Schema.define(version: 20190106193400) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,8 @@ ActiveRecord::Schema.define(version: 20180915182826) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "test_id"
+    t.string "translation"
+    t.string "description"
     t.index ["test_id"], name: "index_cards_on_test_id"
   end
 
@@ -49,11 +51,31 @@ ActiveRecord::Schema.define(version: 20180915182826) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "learned_words", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "card_id"
+    t.integer "revise_times"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["card_id"], name: "index_learned_words_on_card_id"
+    t.index ["user_id"], name: "index_learned_words_on_user_id"
+  end
+
   create_table "pages", force: :cascade do |t|
     t.string "url"
     t.text "code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "points", force: :cascade do |t|
+    t.bigint "test_result_id"
+    t.bigint "user_id"
+    t.integer "points"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["test_result_id"], name: "index_points_on_test_result_id"
+    t.index ["user_id"], name: "index_points_on_user_id"
   end
 
   create_table "selected_cards", force: :cascade do |t|
@@ -102,4 +124,8 @@ ActiveRecord::Schema.define(version: 20180915182826) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "learned_words", "cards"
+  add_foreign_key "learned_words", "users"
+  add_foreign_key "points", "test_results"
+  add_foreign_key "points", "users"
 end

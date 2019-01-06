@@ -70,7 +70,9 @@ end
 
 gem 'rspec-rails', :group => [:development, :test]
 group :test do
-  gem 'factory_bot'
+  gem 'rspec-json_matchers', require: false
+  gem 'factory_bot_rails'
+  gem 'faker'
   # Adds support for Capybara saystem testing and selenium driver
   gem 'capybara', '>= 2.15', '< 4.0'
   gem 'guard-rspec', require: false

@@ -67,6 +67,8 @@ class GameController < ApplicationController
   def check_answer
     cards = []
     correct_answer = session[:order]
+
+
     session[:order] = [] # Record to variable and clean
     correct_answer.each do |answer|
       cards << Card.where(id: answer).pluck(:sound, :picture).first
@@ -75,6 +77,7 @@ class GameController < ApplicationController
     user_answer = JSON.parse(params[:user_answer])
     success = (correct_answer == user_answer ? true : false)
     compare_answers(correct_answer, user_answer)
+    learned_cards(correct_answer, user_answer)
     session[:result] << success
     respond_to do |format|
       format.json {
@@ -116,6 +119,23 @@ class GameController < ApplicationController
   end
 
   private
+
+  def learned_cards(arr1, arr2)
+    if arr1 == arr2
+      arr1.each { |e| LearnedWord.create(card_id: e, user: current_user) }
+    elsif arr1.length == arr2.length
+      @success = false
+      @errors = []
+      arr1.each_with_index do |e, i|
+        if arr1[i] == arr2[i]
+          @errors << true
+          LearnedWord.create(card_id: arr1[i], user: current_user)
+        else
+          @errors << false
+        end
+      end
+    end
+  end
 
   def compare_answers(arr1, arr2)
     if arr1 == arr2

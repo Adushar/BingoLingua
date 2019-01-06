@@ -12,9 +12,9 @@
       .result.w-100.my-sm-0
         %h1 You have played:
         %ul#selector
-          %li= "#{@result[:cards]} cards"
           %li= "#{@result[:tests]} tests"
-          %li= "learned #{@result[:words]} new words"
+          %li= "#{@result[:cards]} new words"
+          %li= "repeated #{@result[:repeats]} times"
   .col-sm-9.col-md-12.mx-auto
     %table.table#top_users
       %thead
@@ -33,82 +33,13 @@
       %thead
         %tr
           %th{:scope => "col"} #
-          %th{:scope => "col"} First
-          %th{:scope => "col"} Last
-          %th{:scope => "col"} Handle
+          %th{:scope => "col"} Word
+          %th{:scope => "col"} Description
+          %th{:scope => "col"} Revise times
       %tbody
-        %tr
-          %th{:scope => "row"} 1
-          %td Mark
-          %td Otto
-          %td @mdo
-        %tr
-          %th{:scope => "row"} 2
-          %td Jacob
-          %td Thornton
-          %td @fat
-        %tr
-          %th{:scope => "row"} 3
-          %td Larry
-          %td the Bird
-          %td @twitter
-        %tr
-          %th{:scope => "row"} 1
-          %td Mark
-          %td Otto
-          %td @mdo
-        %tr
-          %th{:scope => "row"} 2
-          %td Jacob
-          %td Thornton
-          %td @fat
-        %tr
-          %th{:scope => "row"} 3
-          %td Larry
-          %td the Bird
-          %td @twitter
-        %tr
-          %th{:scope => "row"} 1
-          %td Mark
-          %td Otto
-          %td @mdo
-        %tr
-          %th{:scope => "row"} 2
-          %td Jacob
-          %td Thornton
-          %td @fat
-        %tr
-          %th{:scope => "row"} 3
-          %td Larry
-          %td the Bird
-          %td @twitter
-        %tr
-          %th{:scope => "row"} 1
-          %td Mark
-          %td Otto
-          %td @mdo
-        %tr
-          %th{:scope => "row"} 2
-          %td Jacob
-          %td Thornton
-          %td @fat
-        %tr
-          %th{:scope => "row"} 3
-          %td Larry
-          %td the Bird
-          %td @twitter
-        %tr
-          %th{:scope => "row"} 1
-          %td Mark
-          %td Otto
-          %td @mdo
-        %tr
-          %th{:scope => "row"} 2
-          %td Jacob
-          %td Thornton
-          %td @fat
-        %tr
-          %th{:scope => "row"} 3
-          %td Larry
-          %td the Bird
-          %td @twitter
+        - @learned_words.each_with_index do |learned_word, index|
+          %tr
+            %th{:scope => "row"}= index + 1
+            %td= learned_word.card.description
+            %td= learned_word.card.translation
+            %td= learned_word.revise_times || 0
