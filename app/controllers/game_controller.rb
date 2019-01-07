@@ -93,7 +93,6 @@ class GameController < ApplicationController
     attempts = session[:result].length
     # Course of math by 5-th class
     percent_result = (successful*100)/attempts
-    puts session[:result_test_id] != params[:id] || TestResult.where(user_id: user_id, test_id: test_id).empty?
 
     if session[:result_test_id] != params[:id] || TestResult.where(user_id: user_id, test_id: test_id).empty?
       test_in_db = TestResult.new(user_id: user_id, test_id: test_id)
@@ -102,14 +101,12 @@ class GameController < ApplicationController
     else
       test_in_db = TestResult.where(user_id: user_id, test_id: test_id).first
       # Dont touch. Dark magic is processing
-      puts "------------------------------------------------"
-      puts percent_result
-      puts [test_in_db.last_result, test_in_db.attempts]
       test_in_db.last_result = (test_in_db.last_result * test_in_db.attempts + percent_result )/(test_in_db.attempts+1)
       test_in_db.attempts += 1
     end
     if test_in_db.save
       session[:result_test_id] = params[:id]
+      Point.create(test_result: test_in_db, user: current_user, points: successful*( (cookies[:level].to_i||3)+2 )*10)
       respond_to do |format|
         format.json {
           render json: {:save => true}
