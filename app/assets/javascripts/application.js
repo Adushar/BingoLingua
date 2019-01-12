@@ -12,7 +12,6 @@
 //
 //= require jquery
 //= require bootstrap
-//= require log
 //= require jquery.slick
 //= require jquery.fittext.js
 //= require jquery_ujs
