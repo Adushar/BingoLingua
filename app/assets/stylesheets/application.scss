@@ -23,6 +23,26 @@
     bottom: 10px;
 }
 
+.picture.nav-link {
+  text-align: center;
+  float: left;
+  margin-right: 20px;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  font-size: 20px;
+  line-height: 50px;
+  color: white;
+  background: blue;
+}
+
+.picture.nav-link {
+  padding: 0;
+  margin: 0;
+  color: white !important;
+  background: #9d9c91;
+}
+
 .not_drag {
   user-drag: none;
   user-select: none;
