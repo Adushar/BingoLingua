@@ -23,9 +23,6 @@
         %ul.navbar-nav
           %li.nav-item
             %a.nav-link{:href => "/game"} Play a game
-          - if current_user
-            %li.nav-item
-              %a.nav-link{:href => "/chat"} Chat
           %li.nav-item
             %a.nav-link{:href => "/top"} Top 10
           - if current_user.try(:admin?)
@@ -100,8 +97,6 @@
               %a{:href => "#!"} Subscription
             %p
               %a{:href => "#!"} Personal vocabulary account
-            %p
-              %a{:href => "/chat"} Chat
             %p
               %a{:href => "/help"} F.A.Q.
           / Grid column

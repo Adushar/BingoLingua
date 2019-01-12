@@ -4,7 +4,6 @@ SitemapGenerator::Sitemap.compress = false
 
 SitemapGenerator::Sitemap.create do
   add game_index_path, :changefreq => 'monthly', :priority => 1
-  add chat_index_path, :changefreq => 'monthly'
   add top_index_path, :changefreq => 'monthly'
   # Put links creation logic here.
   #

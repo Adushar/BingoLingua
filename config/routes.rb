@@ -19,7 +19,6 @@ Rails.application.routes.draw do
   get 'check_answer/:id' => 'game#check_answer', :via => :get
   get 'finish_test/:id' => 'game#finish_test', :via => :get
 
-  resources :chat, only: [:index]
   resources :top, only: [:index]
   resources :personal_account, only: [:index]
 
