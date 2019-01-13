@@ -39,8 +39,12 @@ gem "font-awesome-rails"
 gem 'public_activity'
 # Pagination
 gem 'kaminari'
+# Mailer
+gem 'sendgrid-actionmailer'
+# SEO
 gem 'meta-tags'
 gem 'sitemap_generator'
+# deployment
 gem 'unicorn'
 gem 'mina-unicorn', :require => false
 

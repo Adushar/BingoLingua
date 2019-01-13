@@ -15,6 +15,16 @@ module BingoLingua
     config.middleware.use Rack::Deflater
     config.assets.precompile += %w(ckeditor/* ckeditor/lang/*)
 
+    config.action_mailer.default_url_options = { :host => 'bingolinguo.club' }
+    ActionMailer::Base.smtp_settings = {
+      :address        => "smtp.sendgrid.net",
+      :port           => "25",
+      :authentication => :plain,
+      :user_name      => 'apikey',
+      :password       => ENV['SENDGRID_API_KEY'],
+      :domain         => 'bingolinguo.club'
+    }
+
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
