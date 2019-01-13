@@ -21,7 +21,7 @@ module BingoLingua
       :port           => "25",
       :authentication => :plain,
       :user_name      => 'apikey',
-      :password       => ENV['SENDGRID_API_KEY'],
+      :password       => Rails.application.secrets.mailer,
       :domain         => 'bingolinguo.club'
     }
 
