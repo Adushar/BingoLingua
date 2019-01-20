@@ -1,53 +1,52 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="devise container">
+  <hr class="mb-4">
+  <h4 class="mb-3">Edit my account</h4>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "needs-validation" }) do |f| %>
+    <%= devise_error_messages! %>
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <%= f.label :first_name %>
+        <%= f.text_field :first_name, autofocus: true, required: "", class: "form-control" %>
+        <div class="invalid-feedback">
+          Valid first name is required.
+        </div>
+      </div>
+      <div class="col-md-6 mb-3">
+        <%= f.label :last_name %>
+        <%= f.text_field :last_name, autofocus: true, required: "", class: "form-control" %>
+        <div class="invalid-feedback">
+          Valid last name is required.
+        </div>
+      </div>
+    </div>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
+    <div class="mb-3">
+      <%= f.label :email %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", required: "", class: "form-control" %>
+      <div class="invalid-feedback">
+        Please enter a valid email address.
+      </div>
+    </div>
 
-  <div class="field">
-    <%= f.label :first_name %><br />
-    <%= f.text_field :first_name, autofocus: true %>
-  </div>
+    <div class="mb-3">
+      <%= f.label :current_password %>
+      <%= f.password_field :current_password, autocomplete: "off", required: "", class: "form-control" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :last_name %><br />
-    <%= f.text_field :last_name, autofocus: true %>
-  </div>
+    <div class="mb-3">
+      <%= f.label :password, "New confirmation" do %>
+        Current password <span class="text-muted">(leave blank if you don't want to change it)</span>
+      <% end %>
+      <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+    <hr class="mb-4">
 
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "off" %>
-  </div>
+    <%= f.submit "Update", class: "btn btn-primary btn-lg btn-block" %>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+    <hr class="mb-4">
   <% end %>
-
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
+  <h4 class="mb-3">Do you want to leave?</h4>
+  <%= button_to "Delete my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-danger btn-lg btn-block" %>
+  <hr class="mb-4">
+</div>
