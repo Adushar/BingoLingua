@@ -1,2 +1,14 @@
-= @top
-- console
+.row.mx-0#personal_account
+  .col-sm-9.col-md-12.mx-auto
+    %table.table#top_users
+      %thead
+        %tr
+          %th{:scope => "col"} #
+          %th{:scope => "col"} Full name
+          %th{:scope => "col"} Points
+      %tbody
+        - @top_users.each_with_index do |user, index|
+          %tr
+            %th{:scope => "row"}= index + 1
+            %td= user.full_name
+            %td= user.scores
