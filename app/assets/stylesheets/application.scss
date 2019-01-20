@@ -43,6 +43,16 @@
   background: #9d9c91;
 }
 
+.flag {
+  img {
+    width: 25px;
+  }
+  &.active {
+    border: 3px solid #9d9b91;
+    border-radius: 5px;
+  }
+}
+
 .not_drag {
   user-drag: none;
   user-select: none;
