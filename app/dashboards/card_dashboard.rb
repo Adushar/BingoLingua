@@ -12,6 +12,8 @@ class CardDashboard < Administrate::BaseDashboard
     picture: Administrate::Field::Image,
     sound: Field::String,
     test: Field::BelongsTo,
+    description: Field::String,
+    translation: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -34,6 +36,8 @@ class CardDashboard < Administrate::BaseDashboard
     :id,
     :picture,
     :sound,
+    :description,
+    :translation,
     :test,
     :created_at,
     :updated_at,
@@ -45,6 +49,8 @@ class CardDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = [
     :picture,
     :sound,
+    :description,
+    :translation,
     :test,
   ].freeze
 

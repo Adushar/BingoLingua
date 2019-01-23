@@ -42,7 +42,14 @@ class User < ActiveRecord::Base
     if demo_user
       return demo_user
     else
-      new_user = User.new({:first_name => "Demo", :last_name => "User", :email => "demo_user@gmail.com", :password => "7uPtpP6J8v9MaQ3u", :password_confirmation => "7uPtpP6J8v9MaQ3u" })
+      new_user = User.new({
+        :first_name => "Demo",
+        :last_name => "User",
+        :email => "demo_user@gmail.com",
+        :password => "7uPtpP6J8v9MaQ3u",
+        :password_confirmation => "7uPtpP6J8v9MaQ3u",
+        confirmed_at: Time.now.utc
+      })
       return new_user if new_user.save
     end
   end

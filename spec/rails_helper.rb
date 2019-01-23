@@ -49,7 +49,7 @@ RSpec.configure do |config|
   config.before(:each) do
     # Sign user in
     Warden.test_mode!
-    @user = FactoryBot.create(:user)
+    @user = FactoryBot.create(:user, :admin)
     login_as @user
   end
 
