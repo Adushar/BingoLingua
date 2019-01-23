@@ -11,9 +11,9 @@ class MultipleLoadController < ApplicationController
     files = Dir.glob("../../shared/public/uploads/#{path_name}/*.mp3")
     create_array = []
     files.each do |e|
+      filename = sound.gsub(".mp3", "")
       image_file = Dir.glob("../../shared/public/uploads/#{path_name}/#{filename}.*g").first
       sound = File.basename(e, ".*")
-      filename = sound.gsub(".mp3", "")
       sound = sound.gsub(/\s+/, '%20')
       if !image_file.nil?
         image ||= File.basename(image_file).gsub(/\s+/, '%20')
