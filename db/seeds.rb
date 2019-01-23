@@ -6,8 +6,8 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 PublicActivity.enabled = false
-User.create!({:first_name => "Guy", :last_name => "Bad", :email => "guy@gmail.com", :admin => true, :password => "sdjjks7dbjvs56567jhbciwed", :password_confirmation => "sdjjks7dbjvs56567jhbciwed" })
-User.create!({:first_name => "Demo", :last_name => "User", :email => "demo_user@gmail.com", :password => "7uPtpP6J8v9MaQ3u", :password_confirmation => "7uPtpP6J8v9MaQ3u" })
+User.create!({:first_name => "Guy", :last_name => "Bad", :email => "guy@gmail.com", :admin => true, :password => "sdjjks7dbjvs56567jhbciwed", :password_confirmation => "sdjjks7dbjvs56567jhbciwed", confirmed_at: Time.now.utc })
+User.create!({:first_name => "Demo", :last_name => "User", :email => "demo_user@gmail.com", :password => "7uPtpP6J8v9MaQ3u", :password_confirmation => "7uPtpP6J8v9MaQ3u", confirmed_at: Time.now.utc })
 puts "User guy created"
 Test.create!({free: true, name: "Test 1 - food"})
 puts "Created Test 1 - food"

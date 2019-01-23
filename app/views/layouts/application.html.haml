@@ -30,12 +30,6 @@
               %a.nav-link{:href => "/admin"} Admin panel
         %ul.navbar-nav.ml-auto
           - if current_user
-            .col
-              %a.flag{:href => "/personal_account"}
-                %img{:src => "/ukr.svg"}
-              %br/
-              %a.flag{:href => "/personal_account"}
-                %img{:src => "/rus.svg"}
             %a.picture.nav-link{:href => "/personal_account"}= (current_user.first_name[0]+current_user.last_name[0]).upcase
             %li.nav-item
               = link_to "Log Out", destroy_user_session_path, class: "nav-link", method: :get
@@ -86,8 +80,14 @@
             %h6.text-uppercase.font-weight-bold BingoLinguo
             %hr.deep-purple.accent-2.mb-4.mt-0.d-inline-block.mx-auto{:style => "width: 60px;"}/
             %p
-              Here you can use rows and columns here to organize your footer content. Lorem ipsum dolor sit amet, consectetur
-              adipisicing elit.
+              %a{:href => "/language/ukr"}
+                = image_tag("/ukr.svg", class: "flag")
+                Ukrainian
+            %p
+              %a{:href => "/language/rus"}
+                = image_tag("/rus.svg", class: "flag")
+                Russian
+
           / Grid column
           / Grid column
           .col-md-2.col-lg-2.col-xl-2.mx-auto.mb-4
@@ -95,11 +95,11 @@
             %h6.text-uppercase.font-weight-bold Products
             %hr.deep-purple.accent-2.mb-4.mt-0.d-inline-block.mx-auto{:style => "width: 60px;"}/
             %p
-              %a{:href => "/"} Let's play
+              %a{:href => "/game"} Let's play
             %p
               %a{:href => "#!"} Subscription
             %p
-              %a{:href => "#!"} Personal vocabulary account
+              %a{:href => "/personal_account"} Personal vocabulary account
             %p
               %a{:href => "/help"} F.A.Q.
           / Grid column

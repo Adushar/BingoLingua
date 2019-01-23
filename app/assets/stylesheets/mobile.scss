@@ -57,6 +57,7 @@ $screen-xl-min: 1200px;
 @media (max-width: #{$screen-sm-min}) {
   .test_card {
     margin: 5px 0;
+    height: min-content;
   }
   .connectedSortable img, img.card, .exampleSortable img, .description.card.not_drag {
     height: 90%;
