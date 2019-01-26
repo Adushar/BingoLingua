@@ -29,7 +29,7 @@ gem 'administrate-field-carrierwave'
 # For code generator in admin panel
 gem "administrate-field-ckeditor", "~> 0.0.9"
 # Bootstrap
-gem 'bootstrap'
+gem "bootstrap", ">= 4.1.2"
 gem 'jquery-datatables-rails', '~> 3.4.0'
 # Jquery
 gem 'jquery-rails'
