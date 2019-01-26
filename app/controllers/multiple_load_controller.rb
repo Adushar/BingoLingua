@@ -27,7 +27,7 @@ class MultipleLoadController < ApplicationController
         puts original
         card = Card.new({
           picture: "/uploads/#{path_name}/#{image}",
-          sound: "/uploads/#{path_name}/#{sound}",
+          sound: "/uploads/#{path_name}/#{sound}.mp3",
           test: test,
           description: original,
           translation: translation
