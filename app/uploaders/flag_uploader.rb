@@ -14,11 +14,7 @@ class FlagUploader < CarrierWave::Uploader::Base
   # end
 
   def store_dir
-    if Rails.env.production?
-      "#{Rails.root.join 'public/uploads'}/uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
-    else
-      "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
-    end
+    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
