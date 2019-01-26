@@ -113,8 +113,7 @@ ActiveRecord::Schema.define(version: 20190124201737) do
     t.string "picture", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "language_id"
-    t.index ["language_id"], name: "index_tests_on_language_id"
+    t.integer "language_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -137,13 +136,14 @@ ActiveRecord::Schema.define(version: 20190124201737) do
     t.string "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
-    t.bigint "language_id"
+    t.integer "language_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["language_id"], name: "index_users_on_language_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "languages", "tests"
+  add_foreign_key "languages", "users"
   add_foreign_key "learned_words", "cards"
   add_foreign_key "learned_words", "users"
   add_foreign_key "points", "test_results"

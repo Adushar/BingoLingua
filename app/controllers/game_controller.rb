@@ -1,8 +1,9 @@
 class GameController < ApplicationController
   before_action :demo_mode, only: :show, if: -> { Test.find(params[:id]).free && !current_user }
   def index
-    @free_tests = Test.where(free: true).order('name').page(params[:free_tests]).per(15)
-    @subscribe_tests = Test.where(free: false).order('name').page(params[:subscribe_tests]).per(15)
+    language = current_user ? current_user.language : nil
+    @free_tests = Test.where(free: true, language: [language, nil]).order('name').page(params[:free_tests]).per(15)
+    @subscribe_tests = Test.where(free: false, language: [language, nil]).order('name').page(params[:subscribe_tests]).per(15)
   end
 
   def show

@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  it { should have_one(:language) }
   context "while getting demo user" do
     it "show existing user" do
       user = FactoryBot.create(:user, :demo_mode)
