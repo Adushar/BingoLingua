@@ -52,9 +52,6 @@ gem 'sitemap_generator'
 gem 'unicorn'
 gem 'mina-unicorn', :require => false
 
-# Use ActiveStorage variant
-# gem 'mini_magick', '~> 4.8'
-
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
