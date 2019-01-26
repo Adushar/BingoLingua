@@ -13,7 +13,6 @@
   = paginate @free_tests, :param_name => :free_tests
 
 %h2.m-2 For BingoLinguo club members
-%button.btn.btn-warning.mx-2{:type => "button"} Subscription
 .container.test_menu
   .row.mx-auto
     - @subscribe_tests.each_with_index do |test_part, i|
