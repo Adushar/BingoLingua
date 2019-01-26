@@ -22,7 +22,7 @@
       #navbarNav.collapse.navbar-collapse
         %ul.navbar-nav
           %li.nav-item
-            %a.nav-link{:href => "/game"} Play a game
+            %a.nav-link{:href => "/game"} Choose my pack
           %li.nav-item
             %a.nav-link{:href => "/top"} Top 10
           - if current_user.try(:admin?)
@@ -94,11 +94,10 @@
             %p
               %a{:href => "/game"} Let's play
             %p
-              %a{:href => "#!"} Subscription
-            %p
               %a{:href => "/personal_account"} Personal vocabulary account
-            %p
-              %a{:href => "/help"} F.A.Q.
+            - Page.all.each do |page|
+              %p
+                %a{:href => "/#{page.url}"}= page.url.humanize
           / Grid column
           / Grid column
           .col-md-4.col-lg-3.col-xl-3.mx-auto.mb-md-0.mb-4
