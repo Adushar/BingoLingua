@@ -18,10 +18,14 @@ gem 'jbuilder', '~> 2.5'
 gem 'haml-rails'
 # Devise for auth
 gem 'devise'
+# Images storage
+gem "mini_magick"
+gem 'carrierwave'
 # For admin panel
 gem "administrate"
 # For images in admin panel
 gem 'administrate-field-image'
+gem 'administrate-field-carrierwave'
 # For code generator in admin panel
 gem "administrate-field-ckeditor", "~> 0.0.9"
 # Bootstrap

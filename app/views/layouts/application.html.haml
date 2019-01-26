@@ -79,14 +79,11 @@
             / Content
             %h6.text-uppercase.font-weight-bold BingoLinguo
             %hr.deep-purple.accent-2.mb-4.mt-0.d-inline-block.mx-auto{:style => "width: 60px;"}/
-            %p
-              %a{:href => "/language/ukr"}
-                = image_tag("/ukr.svg", class: "flag")
-                Ukrainian
-            %p
-              %a{:href => "/language/rus"}
-                = image_tag("/rus.svg", class: "flag")
-                Russian
+            - Language.all.each do |language|
+              %p
+                = link_to language_path(language), :method=> :put do
+                  = image_tag(language.flag.url, alt: language.code, class: "flag") if language.flag?
+                  = language.name
 
           / Grid column
           / Grid column

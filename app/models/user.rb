@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   has_many :test_results
   has_many :points
   has_many :learned_words
+  has_one :language
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

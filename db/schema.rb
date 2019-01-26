@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190113151434) do
+ActiveRecord::Schema.define(version: 20190124201737) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,18 @@ ActiveRecord::Schema.define(version: 20190113151434) do
     t.text "errors_arr"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "languages", force: :cascade do |t|
+    t.string "name"
+    t.string "code"
+    t.bigint "user_id"
+    t.bigint "test_id"
+    t.string "flag"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["test_id"], name: "index_languages_on_test_id"
+    t.index ["user_id"], name: "index_languages_on_user_id"
   end
 
   create_table "learned_words", force: :cascade do |t|
@@ -101,6 +113,8 @@ ActiveRecord::Schema.define(version: 20190113151434) do
     t.string "picture", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "language_id"
+    t.index ["language_id"], name: "index_tests_on_language_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -123,8 +137,10 @@ ActiveRecord::Schema.define(version: 20190113151434) do
     t.string "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
+    t.bigint "language_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["language_id"], name: "index_users_on_language_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 

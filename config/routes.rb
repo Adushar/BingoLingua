@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       resources :tests
       resources :test_results
       resources :cards
+      resources :languages
       resources :pages
 
       root to: "users#index"
@@ -21,6 +22,7 @@ Rails.application.routes.draw do
 
   resources :top, only: [:index]
   resources :personal_account, only: [:index]
+  resources :language, only: :update
 
   get '/:url', to: 'page#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
