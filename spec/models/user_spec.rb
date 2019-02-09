@@ -13,4 +13,10 @@ RSpec.describe User, type: :model do
       expect(model_answer).to eq(demo_user)
     end
   end
+  context "subscribe" do
+    it "should be exprienced" do
+      user = FactoryBot.create(:user)
+      expect(user.subscribe_left).to eq("<b>Your subscribe is ended</b>" )
+    end
+  end
 end

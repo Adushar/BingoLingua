@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
   end
 
   def subscribe_left
-    days = (Date.today...subscribe_ends).count
+    days = subscribe_ends ? (Date.today...subscribe_ends).count : 0
     if days > 0 && Date.today > subscribe_ends
       "Subscribe ends in <b>#{days}</b> days"
     else

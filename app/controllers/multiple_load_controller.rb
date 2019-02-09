@@ -8,12 +8,12 @@ class MultipleLoadController < ApplicationController
     test = Test.find(params[:test])
     path_name = params[:path_name]
 
-    files = Dir.glob("../../shared/public/uploads/#{path_name}/*.mp3")
+    files = Dir.glob("#{ENV['UPLOADS_PATH']}#{path_name}/*.mp3")
     create_array = []
     files.each do |e|
       sound = File.basename(e, ".*")
       filename = sound.gsub(".mp3", "")
-      image_file = Dir.glob("../../shared/public/uploads/#{path_name}/#{filename}.*g").first
+      image_file = Dir.glob("#{ENV['UPLOADS_PATH']}#{path_name}/#{filename}.*g").first
       sound = sound.gsub(/\s+/, '%20')
       if !image_file.nil?
         image ||= File.basename(image_file).gsub(/\s+/, '%20')
@@ -35,7 +35,6 @@ class MultipleLoadController < ApplicationController
         if !card.save
           @errors << card.errors.full_messages
         end
-
       end
     end
     respond_to do |format|

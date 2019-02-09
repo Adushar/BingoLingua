@@ -13,7 +13,28 @@ FactoryBot.define do
     end
   end
   factory :test, class: Test do
+    transient do
+      num_cards { 0 } # Not create cards
+    end
+    # Fill columns
     name { Faker::Book.title }
     free { Faker::Boolean.boolean }
+
+    trait :with_cards do
+      num_cards { 100 } # or create if we need
+    end
+    after(:create) do |test, evaluator|
+      create_list(:cards, (evaluator.num_cards), test: test)
+    end
+  end
+  factory :cards, class: Card do
+    picture { Faker::File.file_name('/foo/bar', nil, 'mp3') }
+    sound { Faker::File.file_name('/foo/bar', nil, 'jpg') }
+    translation { Faker::Lorem.word }
+    description { Faker::Lorem.word }
+  end
+  factory :language, class: Language do
+    name { Faker::Hacker.noun }
+    code { Faker::Hacker.abbreviation }
   end
 end

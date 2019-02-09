@@ -4,8 +4,8 @@ RSpec.describe GameController, type: :controller do
   describe "GET check_answer" do
     before(:each) do
       # default params
-      @rand_test = Test.last(5).sample(1)[0]
-      @cards = @rand_test.cards.sample(3)
+      @test = FactoryBot.create(:test)
+      @cards = FactoryBot.create_list(:cards, 100, test: @test).sample(3)
       @request.session['order'] = @cards.pluck(:id)
       @request.session['result'] = []
     end
@@ -17,7 +17,7 @@ RSpec.describe GameController, type: :controller do
         :cards => @cards.pluck(:sound, :picture).to_json
       }.as_json
 
-      get :check_answer, :params => { :id => @rand_test.id, :user_answer => "#{@cards.pluck(:id)}" }, format: :json
+      get :check_answer, :params => { :id => @test.id, :user_answer => "#{@cards.pluck(:id)}" }, format: :json
       expect(response.body).to be_json.with_content(@answer)                                         # Check if algorithm works right
       expect( @user.learned_words.where(user_id: @user.id).pluck(:card_id) ).to eq(@cards.pluck(:id)) # Check if learned word is saved
     end
@@ -30,7 +30,7 @@ RSpec.describe GameController, type: :controller do
         :errors => [false, true, false],
         :cards => @cards.pluck(:sound, :picture).to_json
       }.as_json
-      get :check_answer, :params => { :id => @rand_test.id, :user_answer => "#{wrong_answ.pluck(:id)}" }, format: :json
+      get :check_answer, :params => { :id => @test.id, :user_answer => "#{wrong_answ.pluck(:id)}" }, format: :json
       expect(response.body).to be_json.with_content(@answer)
       expect( @user.learned_words.where(user_id: @user.id, card_id: @cards.pluck(:id)[1]) ).not_to be_empty # Check if learned word is saved
     end
@@ -43,7 +43,7 @@ RSpec.describe GameController, type: :controller do
         :cards => @cards.pluck(:sound, :picture).to_json
       }.as_json
 
-      get :check_answer, :params => { :id => @rand_test.id, :user_answer => "#{wrong_answ.pluck(:id)}" }, format: :json
+      get :check_answer, :params => { :id => @test.id, :user_answer => "#{wrong_answ.pluck(:id)}" }, format: :json
       expect(response.body).to be_json.with_content(@answer)
     end
   end
