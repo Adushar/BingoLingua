@@ -7,7 +7,6 @@ class User < ActiveRecord::Base
   has_many :selected_cards
   has_many :cards, :through => :selected_cards
   has_many :test_results
-  has_many :points
   has_many :learned_words
   has_one :language
 
@@ -34,9 +33,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  def scores
-    points.sum(:points)
-  end
+  def scores() points end
 
   def self.demo_mode
     demo_user = User.where(email: "demo_user@gmail.com")[0]

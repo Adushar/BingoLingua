@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190124201737) do
+ActiveRecord::Schema.define(version: 20190216165054) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,16 +80,6 @@ ActiveRecord::Schema.define(version: 20190124201737) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "points", force: :cascade do |t|
-    t.bigint "test_result_id"
-    t.bigint "user_id"
-    t.integer "points"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["test_result_id"], name: "index_points_on_test_result_id"
-    t.index ["user_id"], name: "index_points_on_user_id"
-  end
-
   create_table "selected_cards", force: :cascade do |t|
     t.integer "user_id"
     t.integer "card_id"
@@ -137,6 +127,7 @@ ActiveRecord::Schema.define(version: 20190124201737) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.integer "language_id"
+    t.integer "points", default: 0
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -146,6 +137,4 @@ ActiveRecord::Schema.define(version: 20190124201737) do
   add_foreign_key "languages", "users"
   add_foreign_key "learned_words", "cards"
   add_foreign_key "learned_words", "users"
-  add_foreign_key "points", "test_results"
-  add_foreign_key "points", "users"
 end

@@ -5,6 +5,7 @@ FactoryBot.define do
     email { Faker::Internet.safe_email }
     password { Faker::Internet.password }
     confirmed_at { Time.now }
+    points { 0 }
     trait :admin do
       admin { true }
     end

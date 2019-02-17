@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/rails-api/active_model_serializers.git
+  revision: 0ef0f0c538f56b7608cf5103c32b74709ecff501
+  branch: 0-8-stable
+  specs:
+    active_model_serializers (0.8.4)
+      activemodel (>= 3.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -400,6 +408,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_model_serializers!
   administrate
   administrate-field-carrierwave
   administrate-field-ckeditor (~> 0.0.9)

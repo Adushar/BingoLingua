@@ -40,50 +40,51 @@ class GameController < ApplicationController
     end
   end
 
-  def get_cards
+  # AJAX request section
+
+  def cards_set
     # Output: cards, selected, level
-    level = cookies[:level].to_i                    # Parse level
-    user_id = current_user.id.to_i
+    level = cookies[:level].to_i                                                # Parse level
     test_id = params[:id].to_i
     test_part = params[:test_part].to_i
-
-    if level == 4 && user_id   # Turn on selected mode
-      cards = User.find(user_id).cards.where(test_id: test_id).sample(level)
+    if level == 4 && current_user                                               # Turn on selected mode
+      cards = current_user.cards.where(test_id: test_id).sample(level)
       cards = [] if cards.length < 4
-    else
+    elsif level >= 1
       level += 2
-      cards = Test.find(test_id).cards                   # Get all cards of this test
-      cards = cards.limit(25*test_part).last(25).sample(level)          # Get proper card block(0-25, 26-50, 51-75, 75-100)
+      cards = Test.find(test_id).cards                                          # Get all cards of this test
+      cards = cards.limit(25*test_part).last(25).sample(level)                  # Get proper card block(0-25, 26-50, 51-75, 75-100)
     end
-    if cards
-      session[:order] = cards.pluck(:id)
-      mixed_cards = cards.shuffle.to_json(:include => {:users => {:only => [:id]}})
-      puts [session[:order], mixed_cards]
-      cards = cards.to_json(:only => [:sound])      # Finaly transform to json
-    end
-    respond_to do |format|
-      format.json { render json: {"cards" => cards, "mixed_cards" => mixed_cards} }
+    if cards && !cards.empty?
+      session[:correct_order] = cards.pluck(:id)
+      @cards = cards.shuffle
+      respond_to do |format|
+        format.json { render :json => @cards }
+      end
+    else
+      render :json => { :error => 'We can not download enough cards. Sorry us(⌣́_⌣̀)' }
     end
   end
 
   def check_answer
     cards = []
-    correct_answer = session[:order]
-
-
-    session[:order] = [] # Record to variable and clean
-    correct_answer.each do |answer|
-      cards << Card.where(id: answer).pluck(:sound, :picture).first
+    user_answer = params[:user_answer]
+    errors = find_errors(session[:correct_order], user_answer)                  # Find errors in answer. Add correct to LearnedWords
+    session[:correct_order] = []                                                # Record to variable and clean
+    if errors.compact.empty?                                                    # Has array other elements except nil?
+      score_changes = 1
+      errors = nil
+    else
+      score_changes = errors.include?(nil) ? 0 : -1                             # Remove point if answer is fully wrong
     end
-    cards = cards.to_json
-    user_answer = JSON.parse(params[:user_answer])
-    success = (correct_answer == user_answer ? true : false)
-    compare_answers(correct_answer, user_answer)
-    learned_cards(correct_answer, user_answer)
-    session[:result] << success
+    current_user.increment(:points, score_changes)
+
     respond_to do |format|
       format.json {
-        render json: {"success" => @success, "errors" => @errors, "cards" => cards}
+        render json: {
+          :points => score_changes,
+          :errors => errors
+        }
       }
     end
   end
@@ -108,7 +109,7 @@ class GameController < ApplicationController
     end
     if test_in_db.save
       session[:result_test_id] = params[:id]
-      Point.create(test_result: test_in_db, user: current_user, points: successful*( (cookies[:level].to_i||3)+2 )*10)
+      # Point.create(test_result: test_in_db, user: current_user, points: successful*( (cookies[:level].to_i||3)+2 )*10)
       respond_to do |format|
         format.json {
           render json: {:save => true}
@@ -119,30 +120,18 @@ class GameController < ApplicationController
 
   private
 
-  def learned_cards(arr1, arr2)
-    if arr1 == arr2
-      arr1.each { |e| LearnedWord.create(card_id: e, user: current_user) }
-    elsif arr1.length == arr2.length
-      @success = false
-      @errors = []
-      arr1.each_with_index do |e, i|
-        if arr1[i] == arr2[i]
-          @errors << true
-          LearnedWord.create(card_id: arr1[i], user: current_user)
+  def find_errors(usr_answ, corr_answ)
+    errors = []
+    if usr_answ.length == corr_answ.length
+      usr_answ.each_with_index do |e,i|
+        if e == JSON.parse(corr_answ[i])
+          errors << nil
+          LearnedWord.create(card_id: e, user: current_user)
         else
-          @errors << false
+          errors << Card.find(e)
         end
       end
-    end
-  end
-
-  def compare_answers(arr1, arr2)
-    if arr1 == arr2
-      @success = true
-    elsif arr1.length == arr2.length
-      @success = false
-      @errors = []
-      arr1.each_with_index { |e, i| arr1[i] == arr2[i] ? @errors << true : @errors << false }
+      return errors
     end
   end
 end
