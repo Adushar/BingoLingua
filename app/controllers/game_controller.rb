@@ -1,5 +1,6 @@
 class GameController < ApplicationController
   before_action :demo_mode, only: :show, if: -> { Test.find(params[:id]).free && !current_user }
+
   def index
     language = current_user ? current_user.language : nil
     @free_tests = Test.where(free: true, language: [language, nil]).order('name').page(params[:free_tests]).per(15)
@@ -93,35 +94,6 @@ class GameController < ApplicationController
           :errors => errors
         }
       }
-    end
-  end
-
-  def finish_test
-    user_id = current_user.id.to_i
-    test_id = params[:id].to_i
-    successful = session[:result].count(true)
-    attempts = session[:result].length
-    # Course of math by 5-th class
-    percent_result = (successful*100)/attempts
-
-    if session[:result_test_id] != params[:id] || TestResult.where(user_id: user_id, test_id: test_id).empty?
-      test_in_db = TestResult.new(user_id: user_id, test_id: test_id)
-      test_in_db.attempts = 1
-      test_in_db.score = percent_result
-    else
-      test_in_db = TestResult.where(user_id: user_id, test_id: test_id).first
-      # Dont touch. Dark magic is processing
-      test_in_db.score = (test_in_db.score * test_in_db.attempts + percent_result )/(test_in_db.attempts+1)
-      test_in_db.attempts += 1
-    end
-    if test_in_db.save
-      session[:result_test_id] = params[:id]
-      # Point.create(test_result: test_in_db, user: current_user, points: successful*( (cookies[:level].to_i||3)+2 )*10)
-      respond_to do |format|
-        format.json {
-          render json: {:save => true}
-        }
-      end
     end
   end
 
