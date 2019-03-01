@@ -22,12 +22,20 @@ FactoryBot.define do
     free { Faker::Boolean.boolean }
 
     trait :with_cards do
-      num_cards { 100 } # or create if we need
+      num_cards { 20 } # or create if we need
     end
     after(:create) do |test, evaluator|
       create_list(:cards, (evaluator.num_cards), test: test)
     end
   end
+
+  factory :test_result, class: TestResult do
+    attempts { Faker::Number.between(0, 500) }
+    score { Faker::Number.between(0, 100) }
+    user                                                                        # user relation
+    test                                                                        # test relation
+  end
+
   factory :cards, class: Card do
     picture { Faker::File.file_name('/foo/bar', nil, 'mp3') }
     sound { Faker::File.file_name('/foo/bar', nil, 'jpg') }

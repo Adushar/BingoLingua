@@ -71,13 +71,20 @@ class GameController < ApplicationController
     user_answer = params[:user_answer]
     errors = find_errors(session[:correct_order], user_answer)                  # Find errors in answer. Add correct to LearnedWords
     session[:correct_order] = []                                                # Record to variable and clean
-    if errors.compact.empty?                                                    # Has array other elements except nil?
+    errors_num = errors.compact.length
+
+    if errors_num == 0                                                         # Is array fully correct?
       score_changes = 1
       errors = nil
     else
       score_changes = errors.include?(nil) ? 0 : -1                             # Remove point if answer is fully wrong
     end
     current_user.increment(:points, score_changes)
+    TestResult.add_result(                                                      # Send request to custom method in model with:
+      score: 100-(errors_num.to_f/user_answer.length*100),                           # - Percent of correct answers(100%-error percrnt)
+      test_id: params[:id],
+      user: current_user
+    )
 
     respond_to do |format|
       format.json {
@@ -100,11 +107,11 @@ class GameController < ApplicationController
     if session[:result_test_id] != params[:id] || TestResult.where(user_id: user_id, test_id: test_id).empty?
       test_in_db = TestResult.new(user_id: user_id, test_id: test_id)
       test_in_db.attempts = 1
-      test_in_db.last_result = percent_result
+      test_in_db.score = percent_result
     else
       test_in_db = TestResult.where(user_id: user_id, test_id: test_id).first
       # Dont touch. Dark magic is processing
-      test_in_db.last_result = (test_in_db.last_result * test_in_db.attempts + percent_result )/(test_in_db.attempts+1)
+      test_in_db.score = (test_in_db.score * test_in_db.attempts + percent_result )/(test_in_db.attempts+1)
       test_in_db.attempts += 1
     end
     if test_in_db.save

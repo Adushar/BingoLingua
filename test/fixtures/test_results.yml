@@ -2,8 +2,8 @@
 
 one:
   attempts: 1
-  last_result: 1
+  score: 1
 
 two:
   attempts: 1
-  last_result: 1
+  score: 1

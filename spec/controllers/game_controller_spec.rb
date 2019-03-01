@@ -42,6 +42,7 @@ RSpec.describe GameController, type: :controller do
           :errors => nil
        })
        expect( @user.learned_words.pluck(:card_id) ).to include(*@cards.pluck(:id))   # Learned words are assigned to user
+       expect( @user.test_results.last.score ).to eq(100)                       # New test result for our user is created
        expect( @user.points ).to eq(@starting_score+1)                          # Now user score is on 3 points more
     end
 
@@ -62,6 +63,7 @@ RSpec.describe GameController, type: :controller do
         ]
       })
       expect( @user.learned_words.pluck(:card_id) ).to include(@cards[1].id)    # 1 learned word is assigned to user
+      expect( @user.test_results.last.score.round ).to eq(33)                   # New test result for our user is created
       expect( @user.points ).to eq(@starting_score)
     end
 
@@ -76,6 +78,7 @@ RSpec.describe GameController, type: :controller do
         :points => -1,                                                          # Minus one point for fully wrong answer
         :errors => JSON.parse(@cards.to_json)
       })
+      expect( @user.test_results.last.score.round ).to eq(0)                   # New test result for our user is created
       expect( @user.points ).to eq(@starting_score-1)
     end
   end

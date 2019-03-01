@@ -12,7 +12,7 @@ class TestResultDashboard < Administrate::BaseDashboard
     test: Field::BelongsTo,
     id: Field::Number,
     attempts: Field::Number,
-    last_result: Field::Number,
+    score: Field::Number,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -26,7 +26,7 @@ class TestResultDashboard < Administrate::BaseDashboard
     :id,
     :user,
     :test,
-    :last_result,
+    :score,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -36,7 +36,7 @@ class TestResultDashboard < Administrate::BaseDashboard
     :test,
     :id,
     :attempts,
-    :last_result,
+    :score,
     :created_at,
     :updated_at,
   ].freeze
@@ -48,7 +48,7 @@ class TestResultDashboard < Administrate::BaseDashboard
     :user,
     :test,
     :attempts,
-    :last_result,
+    :score,
   ].freeze
 
   # Overwrite this method to customize how test results are displayed

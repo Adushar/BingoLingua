@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190216165054) do
+ActiveRecord::Schema.define(version: 20190224113859) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -88,7 +88,7 @@ ActiveRecord::Schema.define(version: 20190216165054) do
 
   create_table "test_results", force: :cascade do |t|
     t.integer "attempts"
-    t.integer "last_result"
+    t.float "score", default: 0.0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
