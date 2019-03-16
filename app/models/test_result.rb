@@ -13,8 +13,7 @@ class TestResult < ApplicationRecord
       hash[:attempts] = 1
       create(hash)
     elsif hash.has_key?(:score)
-      u = find_by(test: hash[:test], user: hash[:user])
-      puts "Score #{(u.score * u.attempts + hash[:score] )/(u.attempts+1)}. Old #{u.score}"
+      u = find_by(test_id: hash[:test_id], user: hash[:user])
       u.score = (u.score * u.attempts + hash[:score] )/(u.attempts+1)
       u.attempts += 1
       u.save

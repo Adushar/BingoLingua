@@ -11,9 +11,12 @@ module BingoLingua
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
     config.assets.precompile += %w( resources/* )
+    config.assets.precompile += %w(ckeditor/* ckeditor/lang/*)
+    config.assets.precompile << /\.(?:svg|eot|woff|ttf)$/
+    config.assets.paths << Rails.root.join('vendor', 'assets', 'fonts')
+    config.assets.paths << Rails.root.join('vendor', 'assets', 'custom')
     config.serve_static_assets = true
     config.middleware.use Rack::Deflater
-    config.assets.precompile += %w(ckeditor/* ckeditor/lang/*)
 
     config.action_mailer.default_url_options = { :host => 'bingolinguo.club' }
     config.action_mailer.perform_deliveries = true

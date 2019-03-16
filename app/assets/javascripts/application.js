@@ -16,9 +16,14 @@
 //= require jquery.fittext.js
 //= require jquery_ujs
 //= require dataTables/jquery.dataTables
+//= require js/jquery.bootstrap-touchspin
+//= require js/odometer.min
+//= require js/bootstrap-notify.min
 //= require turbolinks
 //= require_tree .
 //= require popper
+
+var game_key;
 
 $.urlParam = function(name){
     var results = new RegExp('[\?&]' + name + '=([^]*)').exec(window.location.href);
@@ -28,6 +33,26 @@ $.urlParam = function(name){
     else{
        return results[1] || 0;
     }
+}
+
+var bootstrap_error = function(text) {
+  html = `<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  `+text+`
+    <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>`
+  $(html).insertAfter("nav.navbar")
+  if (text.includes("☆")) {
+    $(".fa.fa-star-o.star").delay( 1000 ).attr(
+      'style',
+      `-webkit-animation: blink-2 1.5s both !important;
+      animation: blink-2 1.5s both !important;`
+    )
+    setTimeout(function() {
+      $(".fa.fa-star-o.star").removeAttr("style");
+    }, 1500);
+  }
 }
 
 var playlist = function(audio_arr, onPlay, data, endFunc, e) {
@@ -55,7 +80,6 @@ var playlist = function(audio_arr, onPlay, data, endFunc, e) {
   playlistUrls.forEach(function(current, i) {
     howlerBank.push(new Howl({ urls: [playlistUrls[i]], onend: onEnd, onplay: onPlay, buffer: true, volume: volume }))
   });
-
   // initiate the whole :
   howlerBank[0].play();
 }
@@ -89,52 +113,6 @@ function playSound(soundfile) {
     $('body').append('<audio id="delete_me" src="' + soundfile + '" autostart="false" preload="none" ></audio>');
     $("#delete_me")[0].play();
   }, 150);
-};
-
-// IMPORTANT functions for test blocks
-function GenerateTest(cards, random_cards) {
-  var obj = ".container.test_part"
-  var row = $('<div />').attr('class','row');
-  var empty_row = $('<div />').attr('class','row');
-  var check_row = $('<div />').attr('class','row example');
-  var only_sound_array = cards.map(function(item){return item.sound;});
-  console.log([cards, random_cards]);
-  playlist(
-    only_sound_array,
-    function(e) {$('.container.test_part > .row:nth-child(2) > .col:nth-child('+(pCount+1)+') .target').addClass("temp_black");
-  });
-  $.each( random_cards, function( index, value ) {
-    var current_ul_li = '<div class="col"><ul class="connectedSortable"><li class="ui-state-default"  data-id="'+value.id+'"><img src="'+value.picture+'"></li></ul></div>';
-    var empty_ul_li = '<div class="col"><ul class="connectedSortable target"></ul></div>'
-    var example_ul_li = '<div class="col"><ul class="exampleSortable target"></ul></div>'
-    $(row).append(current_ul_li);
-    $(empty_row).append(empty_ul_li);
-    $(check_row).append(example_ul_li);
-  });
-  $(obj).html(row);
-  $(obj).append(empty_row);
-  $(obj).append(check_row);
-}
-
-send_answer = function(answer) {
-  var test_id, test_part, url;
-  url = window.location.pathname;
-  test_id = url.substring(url.lastIndexOf('/') + 1);
-  test_part = parseInt($('.slick-current .block-slide').attr("data-test-part"));
-  return $.ajax({
-    url: '/check_answer/' + test_id,
-    type: 'get',
-    data: {
-      user_answer: "[" + answer + "]"
-    },
-    success: function(data) {
-      console.log(data);
-      return GenerateAnswer(JSON.parse(data["cards"]), data["errors"]);
-    },
-    error: function(xhr) {
-      return console.log("Ops, smth got wrong(");
-    }
-  });
 };
 
 SearchForSortable = function() {
@@ -181,52 +159,100 @@ SearchForSortable = function() {
 };
 
 cards_refresh = function() {
-    var test_id, test_part, url;
-    url = window.location.pathname;
-    test_id = url.substring(url.lastIndexOf('/') + 1);
-    test_part = parseInt($('.slick-current .block-slide').attr("data-test-part"));
-    $("#refresh_btn").hide();
-    $("#refresh_txt_btn").remove();
-    return $.ajax({
-      url: '/cards_refresh/' + test_id,
-      type: 'get',
-      data: {
-        test_part: test_part
-      },
-      success: function(data) {
-        console.log(getCookie('level') === "4");
-        if (JSON.parse(data["cards"]).length < 4 && getCookie('level') === "4") {
-          return alert("Selected cards isn't enough. You need to choose " + (4 - JSON.parse(data["cards"]).length) + " more card(s)");
-        } else {
-          stopMusic();
-          $(".slider-block").hide();
-          $(".container.test_part").html();
-          GenerateTest(JSON.parse(data["cards"]), JSON.parse(data["mixed_cards"]));
-        }
-      },
-      error: function(xhr) {
-        return console.log("Ops, smth got wrong(");
-      }
-    });
-  };
+  var test_id, test_part, url;
+  url = window.location.pathname;
+  test_id = url.substring(url.lastIndexOf('/') + 1);
+  test_part = parseInt($('.slick-current .block-slide').attr("data-test-part"));
+  console.log("----------cards_refresh----------");
+  $("#refresh_btn").hide();
+  $("#refresh_txt_btn").remove();
+  return $.ajax({
+    url: '/cards_set/' + test_id,
+    type: 'get',
+    data: {
+      test_part: test_part
+    },
+    dataType: "json",
+    success: function(data) {
+      game_key = data["answer"]
+      console.log(data);
+      stopMusic();
+      $(".slider-block").hide();                                                // Hide slider
+      $(".container.test_part").html();                                         // And clean test block
+      GenerateTest(game_key, data["game"]);       // Fill test block with new content
+    },
+    error: function(xhr) {
+      var errors = $.parseJSON(xhr.responseText).errors
+      bootstrap_error(errors)                                                   // Render error for user
+      return false;                                                             // And finish ajax request
+    }
+  });
+};
+
+// IMPORTANT functions for test blocks
+function GenerateTest(cards, random_cards) {
+  var obj = ".container.test_part"
+  var row = $('<div />').attr('class','row');
+  var empty_row = $('<div />').attr('class','row');
+  var check_row = $('<div />').attr('class','row example');
+  var only_sound_array = cards.map(function(item){return item.sound;});
+  console.log("GenerateTest");
+  playlist(
+    only_sound_array,
+    function(e) {$('.container.test_part > .row:nth-child(2) > .col:nth-child('+(pCount+1)+') .target').addClass("temp_black");
+  });
+  $.each( random_cards, function( index, value ) {
+    var current_ul_li = '<div class="col"><ul class="connectedSortable"><li class="ui-state-default"  data-id="'+value.id+'"><img src="'+value.picture+'"></li></ul></div>';
+    var empty_ul_li = '<div class="col"><ul class="connectedSortable target"></ul></div>'
+    var example_ul_li = '<div class="col"><ul class="exampleSortable target"></ul></div>'
+    $(row).append(current_ul_li);
+    $(empty_row).append(empty_ul_li);
+    $(check_row).append(example_ul_li);
+  });
+  $(obj).html(row);
+  $(obj).append(empty_row);
+  $(obj).append(check_row);
+}
+
+send_answer = function(answer) {
+  var test_id, test_part, url;
+  url = window.location.pathname;
+  test_id = url.substring(url.lastIndexOf('/') + 1);
+  test_part = parseInt($('.slick-current .block-slide').attr("data-test-part"));
+  console.log("send_answer");
+  return $.ajax({
+    url: '/check_answer/' + test_id,
+    type: 'get',
+    data: {
+      user_answer: answer
+    },
+    success: function(data) {
+      points_notice(JSON.parse(data["points"]))
+      return GenerateAnswer(game_key, data["errors"]);
+    },
+    error: function(xhr) {
+      var errors = $.parseJSON(xhr.responseText).errors
+      bootstrap_error(errors)                                                   // Render error for user
+      return false;                                                             // And finish ajax request
+    }
+  });
+};
 
 function GenerateAnswer(cards, errors) {
-  var only_sound_array = cards.map(function(item){return item[0];});
-  console.log(only_sound_array);
-  console.log([cards, errors]);
+  var only_sound_array = cards.map(function(x){return x["sound"];});
   stopMusic();
+  console.log("GenerateAnswer");
   playlist(
     only_sound_array,
     function(e) {
-      var sound_url = cards[pCount][1]
-      var current_li = '<li class="ui-state-default position-relative"><img src="'+sound_url+'"><p class="full-width text-capitalize">'+decodeURIComponent(sound_url.match(/([^\/]+)(?=\.\w+$)/)[0]);+'</p></li>';
+      var image_url = cards[pCount]["picture"]
+      var current_li = '<li class="ui-state-default position-relative"><img src="'+image_url+'"><p class="full-width text-capitalize">'+decodeURIComponent(image_url.match(/([^\/]+)(?=\.\w+$)/)[0]);+'</p></li>';
       var answer_row = $('.row:nth-child(2) > .col > ul.target > li.ui-state-default').eq(pCount)
       var success_img = '<i class="fa fa-check img_over good" aria-hidden="true"></i>';
       var fail_img = '<i class="fa fa-times img_over bad" aria-hidden="true"></i>';
-      // var card_description = '<h2 class="full-width">Its bow</h2>'
 
       $('.connectedSortable').sortable('disable');
-      if (errors && errors[pCount] == false) {
+      if (errors && errors[pCount] != null) {
         answer_row.append(fail_img);
         console.log(errors[pCount]);
       } else {
@@ -237,57 +263,14 @@ function GenerateAnswer(cards, errors) {
     }, null, function(e) {
       if (pCount == cards.length) {
         setTimeout(function() {
-          var random_number = Math.floor(Math.random() * 2);
-          var bad_result = errors ? errors.includes(false) : false
-          $('.good_result, .good_result_image_1, .bad_result_image_1, .good_result_image_2, .bad_result_image_2, .bad_result').hide();
-          console.log(random_number);
-          switch(random_number) {
-            case 0:
-              if (bad_result) {
-                var sound = "/sounds/sorry.mp3"
-                $('.bad_result').show();
-                $('.bad_result_image_1').show();
-              } else {
-                var sound = "/sounds/excellent.mp3"
-                $('.good_result').show();
-                $('.good_result_image_1').show();
-              }
-            break;
-            case 1:
-              if (bad_result) {
-                var sound = "/sounds/too_bad.mp3"
-                $('.bad_result').show();
-                $('.bad_result_image_2').show();
-              } else {
-                var sound = "/sounds/wonderful.mp3"
-                $('.good_result').show();
-                $('.good_result_image_2').show();
-              }
-            break;
-          }
-          $("#try_again").modal();
-          $("#delete_me").remove();
-          playSound(sound);
-          $("#refresh_btn").show();
+          if ($('#auto_play[active="active"]')[0]) { cards_refresh(); }         // If auto mode is ON, refresh
+          $("#texted_btn.play.btn").removeAttr("active");
           $(".col-6.d-from-md-none:first-of-type").append('<a onclick="cards_refresh();"><button class="btn btn-success" id="refresh_txt_btn" type="button">Reset</button></a>')
         }, 1000);
       }
     }
   );
 }
-
-function finish_test() {
-  var test_id, url;
-  url = window.location.pathname;
-  test_id = url.substring(url.lastIndexOf('/') + 1);
-  return $.ajax({
-    url: '/finish_test/' + test_id,
-    type: 'get',
-    error: function(xhr) {
-      return console.log("Ops, smth got wrong(");
-    }
-  });
-};
 
 // Here is standart cookie stuff
 function setCookie(cname, cvalue, exdays) {

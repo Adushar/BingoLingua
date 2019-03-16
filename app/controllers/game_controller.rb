@@ -50,7 +50,12 @@ class GameController < ApplicationController
     test_part = params[:test_part].to_i
     if level == 4 && current_user                                               # Turn on selected mode
       cards = current_user.cards.where(test_id: test_id).sample(level)
-      cards = [] if cards.length < 4
+      if cards.length < 4
+        cards = []
+        render :json => {
+          :errors => 'You must select at least 4 cards by clicking on ☆'        # Send error
+        }, :status => 422 and return                                            # Stop executing code
+      end
     elsif level >= 1
       level += 2
       cards = Test.find(test_id).cards                                          # Get all cards of this test
@@ -58,12 +63,16 @@ class GameController < ApplicationController
     end
     if cards && !cards.empty?
       session[:correct_order] = cards.pluck(:id)
+      @answer = cards
       @cards = cards.shuffle
-      respond_to do |format|
-        format.json { render :json => @cards }
-      end
+      render :json => {
+        game: @cards,
+        answer: @answer
+       }
     else
-      render :json => { :error => 'We can not download enough cards. Sorry us(⌣́_⌣̀)' }
+      render :json => {
+        :errors => 'We can not download enough cards. Sorry us(⌣́_⌣̀)'
+      }, :status => 422 and return
     end
   end
 
@@ -71,7 +80,7 @@ class GameController < ApplicationController
     cards = []
     user_answer = params[:user_answer]
     errors = find_errors(session[:correct_order], user_answer)                  # Find errors in answer. Add correct to LearnedWords
-    session[:correct_order] = []                                                # Record to variable and clean
+    session[:correct_order] = []                                                # Clean session parameter
     errors_num = errors.compact.length
 
     if errors_num == 0                                                         # Is array fully correct?
@@ -80,7 +89,7 @@ class GameController < ApplicationController
     else
       score_changes = errors.include?(nil) ? 0 : -1                             # Remove point if answer is fully wrong
     end
-    current_user.increment(:points, score_changes)
+    current_user.increment(:points, score_changes).save
     TestResult.add_result(                                                      # Send request to custom method in model with:
       score: 100-(errors_num.to_f/user_answer.length*100),                           # - Percent of correct answers(100%-error percrnt)
       test_id: params[:id],

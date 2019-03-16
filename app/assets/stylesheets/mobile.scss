@@ -24,7 +24,7 @@ $screen-xl-min: 1200px;
 
 @media (max-width: #{$screen-md-min}) {
   body {padding-left: 0 !important;}
-  .sidenav {display: none;}
+  .bottomnav {display: none;}
   .d-from-md-none {display: block;}
   .connectedSortable, .exampleSortable, .connectedSortable li {
     width: 17vw;

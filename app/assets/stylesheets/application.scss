@@ -1,6 +1,26 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto');
+@font-face {
+    font-family: 'ClearSans';
+    src: url('ClearSans/ClearSans-Thin.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'ClearSans';
+    src: url('ClearSans/ClearSans-Italic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+}
+@font-face {
+    font-family: 'ClearSans';
+    src: url('ClearSans/ClearSans-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
 @import "bootstrap";
 @import "dataTables/jquery.dataTables";
+@import "css/jquery.bootstrap-touchspin";
+@import "css/bootstrap-notify";
+@import "css/odometer-theme-default";
 @import "font-awesome";
 @import 'slick';
 @import 'slick-theme';
@@ -8,6 +28,14 @@
 @import "personal_account";
 .devise {
   @import "devise";
+}
+
+body {
+  font-family: 'ClearSans', sans-serif;
+}
+
+.alert {
+  margin: 5px;
 }
 
 .btn-circle {
@@ -84,29 +112,35 @@ ul.navbar-nav.ml-auto > .nav-item > .nav-link {
 
 // for side bar
 
-.sidenav {
-  height: 100%;
-  width: 100px;
+.bottomnav {
+  max-width: 500px;
+  height: 50px;
+  width: fit-content;
   position: fixed;
-  z-index: 0;
-  top: 0;
+  z-index: 10000;
+  bottom: 0;
   left: 0;
-  background-color: #111;
-  display: flex;
-  flex-direction: column;
-  padding: 0;
-  li {padding: 5px 0;}
-  .text-center {
-    margin: 4.5px auto 0;
+  right: 0;
+  background-color: rgb(115, 115, 115);
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+  display: inline-block;
+  padding: 0 20px;
+  margin: auto;
+  text-align: center;
+
+  li {
+    // vertical-align:
     list-style-type: none;
+    vertical-align: middle;
+    display: inline-block;
+    height: 30px;
+    margin: 12px 2px;
+    position: relative;
   }
 }
 
-.sidenav .bottom {
-  margin-top: auto;
-}
-
-.sidenav {
+.bottomnav {
   i {font-size: 30px;}
   span {
     font-size: 25px;
@@ -115,17 +149,56 @@ ul.navbar-nav.ml-auto > .nav-item > .nav-link {
   i, span {
     color: #818181;
   }
+  button.btn {
+    border-color: #f8f9fa;
+    border-radius: 3px;
+    border-width: 1.2px;
+    height: 30px;
+    padding: 0 0.75rem;
+    font-size: 18px;
+    color: #f8f9fa;
+    &:hover, &:active {
+      color: white;
+    }
+  }
+  .input-group-btn button {
+    background-color: white;
+    color: black;
+    &:hover {
+      color: black;
+    }
+  }
+  .badge {
+    z-index: 100;
+    position: absolute;
+    margin: auto;
+    padding: 1px;
+    width: 65%;
+    top: -8px;
+    left: 0;
+    right: 0;
+    font-size: 15px;
+    font-weight: 100;
+    &.badge-light {
+      color: black;
+      background-color: rgb(238, 240, 242);
+    }
+    &.badge-secondary {
+      color: white;
+      background-color: rgb(155, 160, 169);
+    }
+  }
+
 }
 
-.sidenav a {
+.bottomnav a {
   padding: 0;
   text-decoration: none;
   font-size: 18px;
   color: #818181;
-}
-
-.sidenav a:hover i {
-    color: #f1f1f1;
+  &:hover i {
+      color: #f1f1f1;
+  }
 }
 
 .card_block {
@@ -150,7 +223,7 @@ ul.navbar-nav.ml-auto > .nav-item > .nav-link {
 
 footer {
   > * {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'ClearSans', sans-serif;
     font-weight: 300;
     font-size: .9rem;
   }
@@ -172,3 +245,29 @@ nav.pagination {
 }
 // Import in the end to overwrite rools without important
 @import "mobile";
+@-webkit-keyframes blink-2 {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    color: #ffef00 !important;
+    opacity: 0.2;
+  }
+  100% {
+
+    opacity: 1;
+  }
+}
+@keyframes blink-2 {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    color: #ff8d00;
+    opacity: 0.2;
+  }
+  100% {
+    color: #ffef00;
+    opacity: 1;
+  }
+}

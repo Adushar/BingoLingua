@@ -72,9 +72,50 @@ $img_size: calc(20vh - 20px);
 .bage {
   margin: auto;
 }
-#refresh_btn {
-  display: none;
+.level_block, .quarter_block {
+  .btn-default:hover, .btn-default:active {
+    color: black;
+    background: #e7e7e7;
+  }
 }
+#score {
+  background-color: #9ba0a9;
+  padding: 0 27px;
+  border-radius: 5px;
+  border: 3px solid white;
+  height: 30px;
+  overflow: hidden;
+  span {
+    color: white;
+    font-size: 18px;
+    line-height: 30px;
+    font-weight: normal;
+    font-family: 'ClearSans', sans-serif;
+  }
+}
+#level, #part_number {
+  text-align: center;
+  height: 30px;
+  width: 30px;
+  padding: 0;
+  border: 2px solid #eff0f2;
+  border-top: none;
+  border-bottom: none;
+}
+#auto_play, #texted_btn {
+  &[active=active] {
+    -moz-box-shadow: inset 0 0 10px #0000006e;
+    -webkit-box-shadow: inset 0 0 10px #0000006e;
+    box-shadow: inset 0 0 10px #0000006e;
+  }
+}
+#auto_play {
+  background-color: #f4bc59;
+}
+#texted_btn {
+  background-color: #c7d465;
+}
+
 .connectedSortable li {
   position: relative;
   float: left;

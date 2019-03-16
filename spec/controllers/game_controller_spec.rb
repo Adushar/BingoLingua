@@ -15,10 +15,17 @@ RSpec.describe GameController, type: :controller do
 
       expect(JSON.parse(response.body)["game"].length).to eq(@level+2)
     end
-    it 'sends error' do
+    it 'sends no data error' do
+      @request.cookies['level'] = @level = 4
       get :cards_set, params: {id: @test.id, test_part: rand(1..4)}, format: :json
       expect(response.body).to be_json.with_content({
-        :error => 'We can not download enough cards. Sorry us(⌣́_⌣̀)'
+        :errors => 'You must select at least 4 cards by clicking on ☆'
+      })
+    end
+    it 'sends crash error' do
+      get :cards_set, params: {id: @test.id, test_part: rand(1..4)}, format: :json
+      expect(response.body).to be_json.with_content({
+        :errors => 'We can not download enough cards. Sorry us(⌣́_⌣̀)'
       })
     end
   end
