@@ -24,7 +24,6 @@ $screen-xl-min: 1200px;
 
 @media (max-width: #{$screen-md-min}) {
   body {padding-left: 0 !important;}
-  .bottomnav {display: none;}
   .d-from-md-none {display: block;}
   .connectedSortable, .exampleSortable, .connectedSortable li {
     width: 17vw;
@@ -92,8 +91,6 @@ $screen-xl-min: 1200px;
   }
 }
 
-@media (max-width: 320px) {
-  .slides_btns > .row > .col-2 {
-    margin: 1px;
-  }
+@media (max-width: 500px) {
+  .bottomnav {display: none;}
 }

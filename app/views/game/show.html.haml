@@ -15,16 +15,6 @@
   %li
     %button.play.btn#texted_btn{:type => "button"} Play
   / Button trigger modal
-.container.mt-2.slides_btns
-  .row{:style => "padding: 5px 30px;"}
-    .col-2
-      %button.btn{:onclick => "if (document.getElementsByClassName('fa-stop-circle')[0] ) {window.location.search = '?slide=0'} else { $('.slider-block').slick('slickGoTo', 0 ); }"} 1-50
-    .col-2
-      %button.btn{:onclick => "if (document.getElementsByClassName('fa-stop-circle')[0] ) {window.location.search = '?slide=1'} else { $('.slider-block').slick('slickGoTo', 1 ); }"} 51-100
-    .col-2
-      %button.btn{:onclick => "if (document.getElementsByClassName('fa-stop-circle')[0] ) {window.location.search = '?slide=2'} else { $('.slider-block').slick('slickGoTo', 2 ); }"} 101-150
-    .col-2
-      %button.btn{:onclick => "if (document.getElementsByClassName('fa-stop-circle')[0] ) {window.location.search = '?slide=3'} else { $('.slider-block').slick('slickGoTo', 3 ); }"} 151-200
 .container.mt-2
   .row
     .col-6.d-from-md-none
@@ -57,22 +47,3 @@
             %button{:type => "button", "data-level" => "4", :class => "btn btn-secondary #{'btn-active' if cookies[:level] == '4'}"} Selected cards
       .modal-footer
         %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"} Close
-
-#try_again.modal
-  .modal-dialog
-    .modal-content
-      / Modal Header
-      .modal-header
-        %h4.modal-title.good_result Well done
-        %h4.modal-title.bad_result Sorry, that's not correct
-        %button.close{"data-dismiss" => "modal", :type => "button"} ×
-      / Modal body
-      .modal-body
-        %img.good_result_image_1{:src => "https://www.stampsdirect.co.uk/media/product/25c/well-done-dog-pre-inked-stamp-45d.png"}/
-        %img.good_result_image_2{:src => "https://www.stampsdirect.co.uk/media/product/283/well-done-dino-pre-inked-square-deskmate-stamp-a4a.png"}/
-        %img.bad_result_image_1{:src => "https://pics.me.me/failure-isproof-that-you-tried-now-go-try-again-11173247.png"}/
-        %img.bad_result_image_2{:src => "http://apikabu.ru/img_n/2012-10_5/4m4.png"}/
-      / Modal footer
-      .modal-footer
-        %button.btn.btn-danger{"data-dismiss" => "modal", :onclick => "finish_test(); location.reload();"} I'm leaving
-        %button.btn.btn-success{"data-dismiss" => "modal", :onclick => "stopMusic(); cards_refresh();"} I'll continue
