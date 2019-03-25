@@ -13,6 +13,7 @@ module BingoLingua
     config.assets.precompile += %w( resources/* )
     config.assets.precompile += %w(ckeditor/* ckeditor/lang/*)
     config.assets.precompile << /\.(?:svg|eot|woff|ttf)$/
+    config.assets.precompile += %w(assets/custom/*)
     config.assets.paths << Rails.root.join('vendor', 'assets', 'fonts')
     config.assets.paths << Rails.root.join('vendor', 'assets', 'custom')
     config.serve_static_assets = true
