@@ -1,4 +1,5 @@
 document.addEventListener 'turbolinks:load', ->
+  mobile = $(window).width() < 500
   $('.slider-block').slick({
     arrows: false
     infinite: false
@@ -25,14 +26,18 @@ document.addEventListener 'turbolinks:load', ->
     trigger = if direction == "left" then "touchspin.uponce" else "touchspin.downonce"
     $('#part_number').trigger(trigger);
 
-  $('.play, #auto_play').click ->
-    if $("#auto_play").attr("active")                                           # if user cancels auto mode
+  $('.play, .auto_play').click ->
+    if $(".auto_play").attr("active")                                           # if user cancels auto mode
       $(this).removeAttr("active");                                             # remove active status
       return                                                                    # break function
     else if $(".play").attr("active")
       return
+    if mobile
+      $(".mobile_controll").show()                                              # enable mobile mode
     $(this).attr({active: "active"});
     cards_refresh();
+    $('.mobnav').hide();
+    $(".test_part, .mobile_info, .notification_holder").show();
     $('#texted_btn, button.btn.btn-secondary.mx-3[data-target=".level-of-difficulty-modal-sm"]').removeClass("mx-3")
     $('.col-6.d-from-md-none').not(".text-right").css("padding", "0 5px")
 
@@ -46,5 +51,5 @@ document.addEventListener 'turbolinks:load', ->
     location.reload();
 
   # mobile hints
-  if $(window).width() < 500 && getCookie('hint') != "false"
+  if $(".mobile_controll").length && getCookie('hint') != "false"
     $( "body" ).append('<div class="hint" onclick="$(\'.hint\').remove();setCookie(\'hint\', false, 25)"><img src="/swipe-helper.gif"></div>')

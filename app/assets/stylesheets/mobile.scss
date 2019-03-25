@@ -14,42 +14,30 @@ $screen-xl-min: 1200px;
   display: none;
 }
 
-.test_part > .row > .col {
-  max-width: inherit;
-}
-
 @media (max-width: #{$screen-lg-min}) {
 
+}
+
+@media (min-width: #{$screen-md-min}) {
+  .mobile_controll, .mobile_info, .notification_holder {
+    display: none !important;
+  }
 }
 
 @media (max-width: #{$screen-md-min}) {
   body {padding-left: 0 !important;}
   .d-from-md-none {display: block;}
-  .connectedSortable, .exampleSortable, .connectedSortable li {
-    width: 17vw;
-    height: 17vw;
-    min-width: 100px;
-    min-height: 100px;
-  }
-  .test_part .connectedSortable img {
-    height: 100%;
-  }
-  .test_part > .row > .col {
-    padding: 0;
-    margin-left: 2px;
-    margin-right: 2px;
-    max-width: initial;
+  table.test_part {
+    max-width: 600px;
+    td h3 {
+      display: none;
+    }
   }
   .img_over {
-    font-size: 17vw;
+    font-size: 45px;
   }
   .test_card {
     background: #eee;
-  }
-  .img_over {
-    &:before {
-      margin: auto 2vw;
-    }
   }
 }
 
@@ -65,17 +53,8 @@ $screen-xl-min: 1200px;
     min-height: 300px;
     line-height: 300px;
   }
-  .test_part > .row > .col {
-    width: 100px;
-    max-width: 100px;
-  }
-  .img_over {
-    font-size: 100px;
-  }
-  .good {
-    &:before  {
-      margin: auto;
-    }
+  .full-width.text-capitalize {
+    display: none;
   }
 }
 
@@ -93,4 +72,14 @@ $screen-xl-min: 1200px;
 
 @media (max-width: 500px) {
   .bottomnav {display: none;}
+  .mobnav button.btn {
+    border-radius: 5px;
+    border-color: #d9d9d9;
+  }
+  .card_block {
+    padding: 2px;
+    img {
+      border: none;
+    }
+  }
 }

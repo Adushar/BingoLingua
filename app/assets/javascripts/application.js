@@ -19,11 +19,12 @@
 //= require js/jquery.bootstrap-touchspin
 //= require js/odometer.min
 //= require js/bootstrap-notify.min
+//= require js/help_func
 //= require turbolinks
 //= require_tree .
 //= require popper
 
-var game_key;
+var game_key, isFullscreen;
 
 $.urlParam = function(name){
     var results = new RegExp('[\?&]' + name + '=([^]*)').exec(window.location.href);
@@ -138,8 +139,8 @@ SearchForSortable = function() {
     },
     stop: function() {
       var card_obj, user_answer_array, wrap_obj;
-      card_obj = $('.container.test_part > .row:nth-child(2) > .col > ul.target > li');
-      wrap_obj = $('.container.test_part > .row:nth-child(2) > .col > ul.target');
+      card_obj = $('.test_part tr:nth-child(2) > td > ul.target > li');
+      wrap_obj = $('.test_part tr:nth-child(2) > td > ul.target');
       user_answer_array = card_obj.map(function() {
         return $(this).attr('data-id');
       }).get();
@@ -178,7 +179,7 @@ cards_refresh = function() {
       console.log(data);
       stopMusic();
       $(".slider-block").hide();                                                // Hide slider
-      $(".container.test_part").html();                                         // And clean test block
+      $(".test_part").html();                                         // And clean test block
       GenerateTest(game_key, data["game"]);       // Fill test block with new content
     },
     error: function(xhr) {
@@ -191,20 +192,22 @@ cards_refresh = function() {
 
 // IMPORTANT functions for test blocks
 function GenerateTest(cards, random_cards) {
-  var obj = ".container.test_part"
-  var row = $('<div />').attr('class','row');
-  var empty_row = $('<div />').attr('class','row');
-  var check_row = $('<div />').attr('class','row example');
+  var obj = ".test_part"
+  var row = $('<tr />');
+  var empty_row = $('<tr />');
+  var check_row = $('<tr />').attr('class','example');
   var only_sound_array = cards.map(function(item){return item.sound;});
   console.log("GenerateTest");
   playlist(
     only_sound_array,
-    function(e) {$('.container.test_part > .row:nth-child(2) > .col:nth-child('+(pCount+1)+') .target').addClass("temp_black");
-  });
+    function(e) {
+      $('.test_part tr:nth-child(2) > td:nth-child('+(pCount+1)+') .target').addClass("temp_black").after(`<h3>${cards[pCount]["description"] || ""}</h3>`);
+    }
+  );
   $.each( random_cards, function( index, value ) {
-    var current_ul_li = '<div class="col"><ul class="connectedSortable"><li class="ui-state-default"  data-id="'+value.id+'"><img src="'+value.picture+'"></li></ul></div>';
-    var empty_ul_li = '<div class="col"><ul class="connectedSortable target"></ul></div>'
-    var example_ul_li = '<div class="col"><ul class="exampleSortable target"></ul></div>'
+    var current_ul_li = `<td><ul class="connectedSortable"><li class="ui-state-default"  data-id="${value.id}"><img src="${value.picture}"></li></ul></td>`;
+    var empty_ul_li = '<td><ul class="connectedSortable target"></ul></td>'
+    var example_ul_li = '<td><ul class="exampleSortable target"></ul></td>'
     $(row).append(current_ul_li);
     $(empty_row).append(empty_ul_li);
     $(check_row).append(example_ul_li);
@@ -246,8 +249,8 @@ function GenerateAnswer(cards, errors) {
     only_sound_array,
     function(e) {
       var image_url = cards[pCount]["picture"]
-      var current_li = '<li class="ui-state-default position-relative"><img src="'+image_url+'"><p class="full-width text-capitalize">'+decodeURIComponent(image_url.match(/([^\/]+)(?=\.\w+$)/)[0]);+'</p></li>';
-      var answer_row = $('.row:nth-child(2) > .col > ul.target > li.ui-state-default').eq(pCount)
+      var current_li = '<li class="ui-state-default position-relative"><img src="'+image_url+'"></li>';
+      var answer_row = $('.test_part tr:nth-child(2) > td > ul.target > li.ui-state-default').eq(pCount)
       var success_img = '<i class="fa fa-check img_over good" aria-hidden="true"></i>';
       var fail_img = '<i class="fa fa-times img_over bad" aria-hidden="true"></i>';
 
@@ -259,13 +262,19 @@ function GenerateAnswer(cards, errors) {
         answer_row.append(success_img);
         console.log(true);
       }
-      $('.row.example > .col > ul.target').eq(pCount).html(current_li);
+      $('.example > td > ul.target').eq(pCount).html(current_li);
+      $('.example > td').eq(pCount).append(`<h3>${cards[pCount]["translation"] || ""}</h3>`);
+      translation(
+        `Word:<p>${cards[pCount]["description"] || "-"}</p>
+        Translation:<p>${cards[pCount]["translation"] || "-"}</p>`, 
+        cards[pCount]["picture"]
+      );
+      $('tr:nth-child(2) > td h3').eq(pCount).css({'z-index': 1000})
     }, null, function(e) {
       if (pCount == cards.length) {
         setTimeout(function() {
-          if ($('#auto_play[active="active"]')[0]) { cards_refresh(); }         // If auto mode is ON, refresh
+          if ($('.auto_play[active="active"]')[0]) { cards_refresh(); }         // If auto mode is ON, refresh
           $("#texted_btn.play.btn").removeAttr("active");
-          $(".col-6.d-from-md-none:first-of-type").append('<a onclick="cards_refresh();"><button class="btn btn-success" id="refresh_txt_btn" type="button">Reset</button></a>')
         }, 1000);
       }
     }

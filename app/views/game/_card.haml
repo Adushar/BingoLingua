@@ -1,5 +1,5 @@
 - if card
-  .card_block.col-xl-2.col-lg-2.col-md-3.col-6
+  .card_block.col-xl-2.col-lg-2.col-md-3.col-4
     - if user_signed_in? && current_user
       = link_to game_path(card_id: card.id), method: :put, remote: true do
         = fa_icon "star-o", class: "star #{'active' if card.users.exists?(current_user.id)}"

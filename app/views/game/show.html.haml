@@ -1,49 +1,72 @@
 //Css for sidebar
 // Sidebar
-%ul.bottomnav.navbar-fixed-left
-  %li
-    %span.badge.badge-light Score
-    %span#score.odometer{'data-score': current_user.scores}= current_user.scores
-  %li.level_block
-    %span.badge.badge-secondary Level
-    %input#level{type: "text", name: "level", value: cookies[:level], 'data-toggle': "tooltip", 'data-placement': "top"}
-  %li.quarter_block
-    %span.badge.badge-secondary Part
-    %input#part_number{type: "text", name: "level", value: 1, 'data-toggle': "tooltip", 'data-placement': "top"}
-  %li
-    %button.btn#auto_play{:type => "button"} Auto
-  %li
-    %button.play.btn#texted_btn{:type => "button"} Play
-  / Button trigger modal
-.container.mt-2
-  .row
-    .col-6.d-from-md-none
-      %button.play#texted_btn.btn.btn-success.mx-3{:type => "button"} Play
-    .col-6.d-from-md-none.text-right
-      %button.btn.btn-secondary.mx-3{:type => "button", "data-toggle" => "modal", "data-target" => ".level-of-difficulty-modal-sm"} Level
-.slider-block
-  - @cards.in_groups(4).each_with_index do |cards_part, i|
-    = content_tag(:div, class: "block-slide", id: ('block_slide_' + (i+1).to_s), "data-test-part" => (i+1) ) do
-      .container
-        .row.mx-auto
-          = render partial: "game/card", collection: cards_part, as: :card
-// Game
-.container.test_part
+.game_zone
+  %ul.bottomnav.navbar-fixed-left
+    %li
+      %span.badge.badge-light Score
+      %span#score.odometer{'data-score': current_user.scores}= current_user.scores
+    %li.level_block
+      %span.badge.badge-secondary Level
+      %input#level{type: "text", name: "level", value: cookies[:level], 'data-toggle': "tooltip", 'data-placement': "top"}
+    %li.quarter_block
+      %span.badge.badge-secondary Part
+      %input#part_number{type: "text", name: "level", value: 1, 'data-toggle': "tooltip", 'data-placement': "top"}
+    %li
+      %button.btn.auto_play{:type => "button"} Auto
+    %li
+      %button.play.btn#texted_btn{:type => "button"} Play
+    / Button trigger modal
+  .container.mobnav.mt-2
+    .row
+      .col-6.d-from-md-none
+        %button.play#texted_btn.btn.play{:type => "button"} Start
+        %button.auto_play.btn{:type => "button"} Auto
+      .col-6.d-from-md-none.text-right
+        %button.btn.btn-secondary{:type => "button", "data-toggle" => "modal", "data-target" => ".level-of-difficulty-modal-sm"} Settings
+        %button.btn.btn-secondary{:onclick => "fullscreen();"}
+          %i.fa.fa-arrows-alt{"aria-hidden" => "true"}
+  .slider-block
+    - @cards.in_groups(4).each_with_index do |cards_part, i|
+      = content_tag(:div, class: "block-slide", id: ('block_slide_' + (i+1).to_s), "data-test-part" => (i+1) ) do
+        .container
+          .row
+            = render partial: "game/card", collection: cards_part, as: :card
+  // Game
+  %table.test_part{:cellspacing => "0"}
+  .mobile_info
+    %span
+      %div Score:
+      .b#mob_score.odometer= current_user.points
+    %span
+      %div Level:
+      .b= cookies[:level]
+    %span
+      %div Part:
+      .b 1
+  .notification_holder
+  .mobile_controll
+    %button.btn.auto_play.mob
+      %span A
+      %i.fa.fa-repeat{"aria-hidden" => "true"}
+    %button.btn.play.mob
+      %i.fa.fa-repeat{"aria-hidden" => "true"}
+    %button.btn.settings.mob{:type => "button", "data-toggle" => "modal", "data-target" => ".level-of-difficulty-modal-sm"}
+      %i.fa.fa-cog{"aria-hidden" => "true"}
 
-/ Modal
-.modal.fade.level-of-difficulty-modal-sm{"aria-hidden" => "true", "aria-labelledby" => "mySmallModalLabel", :role => "dialog", :tabindex => "-1"}
-  .modal-dialog.modal-sm
-    .modal-content
-      .modal-header
-        %h5#LevelOfDifficultyLabel.modal-title Level of difficulty
-        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
-          %span{"aria-hidden" => "true"} ×
-      .modal-body
-        .btn-group-vertical{"aria-label" => "Basic example", :role => "group"}
-          %button{:type => "button", "data-level" => "1", :class => "btn btn-secondary #{'btn-active' if cookies[:level] == '1'}"} Easy
-          %button{:type => "button", "data-level" => "2", :class => "btn btn-secondary #{'btn-active' if cookies[:level] == '2'}"} Medium
-          %button{:type => "button", "data-level" => "3", :class => "btn btn-secondary #{'btn-active' if cookies[:level] == '3'}"} Hard
-          - if user_signed_in?
-            %button{:type => "button", "data-level" => "4", :class => "btn btn-secondary #{'btn-active' if cookies[:level] == '4'}"} Selected cards
-      .modal-footer
-        %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"} Close
+  / Modal
+  .modal.fade.level-of-difficulty-modal-sm{"aria-hidden" => "true", "aria-labelledby" => "mySmallModalLabel", :role => "dialog", :tabindex => "-1"}
+    .modal-dialog.modal-sm
+      .modal-content
+        .modal-header
+          %h5#LevelOfDifficultyLabel.modal-title Level of difficulty
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} ×
+        .modal-body
+          .btn-group-vertical{"aria-label" => "Basic example", :role => "group"}
+            %button{:type => "button", "data-level" => "1", :class => "btn btn-secondary #{'btn-active' if cookies[:level] == '1'}"} Easy
+            %button{:type => "button", "data-level" => "2", :class => "btn btn-secondary #{'btn-active' if cookies[:level] == '2'}"} Medium
+            %button{:type => "button", "data-level" => "3", :class => "btn btn-secondary #{'btn-active' if cookies[:level] == '3'}"} Hard
+            - if user_signed_in?
+              %button{:type => "button", "data-level" => "4", :class => "btn btn-secondary #{'btn-active' if cookies[:level] == '4'}"} Selected cards
+        .modal-footer
+          %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"} Close

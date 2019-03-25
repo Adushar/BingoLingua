@@ -38,6 +38,13 @@ body {
   margin: 5px;
 }
 
+.vertical_line {
+  border-left: 2px solid #777;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+
 .hint {
   position: sticky;
   background: rgba(255, 255, 255, 0.75);
@@ -105,6 +112,10 @@ body {
   -ms-user-select: none;
 }
 
+.odometer.odometer-auto-theme, .odometer.odometer-theme-default {
+  font-family: 'ClearSans', sans-serif;
+}
+
 [data-text]::after {
   content: attr(data-text);
 }
@@ -146,7 +157,14 @@ ul.navbar-nav.ml-auto > .nav-item > .nav-link {
   padding: 0 20px;
   margin: auto;
   text-align: center;
-
+  i {font-size: 30px;}
+  span {
+    font-size: 25px;
+    vertical-align: unset;
+  }
+  i, span {
+    color: #818181;
+  }
   li {
     // vertical-align:
     list-style-type: none;
@@ -158,15 +176,7 @@ ul.navbar-nav.ml-auto > .nav-item > .nav-link {
   }
 }
 
-.bottomnav {
-  i {font-size: 30px;}
-  span {
-    font-size: 25px;
-    vertical-align: unset;
-  }
-  i, span {
-    color: #818181;
-  }
+.bottomnav, .mobnav {
   button.btn {
     border-color: #f8f9fa;
     border-radius: 3px;
@@ -288,4 +298,138 @@ nav.pagination {
     color: #ffef00;
     opacity: 1;
   }
+}
+@-webkit-keyframes slide-in-top {
+  0% {
+    -webkit-transform: translateY(-1000px);
+            transform: translateY(-1000px);
+    opacity: 0;
+    height: 0px;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+    height: 60px;
+  }
+}
+@keyframes slide-in-top {
+  0% {
+    -webkit-transform: translateY(-1000px);
+            transform: translateY(-1000px);
+    opacity: 0;
+    height: 0px;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+    height: 60px;
+  }
+}
+@-webkit-keyframes slide-out-top {
+  0% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+    height: 60px;
+  }
+  100% {
+    -webkit-transform: translateY(-1000px);
+    transform: translateY(-1000px);
+    opacity: 0;
+    height: 0px;
+  }
+}
+@keyframes slide-out-top {
+  0% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+    height: 60px;
+  }
+  100% {
+    -webkit-transform: translateY(-1000px);
+    transform: translateY(-1000px);
+    opacity: 0;
+    height: 0px;
+  }
+}
+@-webkit-keyframes slide-in-bottom {
+  0% {
+    -webkit-transform: translateY(1000px);
+            transform: translateY(1000px);
+    opacity: 0;
+    height: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+    height: unset;
+  }
+}
+@keyframes slide-in-bottom {
+  0% {
+    -webkit-transform: translateY(1000px);
+            transform: translateY(1000px);
+    opacity: 0;
+    height: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+    height: unset;
+  }
+}
+@-webkit-keyframes slide-out-bottom {
+  0% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+    height: 60px;
+
+  }
+  100% {
+    -webkit-transform: translateY(1000px);
+            transform: translateY(1000px);
+    opacity: 0;
+    height: 0px;
+
+  }
+}
+@keyframes slide-out-bottom {
+  0% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+    height: 60px;
+  }
+  100% {
+    -webkit-transform: translateY(1000px);
+            transform: translateY(1000px);
+    opacity: 0;
+    height: 0px;
+  }
+}
+
+.slide-in-top {
+	-webkit-animation: slide-in-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: slide-in-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+.slide-out-top {
+	-webkit-animation: slide-out-top 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+	        animation: slide-out-top 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+}
+
+.slide-in-bottom {
+	-webkit-animation: slide-in-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: slide-in-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+.slide-out-bottom {
+	-webkit-animation: slide-out-bottom 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+	        animation: slide-out-bottom 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
 }
