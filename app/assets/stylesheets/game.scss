@@ -44,7 +44,8 @@ $img_size: calc(20vh - 20px);
   right: 0;
   margin: auto;
   font-size: 110px;
-    line-height: inherit;
+  line-height: inherit;
+  z-index: 100;
 }
 .good {
   color: green;
