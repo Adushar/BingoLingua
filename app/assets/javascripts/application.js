@@ -264,11 +264,19 @@ function GenerateAnswer(cards, errors) {
       }
       $('.example > td > ul.target').eq(pCount).html(current_li);
       $('.example > td').eq(pCount).append(`<h3>${cards[pCount]["translation"] || ""}</h3>`);
-      translation(
-        `Word:<p>${cards[pCount]["description"] || "-"}</p>
-        Translation:<p>${cards[pCount]["translation"] || "-"}</p>`, 
-        cards[pCount]["picture"]
-      );
+      if ($('.notification_holder > .alert').length) {                          // If alerts are in block
+        $('.notification_holder').slick('slickGoTo', pCount)
+      } else {                                                                  // Else set cards
+        cards.forEach(function(card) {
+          translation(
+            `Word:<p>${card["description"] || "-"}</p>
+            Translation:<p>${card["translation"] || "-"}</p>`,
+            card["picture"]
+          );
+        });
+        $('.notification_holder').slick({infinite: false, mobileFirst: true});  // initiate slider
+      }
+
       $('tr:nth-child(2) > td h3').eq(pCount).css({'z-index': 1000})
     }, null, function(e) {
       if (pCount == cards.length) {

@@ -141,9 +141,11 @@ $img_size: calc(20vh - 20px);
   margin: 10px auto;
   border: 3px dashed #777;
   border-radius: 5px;
-  > div[data-notify="container"] {
+  overflow: hidden;
+  div[data-notify="container"] {
     height: 100%;
     padding: 10px;
+    top: 0 !important;
   }
   .alert-warning {
     background: #ffde59;

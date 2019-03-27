@@ -46,6 +46,10 @@ $screen-xl-min: 1200px;
     margin: 5px 0;
     height: min-content;
   }
+  [data-notify="container"]:not(.word_info) {
+    width: 90vw;
+    left: 10px;
+  }
   .connectedSortable img, img.card, .exampleSortable img, .description.card.not_drag {
     height: 90%;
   }

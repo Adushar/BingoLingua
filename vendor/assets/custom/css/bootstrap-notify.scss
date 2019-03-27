@@ -1,9 +1,14 @@
 [data-notify="container"] {
 	background-color: #eef0f2;
+	&:not(.word_info) {
+		display: table !important;
+		min-width: 300px;
+	  width: auto;
+	}
 	div, span {
 		display: inline-block;
 	}
-	img {
+	&.word_info img {
 		height: 90px;
     width: 85px;
     object-fit: cover;
@@ -15,6 +20,7 @@
     padding-left: 10px;
     position: absolute;
     top: 10px;
+    right: 0;
 		color: #777;
     font-size: 15px;
 		p {
