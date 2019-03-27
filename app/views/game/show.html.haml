@@ -7,10 +7,10 @@
       %span#score.odometer{'data-score': current_user.scores}= current_user.scores
     %li.level_block
       %span.badge.badge-secondary Level
-      %input#level{type: "text", name: "level", value: cookies[:level], 'data-toggle': "tooltip", 'data-placement': "top"}
+      %input.level{type: "text", name: "level", value: cookies[:level], 'data-toggle': "tooltip", 'data-placement': "top"}
     %li.quarter_block
       %span.badge.badge-secondary Part
-      %input#part_number{type: "text", name: "level", value: 1, 'data-toggle': "tooltip", 'data-placement': "top"}
+      %input.part_number{type: "text", name: "level", value: 1, 'data-toggle': "tooltip", 'data-placement': "top"}
     %li
       %button.btn.auto_play{:type => "button"} Auto
     %li
@@ -22,8 +22,8 @@
         %button.play#texted_btn.btn.play{:type => "button"} Start
         %button.auto_play.btn{:type => "button"} Auto
       .col-6.d-from-md-none.text-right
-        %button.btn.btn-secondary{:type => "button", "data-toggle" => "modal", "data-target" => ".level-of-difficulty-modal-sm"} Settings
-        %button.btn.btn-secondary{:onclick => "fullscreen();"}
+        %button.btn.btn-secondary{:type => "button", "data-toggle" => "modal", "data-target" => ".settings-modal-sm"} Settings
+        %button.btn.btn-secondary.fullscreen
           %i.fa.fa-arrows-alt{"aria-hidden" => "true"}
   .slider-block
     - @cards.in_groups(4).each_with_index do |cards_part, i|
@@ -50,23 +50,26 @@
       %i.fa.fa-repeat{"aria-hidden" => "true"}
     %button.btn.play.mob
       %i.fa.fa-repeat{"aria-hidden" => "true"}
-    %button.btn.settings.mob{:type => "button", "data-toggle" => "modal", "data-target" => ".level-of-difficulty-modal-sm"}
+    %button.btn.settings.mob{:type => "button", "data-toggle" => "modal", "data-target" => ".settings-modal-sm"}
       %i.fa.fa-cog{"aria-hidden" => "true"}
 
   / Modal
-  .modal.fade.level-of-difficulty-modal-sm{"aria-hidden" => "true", "aria-labelledby" => "mySmallModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal.fade.settings-modal-sm{"aria-hidden" => "true", "aria-labelledby" => "settings-modal", :role => "dialog", :tabindex => "-1"}
     .modal-dialog.modal-sm
       .modal-content
         .modal-header
-          %h5#LevelOfDifficultyLabel.modal-title Level of difficulty
-          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
-            %span{"aria-hidden" => "true"} ×
+          %h5#LevelOfDifficultyLabel.modal-title Settings
         .modal-body
           .btn-group-vertical{"aria-label" => "Basic example", :role => "group"}
-            %button{:type => "button", "data-level" => "1", :class => "btn btn-secondary #{'btn-active' if cookies[:level] == '1'}"} Easy
-            %button{:type => "button", "data-level" => "2", :class => "btn btn-secondary #{'btn-active' if cookies[:level] == '2'}"} Medium
-            %button{:type => "button", "data-level" => "3", :class => "btn btn-secondary #{'btn-active' if cookies[:level] == '3'}"} Hard
-            - if user_signed_in?
-              %button{:type => "button", "data-level" => "4", :class => "btn btn-secondary #{'btn-active' if cookies[:level] == '4'}"} Selected cards
-        .modal-footer
-          %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"} Close
+            .level_block
+              %span.badge.badge-secondary Level
+              %input.level{type: "text", name: "level", value: cookies[:level], 'data-toggle': "tooltip", 'data-placement': "top"}
+            .quarter_block
+              %span.badge.badge-secondary Part
+              %input.part_number{type: "text", name: "level", value: 1, 'data-toggle': "tooltip", 'data-placement': "top"}
+        .modal-footer.final_block
+          %a.btn.btn-secondary{href: "/game"}
+            %i.fa.fa-power-off{"aria-hidden" => "true"}
+          %button.btn.btn-success{"data-dismiss" => "modal", :type => "button"} OK
+          %button.btn.btn-secondary.fullscreen
+            %i.fa.fa-arrows-alt{"aria-hidden" => "true"}

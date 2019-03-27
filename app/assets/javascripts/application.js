@@ -264,9 +264,9 @@ function GenerateAnswer(cards, errors) {
       }
       $('.example > td > ul.target').eq(pCount).html(current_li);
       $('.example > td').eq(pCount).append(`<h3>${cards[pCount]["translation"] || ""}</h3>`);
-      if ($('.notification_holder > .alert').length) {                          // If alerts are in block
-        $('.notification_holder').slick('slickGoTo', pCount)
-      } else {                                                                  // Else set cards
+      if ($('.notification_holder .alert').length) {                          // If alerts are in block
+        $('.notification_holder').slick('slickGoTo', pCount)                    // Slide them
+      } else {                                                                  // Or create slider
         cards.forEach(function(card) {
           translation(
             `Word:<p>${card["description"] || "-"}</p>
@@ -282,6 +282,9 @@ function GenerateAnswer(cards, errors) {
       if (pCount == cards.length) {
         setTimeout(function() {
           if ($('.auto_play[active="active"]')[0]) { cards_refresh(); }         // If auto mode is ON, refresh
+          if ($('.notification_holder').html()) {
+            $('.notification_holder').slick('destroy').html("");                // clear notification block
+          }
           $("#texted_btn.play.btn").removeAttr("active");
         }, 1000);
       }

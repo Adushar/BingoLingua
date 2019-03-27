@@ -5,27 +5,31 @@ document.addEventListener 'turbolinks:load', ->
     infinite: false
     waitForAnimate: false
   });
-  $("#level, #part_number").TouchSpin({
+  $(".level, .part_number").TouchSpin({
       min: 1,
       max: 4,
       buttondown_class: 'btn btn-default',
       buttonup_class: 'btn btn-default',
       stepinterval: 1000
   });
-  $("#level").on 'change', ->
-    level = $("#level").val()
+  $(".level").on 'change', ->
+    level = this.value
+    console.log $(this).val()
+    $(".level").val(level)
     if level == "4"
       alert("☆Now you are playing with selected cards☆")
     setCookie 'level', level, 365
     return
-  $("#part_number").on 'touchspin.on.stopspin', ->
+  $(".part_number").on 'touchspin.on.stopspin', ->
     console.log $(this).val()-1
     $('.slider-block').slick( 'slickGoTo', $(this).val()-1 );
     return
   $('.slider-block').on 'swipe', (event, slick, direction) ->
     trigger = if direction == "left" then "touchspin.uponce" else "touchspin.downonce"
     $('#part_number').trigger(trigger);
-
+  $('.fullscreen').click (event) ->
+    fullscreen();
+    event.preventDefault();
   $('.play, .auto_play').click ->
     if $(".auto_play").attr("active")                                           # if user cancels auto mode
       $(this).removeAttr("active");                                             # remove active status
@@ -38,7 +42,7 @@ document.addEventListener 'turbolinks:load', ->
     cards_refresh();
     $('.mobnav').hide();
     $(".test_part, .mobile_info, .notification_holder").show();
-    $('#texted_btn, button.btn.btn-secondary.mx-3[data-target=".level-of-difficulty-modal-sm"]').removeClass("mx-3")
+    $('#texted_btn, button.btn.btn-secondary.mx-3[data-target=".settings-modal-sm"]').removeClass("mx-3")
     $('.col-6.d-from-md-none').not(".text-right").css("padding", "0 5px")
 
   $('.btn-group-vertical .btn').click ->
@@ -47,7 +51,7 @@ document.addEventListener 'turbolinks:load', ->
       setCookie 'level', level, 365
       $('.btn-active').removeClass 'btn-active'
       $(this).addClass 'btn-active'
-      $('.level-of-difficulty-modal-sm').modal 'hide'
+      $('.settings-modal-sm').modal 'hide'
     location.reload();
 
   # mobile hints

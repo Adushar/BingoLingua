@@ -81,7 +81,7 @@ $img_size: calc(20vh - 20px);
     font-family: 'ClearSans', sans-serif;
   }
 }
-#level, #part_number {
+input.level[data-toggle="tooltip"], input.part_number[data-toggle="tooltip"] {
   text-align: center;
   height: 30px;
   width: 30px;
@@ -146,6 +146,7 @@ $img_size: calc(20vh - 20px);
     height: 100%;
     padding: 10px;
     top: 0 !important;
+    margin: 0;
   }
   .alert-warning {
     background: #ffde59;
