@@ -90,7 +90,7 @@ $screen-xl-min: 1200px;
 @media (max-width: 500px) {
   .card_block {
     &.col-4 {
-      padding: 0;
+      padding: 2px;
     }
     img {
       border: none;

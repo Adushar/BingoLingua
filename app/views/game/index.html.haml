@@ -1,27 +1,29 @@
-%h2.m-2 Let's play
 .container.test_menu
+  %h2.m-2 Let's play
   .row.mx-auto
     - @free_tests.each_with_index do |test_part, i|
-      .card_block.test_card.col-xl-2.col-lg-2.col-md-3.col-12.text-center
-        = link_to game_path(test_part), style: "color:#000000 !important; text-decoration:none;" do
-          - if test_part.picture.empty?
-            %h2.description.card.not_drag No image
-            %p.description= test_part.name
-          - else
-            = image_tag test_part.picture, class: "card not_drag", id: ("card_#{test_part.id}")
-            %p.description= test_part.name
+      .col-xl-2.col-lg-2.col-md-3.col-12.my-2.px-1
+        .card_block.test_card.text-center
+          = link_to game_path(test_part), style: "color:#000000 !important; text-decoration:none;" do
+            - if test_part.picture.empty?
+              %h2.description.card.not_drag No image
+              %p.description= test_part.name
+            - else
+              = image_tag test_part.picture, class: "card not_drag", id: ("card_#{test_part.id}")
+              %p.description= test_part.name
   = paginate @free_tests, :param_name => :free_tests
 
-%h2.m-2 For BingoLinguo club members
 .container.test_menu
+  %h2.m-2 For BingoLinguo club members
   .row.mx-auto
     - @subscribe_tests.each_with_index do |test_part, i|
-      .card_block.test_card.col-xl-2.col-lg-2.col-md-3.col-12.text-center
-        = link_to game_path(test_part), style: "color:#000000 !important; text-decoration:none;" do
-          - if test_part.picture.empty?
-            %h2.description.card.not_drag No image
-            %p.description= test_part.name
-          - else
-            = image_tag test_part.picture, class: "card not_drag", id: ("card_#{test_part.id}")
-            %p.description= test_part.name
+      .col-xl-2.col-lg-2.col-md-3.col-12.my-2.px-1
+        .card_block.test_card.text-center
+          = link_to game_path(test_part), style: "color:#000000 !important; text-decoration:none;" do
+            - if test_part.picture.empty?
+              %h2.description.card.not_drag No image
+              %p.description= test_part.name
+            - else
+              = image_tag test_part.picture, class: "card not_drag", id: ("card_#{test_part.id}")
+              %p.description= test_part.name
   = paginate @subscribe_tests, :param_name => :subscribe_tests
