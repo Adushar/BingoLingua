@@ -63,8 +63,9 @@ body {
     color: white;
   }
   .final_block, .level_block, .quarter_block {
-    width: 300px;
+    max-width: 300px;
     margin: 10px auto;
+    width: 90%;
     input, button.btn, a.btn {
       background: rgba(115, 115, 115, 0.5);
       color: white;

@@ -1,5 +1,5 @@
 document.addEventListener 'turbolinks:load', ->
-  mobile = $(window).width() < 500
+  mobile = $(window).width() < 768
   $('.slider-block').slick({
     arrows: false
     infinite: false

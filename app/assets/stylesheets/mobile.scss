@@ -33,6 +33,16 @@ $screen-xl-min: 1200px;
       display: none;
     }
   }
+  .bottomnav {display: none;}
+  .mobnav {
+    .row > div {
+      padding: 0 10px;
+    }
+    button.btn {
+      border-radius: 5px;
+      border-color: #d9d9d9;
+    }
+  }
   .img_over {
     font-size: 45px;
   }
@@ -49,6 +59,9 @@ $screen-xl-min: 1200px;
   [data-notify="container"]:not(.word_info) {
     width: 90vw;
     left: 10px;
+  }
+  .mobile_info div {
+    font-size: 14px;
   }
   .connectedSortable img, img.card, .exampleSortable img, .description.card.not_drag {
     height: 90%;
@@ -75,13 +88,10 @@ $screen-xl-min: 1200px;
 }
 
 @media (max-width: 500px) {
-  .bottomnav {display: none;}
-  .mobnav button.btn {
-    border-radius: 5px;
-    border-color: #d9d9d9;
-  }
   .card_block {
-    padding: 2px;
+    &.col-4 {
+      padding: 0;
+    }
     img {
       border: none;
     }

@@ -54,6 +54,9 @@ var bootstrap_error = function(text) {
       $(".fa.fa-star-o.star").removeAttr("style");
     }, 1500);
   }
+  $("#texted_btn.play.btn").removeAttr("active");
+  $('.mobnav').show();
+  $('.test_part, .mobile_info, .notification_holder, .mobile_controll').hide();
 }
 
 var playlist = function(audio_arr, onPlay, data, endFunc, e) {
