@@ -53,7 +53,3 @@ document.addEventListener 'turbolinks:load', ->
       $(this).addClass 'btn-active'
       $('.settings-modal-sm').modal 'hide'
     location.reload();
-
-  # mobile hints
-  if $(".mobile_controll").length && getCookie('hint') != "false"
-    $( "body" ).append('<div class="hint" onclick="$(\'.hint\').remove();setCookie(\'hint\', false, 25)"><img src="/swipe-helper.gif"></div>')
