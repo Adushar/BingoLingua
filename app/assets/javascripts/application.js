@@ -20,6 +20,7 @@
 //= require js/odometer.min
 //= require js/bootstrap-notify.min
 //= require js/help_func
+//= require js/howler.core.min
 //= require turbolinks
 //= require_tree .
 //= require popper
@@ -64,7 +65,6 @@ var playlist = function(audio_arr, onPlay, data, endFunc, e) {
     pCount = 0;
     playlistUrls = audio_arr, // audio list
     howlerBank = [],
-    volume = 1,
     loop = false;
 
   // playing i+1 audio (= chaining audio files)
@@ -73,6 +73,7 @@ var playlist = function(audio_arr, onPlay, data, endFunc, e) {
     else { pCount = pCount + 1; }
     if (audio_arr.length == pCount) {
       SearchForSortable();
+      Howler.unload()
     }
     setTimeout(function(){
       if (howlerBank[pCount]) {howlerBank[pCount].play()};
@@ -82,7 +83,7 @@ var playlist = function(audio_arr, onPlay, data, endFunc, e) {
 
   // build up howlerBank:
   playlistUrls.forEach(function(current, i) {
-    howlerBank.push(new Howl({ urls: [playlistUrls[i]], onend: onEnd, onplay: onPlay, buffer: true, volume: volume }))
+    howlerBank.push(new Howl({ src: [playlistUrls[i]], onend: onEnd, onplay: onPlay, buffer: true, volume: 1 }))
   });
   // initiate the whole :
   howlerBank[0].play();
@@ -154,9 +155,6 @@ SearchForSortable = function() {
       if (cancelRequired) {
         $(this).sortable('cancel');
       }
-    },
-    update: function(event, ui) {
-      return playSound('/sounds/drop.mp3');
     }
   }).disableSelection();
   // equalize();
@@ -218,6 +216,10 @@ function GenerateTest(cards, random_cards) {
   $(obj).html(row);
   $(obj).append(empty_row);
   $(obj).append(check_row);
+
+  if ($('.notification_holder.slick-initialized').html()) {                                 // if notification is created
+    $('.notification_holder').slick('destroy').html("");                  //  clear notification block
+  }
 }
 
 send_answer = function(answer) {
@@ -285,9 +287,6 @@ function GenerateAnswer(cards, errors) {
       if (pCount == cards.length) {
         setTimeout(function() {
           if ($('.auto_play[active="active"]')[0]) { cards_refresh(); }         // If auto mode is ON, refresh
-          if ($('.notification_holder').html()) {
-            $('.notification_holder').slick('destroy').html("");                // clear notification block
-          }
           $("#texted_btn.play.btn").removeAttr("active");
         }, 1000);
       }
