@@ -1,5 +1,6 @@
 document.addEventListener 'turbolinks:load', ->
   mobile = $(window).width() < 768
+  Howler.unload()
   $('.slider-block').slick({
     arrows: false
     infinite: false
