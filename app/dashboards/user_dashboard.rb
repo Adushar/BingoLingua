@@ -10,6 +10,8 @@ class UserDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     email: Field::Email,
+    first_name: Field::String,
+    last_name: Field::String,
     encrypted_password: Field::String,
     password: Field::String,
     password_confirmation: Field::String,
@@ -63,7 +65,11 @@ class UserDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
     :email,
+    :first_name,
+    :last_name,
     :subscribe_ends,
+    :password,
+    :password_confirmation,
     :admin,
     :cards,
   ].freeze
