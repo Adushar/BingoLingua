@@ -84,13 +84,15 @@ task :deploy do
     invoke :'deploy:cleanup'
     # For seed run `mina "rake[db:seed]" -v`
 
-    on :launch do
-      # command "sudo service #{fetch(:user)} restart"
+      on :launch do
+        # command "sudo service #{fetch(:user)} restart"
     end
+    command %[kill -9 $(pgrep -f unicorn)]   # Kill unicorn pid
   end
 
   # you can use `run :local` to run tasks on local machine before of after the deploy scripts
   run(:local){ command 'mina "run[ln -s /home/deployer/app/shared/public/uploads/ /home/deployer/app/current/public/uploads]"' }
+  run(:local){ command "mina unicorn:stop" }
   run(:local){ command "mina unicorn:start" }
 end
 
