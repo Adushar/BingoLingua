@@ -27,7 +27,7 @@ document.addEventListener 'turbolinks:load', ->
     return
   $('.slider-block').on 'swipe', (event, slick, direction) ->
     trigger = if direction == "left" then "touchspin.uponce" else "touchspin.downonce"
-    $('#part_number').trigger(trigger);
+    $('.part_number').trigger(trigger);
   $('.fullscreen').click (event) ->
     fullscreen();
     event.preventDefault();
