@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
     if days > 0 && Date.today > subscribe_ends
       "Subscribe ends in <b>#{days}</b> days"
     else
-      "<b>Your subscribe is ended</b>"
+      "<b>Your subscription has ended</b>"
     end
   end
 
