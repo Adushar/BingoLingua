@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       resources :cards
       resources :languages
       resources :pages
+      resources :groups
 
       root to: "users#index"
     end

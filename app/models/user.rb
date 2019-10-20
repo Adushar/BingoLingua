@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   has_many :cards, :through => :selected_cards
   has_many :test_results
   has_many :learned_words
+  has_and_belongs_to_many :groups
   has_one :language
 
   # Include default devise modules. Others available are:

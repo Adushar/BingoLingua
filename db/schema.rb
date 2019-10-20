@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190224113859) do
+ActiveRecord::Schema.define(version: 20191020143241) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,26 @@ ActiveRecord::Schema.define(version: 20190224113859) do
     t.string "translation"
     t.string "description"
     t.index ["test_id"], name: "index_cards_on_test_id"
+  end
+
+  create_table "groups", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "groups_tests", id: false, force: :cascade do |t|
+    t.bigint "group_id"
+    t.bigint "test_id"
+    t.index ["group_id"], name: "index_groups_tests_on_group_id"
+    t.index ["test_id"], name: "index_groups_tests_on_test_id"
+  end
+
+  create_table "groups_users", id: false, force: :cascade do |t|
+    t.bigint "group_id"
+    t.bigint "user_id"
+    t.index ["group_id"], name: "index_groups_users_on_group_id"
+    t.index ["user_id"], name: "index_groups_users_on_user_id"
   end
 
   create_table "js_logs", force: :cascade do |t|
@@ -104,6 +124,8 @@ ActiveRecord::Schema.define(version: 20190224113859) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "language_id"
+    t.bigint "groups_id"
+    t.index ["groups_id"], name: "index_tests_on_groups_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -128,8 +150,10 @@ ActiveRecord::Schema.define(version: 20190224113859) do
     t.datetime "confirmation_sent_at"
     t.integer "language_id"
     t.integer "points", default: 0
+    t.bigint "groups_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["groups_id"], name: "index_users_on_groups_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 

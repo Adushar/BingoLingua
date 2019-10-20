@@ -12,6 +12,7 @@ class UserDashboard < Administrate::BaseDashboard
     email: Field::Email,
     first_name: Field::String,
     last_name: Field::String,
+    full_name: Field::String,
     encrypted_password: Field::String,
     password: Field::String.with_options(searchable: false),
     password_confirmation: Field::String.with_options(searchable: false),
@@ -38,7 +39,8 @@ class UserDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = [
     :id,
     :email,
-    :encrypted_password,
+    :full_name,
+    :admin,
     :subscribe_ends,
   ].freeze
 
@@ -77,7 +79,7 @@ class UserDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how users are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(user)
-  #   "User ##{user.id}"
-  # end
+  def display_resource(user)
+    "#{user.full_name}"
+  end
 end
