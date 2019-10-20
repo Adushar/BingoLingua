@@ -3,13 +3,17 @@ class GameController < ApplicationController
 
   def index
     language = current_user ? current_user.language : nil
-    @free_tests = Test.where(
-      free: true, language: [language, nil]
-    ).to_a.sort_by(&:pack_name)
+
+    @extra_tests = Test.extra(language).to_a
+    @extra_tests = Kaminari.paginate_array(@extra_tests).page(params[:extra_tests]).per(15)
+
+    @assigned_tests = current_user.assigned_tests
+    @assigned_tests = Kaminari.paginate_array(@assigned_tests).page(params[:assigned_tests]).per(15)
+
+    @free_tests = Test.free(language).to_a.sort_by(&:pack_name)
     @free_tests = Kaminari.paginate_array(@free_tests).page(params[:free_tests]).per(15)
-    @subscribe_tests = Test.where(
-      free: false, language: [language, nil]
-    ).to_a.sort_by(&:pack_name)
+
+    @subscribe_tests = Test.premium(language).to_a.sort_by(&:pack_name)
     @subscribe_tests = Kaminari.paginate_array(@subscribe_tests).page(params[:subscribe_tests]).per(15)
   end
 

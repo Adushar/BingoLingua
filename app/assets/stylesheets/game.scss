@@ -285,7 +285,20 @@ img.card, .description.card.not_drag {
   width: 100%;
   height: 100%;
   border-radius: 0.25rem;
+
+  > a {
+    color: #000;
+    text-decoration:none;
+  }
   p.description {
     margin: 0;
+  }
+}
+
+.test_menu.extra .card_block.test_card {
+  background: #f4bc59;
+
+  > a {
+    color: white;
   }
 }

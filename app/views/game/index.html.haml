@@ -1,29 +1,17 @@
-.container.test_menu
-  %h2.m-2 Let's play
-  .row.mx-auto
-    - @free_tests.each_with_index do |test_part, i|
-      .col-xl-2.col-lg-2.col-md-3.col-12.my-2.px-1
-        .card_block.test_card.text-center
-          = link_to game_path(test_part), style: "color:#000000 !important; text-decoration:none;" do
-            - if test_part.picture.empty?
-              %h2.description.card.not_drag No image
-              %p.description= test_part.name
-            - else
-              = image_tag test_part.picture, class: "card not_drag", id: ("card_#{test_part.id}")
-              %p.description= test_part.name
-  = paginate @free_tests, :param_name => :free_tests
+- unless @extra_tests.empty?
+  .container.test_menu.extra
+    = render :partial => 'menu_block', locals: { name: "Extra", tests: @extra_tests }
+    = paginate @extra_tests, param_name: :extra_tests
+
+- unless @assigned_tests.empty?
+  .container.test_menu
+    = render :partial => 'menu_block', locals: { name: "Assigned", tests: @assigned_tests }
+    = paginate @assigned_tests, param_name: :assigned_tests
 
 .container.test_menu
-  %h2.m-2 For BingoLinguo club members
-  .row.mx-auto
-    - @subscribe_tests.each_with_index do |test_part, i|
-      .col-xl-2.col-lg-2.col-md-3.col-12.my-2.px-1
-        .card_block.test_card.text-center
-          = link_to game_path(test_part), style: "color:#000000 !important; text-decoration:none;" do
-            - if test_part.picture.empty?
-              %h2.description.card.not_drag No image
-              %p.description= test_part.name
-            - else
-              = image_tag test_part.picture, class: "card not_drag", id: ("card_#{test_part.id}")
-              %p.description= test_part.name
-  = paginate @subscribe_tests, :param_name => :subscribe_tests
+  = render :partial => 'menu_block', locals: { name: "Let's play", tests: @free_tests }
+  = paginate @free_tests, param_name: :free_tests
+
+.container.test_menu
+  = render :partial => 'menu_block', locals: { name: "Premium", tests: @subscribe_tests }
+  = paginate @subscribe_tests, param_name: :subscribe_tests

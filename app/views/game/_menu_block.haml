@@ -1,0 +1,12 @@
+%h2.m-2= name
+.row.mx-auto
+  - tests.each_with_index do |test_part, i|
+    .col-xl-2.col-lg-2.col-md-3.col-12.my-2.px-1
+      .card_block.test_card.text-center
+        = link_to game_path(test_part) do
+          - if pic = test_part.picture.url and !pic.empty?
+            = image_tag pic, class: "card not_drag", id: ("card_#{test_part.id}")
+            %p.description= test_part.name
+          - else
+            %h2.description.card.not_drag No image
+            %p.description= test_part.name

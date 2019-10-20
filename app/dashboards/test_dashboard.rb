@@ -10,8 +10,12 @@ class TestDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     name: Field::String,
-    picture: Administrate::Field::Image,
+    picture: Field::Carrierwave.with_options(
+      remove: true,
+      image_on_index: true
+    ),
     free: Field::Boolean,
+    promote: Field::Boolean,
     test_results: Field::HasMany,
     cards: Field::HasMany,
     groups: Field::HasMany,
@@ -30,7 +34,7 @@ class TestDashboard < Administrate::BaseDashboard
     :picture,
     :name,
     :free,
-    :language,
+    :promote,
     :cards,
   ].freeze
 
@@ -41,6 +45,7 @@ class TestDashboard < Administrate::BaseDashboard
     :picture,
     :name,
     :free,
+    :promote,
     :language,
     :groups,
     :cards,
@@ -56,6 +61,7 @@ class TestDashboard < Administrate::BaseDashboard
     :picture,
     :name,
     :free,
+    :promote,
     :groups,
     :cards,
     :language,

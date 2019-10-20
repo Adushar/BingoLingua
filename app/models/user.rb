@@ -51,6 +51,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def assigned_tests
+    groups.includes(:tests).map(&:tests).flatten
+  end
+
   def scores() points end
 
   def self.demo_mode
