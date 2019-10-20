@@ -18,6 +18,25 @@ class User < ActiveRecord::Base
     return subscribe_ends ? !subscribe_ends.past? : false
   end
 
+  def select_card(card_id)
+    if has_selected_card? card_id
+      SelectedCard.where(user_id: id, card_id: card_id).destroy_all
+    else
+      SelectedCard.create(user_id: id, card_id: card_id)
+    end
+  end
+
+  def remove_selected_cards(test_id)
+    SelectedCard.includes(:card).where(
+      cards: {test_id: test_id},
+      user_id: id
+    ).destroy_all
+  end
+
+  def has_selected_card?(card_id)
+    selected_cards.pluck(:card_id).include? card_id.to_i
+  end
+
   def full_name
     "#{first_name} #{last_name}"
   end

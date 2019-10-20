@@ -32,19 +32,7 @@ class GameController < ApplicationController
   end
 
   def update
-    if current_user
-      user = User.find(current_user.id)
-      card = Card.find(params[:card_id])
-      if !user.cards.exists?(params[:card_id])
-        user.cards << card
-      else
-        user.cards.destroy(card)
-      end
-      respond_to do |format|
-        format.js { render "update", :locals => {:user => user, :card => card, :exist => user.cards.exists?(params[:card_id])} }
-        format.json { render json: user, status: :updated }
-      end
-    end
+
   end
 
   # AJAX request section
@@ -99,7 +87,7 @@ class GameController < ApplicationController
     TestResult.add_result(                                                      # Send request to custom method in model with:
       score: 100-(errors_num.to_f/user_answer.length*100),                           # - Percent of correct answers(100%-error percrnt)
       test_id: params[:id],
-      user: current_user
+      user_id: current_user.id
     )
 
     respond_to do |format|

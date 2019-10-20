@@ -278,6 +278,37 @@ ul.navbar-nav.ml-auto > .nav-item > .nav-link {
   }
 }
 
+.btn.remove_stars {
+  border-color: #f8f9fa;
+  border-radius: 3px;
+  border-width: 1.2px;
+  height: 30px;
+  font-size: 18px;
+  background: #f4bc59;
+  color: rgba(115, 109, 115, 0.7);
+
+  img {
+    width: auto;
+    height: 25px;
+    vertical-align: text-top;
+  }
+}
+i.unselect_all {
+  color: rgba(115, 109, 115, 0.7);
+
+  &:after {
+    content: "";
+    position: absolute;
+    width: 3px;
+    height: 141.421356%;
+    top: -20.710678%;
+    display: block;
+    background: red;
+    left: 50%;
+    transform: translate(-50%, 0) rotate(45deg);
+  }
+}
+
 .card_block {
   text-align: right;
   min-width: 20%;

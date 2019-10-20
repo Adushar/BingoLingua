@@ -14,11 +14,14 @@ Rails.application.routes.draw do
     end
   devise_for :users
   root "game#index"
-  resources :game, only: [:index, :show, :update]
+  resources :game, only: [:index, :show]
   resources :multiple_load, only: [:new, :create]
   get 'cards_set/:id/' => 'game#cards_set', :via => :get
   get 'check_answer/:id' => 'game#check_answer', :via => :get
   get 'finish_test/:id' => 'game#finish_test', :via => :get
+
+  post 'selected_cards/select', as: :select_card
+  delete 'selected_cards/unselect_all', as: :unselect_all_cards
 
   resources :top, only: [:index]
   resources :personal_account, only: [:index]

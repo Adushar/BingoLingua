@@ -75,7 +75,7 @@ RSpec.describe GameController, type: :controller do
     end
 
     it "sends wrong answer" do
-      wrong_answ = FactoryBot.create_list(:cards, 3, test: @test)
+      wrong_answ = FactoryBot.create_list(:card, 3, test: @test)
 
       get :check_answer, :params => {
           :id => @test.id,

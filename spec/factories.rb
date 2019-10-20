@@ -25,7 +25,7 @@ FactoryBot.define do
       num_cards { 20 } # or create if we need
     end
     after(:create) do |test, evaluator|
-      create_list(:cards, (evaluator.num_cards), test: test)
+      create_list(:card, (evaluator.num_cards), test: test)
     end
   end
 
@@ -36,12 +36,13 @@ FactoryBot.define do
     test                                                                        # test relation
   end
 
-  factory :cards, class: Card do
+  factory :card, class: Card do
     picture { Faker::File.file_name('/foo/bar', nil, 'mp3') }
     sound { Faker::File.file_name('/foo/bar', nil, 'jpg') }
     translation { Faker::Lorem.word }
     description { Faker::Lorem.word }
   end
+
   factory :language, class: Language do
     name { Faker::Hacker.noun }
     code { Faker::Hacker.abbreviation }

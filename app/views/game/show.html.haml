@@ -12,6 +12,9 @@
       %span.badge.badge-secondary Part
       %input.part_number{type: "text", name: "level", value: 1, 'data-toggle': "tooltip", 'data-placement': "top"}
     %li
+      = link_to unselect_all_cards_path(test_id: @test.id), method: :delete, remote: true, class: "btn remove_stars" do
+        = image_tag "/unselect_all.svg", class: "unselect_all"
+    %li
       %button.btn.auto_play{:type => "button"} Auto
     %li
       %button.play.btn#texted_btn{:type => "button"} Play

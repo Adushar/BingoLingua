@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  let(:user) { FactoryBot.create(:user) }
+
   it { should have_one(:language) }
   context "while getting demo user" do
     it "show existing user" do
@@ -8,9 +10,7 @@ RSpec.describe User, type: :model do
       expect(User.demo_mode).to eq(user)
     end
     it 'create new user' do
-      model_answer = User.demo_mode
-      demo_user = User.find_by_email("demo_user@gmail.com")
-      expect(model_answer).to eq(demo_user)
+      expect{User.demo_mode}.to change(User.all, :count).by(1)
     end
   end
   context "subscribe" do
