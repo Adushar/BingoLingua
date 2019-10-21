@@ -21,9 +21,9 @@
       #navbarNav.collapse.navbar-collapse
         %ul.navbar-nav
           %li.nav-item
-            %a.nav-link{:href => "/game"} Choose my pack
+            %a.nav-link{:href => "/game"} Choose your pack
           %li.nav-item
-            %a.nav-link{:href => "/top"} Top 10
+            %a.nav-link{:href => "/top"} Top 10 players
           - if current_user.try(:admin?)
             %li.nav-item
               %a.nav-link{:href => "/admin"} Admin panel
