@@ -1,6 +1,6 @@
 //Css for sidebar
 // Sidebar
-.game_zone
+.game_zone{'data-learning': true}
   %ul.bottomnav.navbar-fixed-left
     %li
       %span.badge.badge-light Score
@@ -36,26 +36,34 @@
             %tr
               = render partial: "game/card", collection: card_row, as: :card
   // Game
-  %table.test_part{:cellspacing => "0"}
-  .mobile_info
-    %span
-      %div Score:
-      .b#mob_score.odometer= current_user.points
-    %span
-      %div Level:
-      .b= cookies[:level]
-    %span
-      %div Part:
-      .b 1
-  .notification_holder
-  .mobile_controll
-    %button.btn.auto_play.mob
-      %span A
-      %i.fa.fa-repeat{"aria-hidden" => "true"}
-    %button.btn.play.mob
-      %i.fa.fa-repeat{"aria-hidden" => "true"}
-    %button.btn.settings.mob{:type => "button", "data-toggle" => "modal", "data-target" => ".settings-modal-sm"}
-      %i.fa.fa-cog{"aria-hidden" => "true"}
+  .game.container
+    .row
+      .col-md-9.col-sm-12
+        %table.test_part{:cellspacing => "0"}
+      .col-md-3.col-sm-12.notifications_block
+        .mobile_info
+          %span
+            %div Score:
+            .b#mob_score.odometer= current_user.points
+          %span
+            %div Level:
+            .b= cookies[:level]
+          %span
+            %div Part:
+            .b 1
+        .notification_holder
+          .notification_slider
+          .btn-group.slider_controls{"aria-label" => "Basic example", :role => "group"}
+            %button.btn.btn-dark.ml-auto.prev_arrow{:type => "button"} ←
+            %button.btn.btn-dark.mr-auto.next_arrow{:type => "button"} →
+        .mobile_controll
+          %button.btn.auto_play.mob
+            %span A
+            %i.fa.fa-repeat{"aria-hidden" => "true"}
+          %button.btn.play.mob
+            %i.fa.fa-repeat{"aria-hidden" => "true"}
+          %button.btn.settings.mob{:type => "button", "data-toggle" => "modal", "data-target" => ".settings-modal-sm"}
+            %i.fa.fa-cog{"aria-hidden" => "true"}
 
   / Modal
   .modal.fade.settings-modal-sm{"aria-hidden" => "true", "aria-labelledby" => "settings-modal", :role => "dialog", :tabindex => "-1"}

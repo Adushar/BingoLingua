@@ -202,7 +202,7 @@ function GenerateTest(cards, random_cards) {
   playlist(
     only_sound_array,
     function(e) {
-      $('.test_part tr:nth-child(2) > td:nth-child('+(pCount+1)+') .target').addClass("temp_black").after(`<h3>${cards[pCount]["description"] || ""}</h3>`);
+      $('.test_part tr:nth-child(2) > td:nth-child('+(pCount+1)+') .target').addClass("temp_black");
     }
   );
   $.each( random_cards, function( index, value ) {
@@ -217,8 +217,8 @@ function GenerateTest(cards, random_cards) {
   $(obj).append(empty_row);
   $(obj).append(check_row);
 
-  if ($('.notification_holder.slick-initialized').html()) {                                 // if notification is created
-    $('.notification_holder').slick('destroy').html("");                  //  clear notification block
+  if ($('.notification_slider.slick-initialized').html()) {                                 // if notification is created
+    $('.notification_slider').slick('destroy').html("");                  //  clear notification block
   }
 }
 
@@ -268,9 +268,8 @@ function GenerateAnswer(cards, errors) {
         console.log(true);
       }
       $('.example > td > ul.target').eq(pCount).html(current_li);
-      $('.example > td').eq(pCount).append(`<h3>${cards[pCount]["translation"] || ""}</h3>`);
-      if ($('.notification_holder .alert').length) {                          // If alerts are in block
-        $('.notification_holder').slick('slickGoTo', pCount)                    // Slide them
+      if ($('.notification_slider .alert').length) {                          // If alerts are in block
+        $('.notification_slider').slick('slickGoTo', pCount)                    // Slide them
       } else {                                                                  // Or create slider
         cards.forEach(function(card) {
           translation(
@@ -279,7 +278,12 @@ function GenerateAnswer(cards, errors) {
             card["picture"]
           );
         });
-        $('.notification_holder').slick({infinite: false, mobileFirst: true});  // initiate slider
+        $('.notification_slider').slick({
+          infinite: false,
+          mobileFirst: true,
+          prevArrow: ".slider_controls .prev_arrow",
+          nextArrow: ".slider_controls .next_arrow"
+        });  // initiate slider
       }
 
       $('tr:nth-child(2) > td h3').eq(pCount).css({'z-index': 1000})

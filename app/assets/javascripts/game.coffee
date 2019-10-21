@@ -32,10 +32,11 @@ document.addEventListener 'turbolinks:load', ->
     fullscreen();
     event.preventDefault();
   $('.play, .auto_play').click ->
-    if $(".auto_play").attr("active")                                           # if user cancels auto mode
+    $('.game_zone').removeAttr("data-learning");
+    if $(".auto_play").is("[active]")                                           # if user cancels auto mode
       $(this).removeAttr("active");                                             # remove active status
       return                                                                    # break function
-    else if $(".play").attr("active")
+    else if $(".play").is("[active]")
       return
     if mobile
       $(".mobile_controll").show()                                              # enable mobile mode

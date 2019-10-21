@@ -18,9 +18,28 @@ $screen-xl-min: 1200px;
 
 }
 
+@media (min-width: #{$screen-lg-min}) {
+  .game.container {
+    max-width: 1000px;
+  }
+}
+
 @media (min-width: #{$screen-md-min}) {
-  .mobile_controll, .mobile_info, .notification_holder {
+  .mobile_controll, .mobile_info {
     display: none !important;
+  }
+  .notification_holder div[data-notify="container"] {
+    img {
+      height: auto;
+      width: 100%;
+    }
+    div[data-notify="message"] {
+      position: relative;
+      width: 100%;
+    }
+    .vertical_line {
+      display: none;
+    }
   }
 }
 
@@ -33,7 +52,9 @@ $screen-xl-min: 1200px;
       display: none;
     }
   }
-  .bottomnav {display: none;}
+  .bottomnav, .slider_controls {
+    display: none;
+  }
   .mobnav {
     .row > div {
       padding: 0 10px;
@@ -48,6 +69,11 @@ $screen-xl-min: 1200px;
   }
   .test_card {
     background: #eee;
+  }
+  .notification_holder {
+    margin: 10px auto;
+    height: 120px;
+    width: 95%;
   }
 }
 
