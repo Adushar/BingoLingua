@@ -17,7 +17,7 @@ class TestDashboard < Administrate::BaseDashboard
     free: Field::Boolean,
     promote: Field::Boolean,
     test_results: Field::HasMany,
-    cards: Field::HasMany,
+    cards: Field::HasMany.with_options(sort_by: :position_in_test),
     groups: Field::HasMany,
     language: Administrate::Field::BelongsTo,
     created_at: Field::DateTime,

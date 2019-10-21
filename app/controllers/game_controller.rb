@@ -19,7 +19,7 @@ class GameController < ApplicationController
 
   def show
     @test = Test.find(params[:id])
-    @cards = @test.cards
+    @cards = @test.cards.order(:position_in_test)
     # If user isnt logged in
     if current_user.nil?
       redirect_to new_user_registration_url
@@ -27,6 +27,7 @@ class GameController < ApplicationController
     # Redirect if it isn`t free, user is logged in and subscribe is ended, but this user isn`t admin
     if ( !@test.free && current_user && !(User.subscribe_active(current_user.id)) && !current_user.admin? )
       render :file => "#{Rails.root}/public/pay.html",  layout: false
+      return
     end
     # Set up default cookie; get cookie and transform to integer
     cookies[:level] = { value: 1, :expires => 12.month.from_now } if !cookies.has_key?(:level)

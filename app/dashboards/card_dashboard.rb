@@ -9,6 +9,7 @@ class CardDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
+    position_in_test: Field::Number,
     picture: Administrate::Field::Image,
     sound: Field::String,
     test: Field::BelongsTo,
@@ -25,6 +26,7 @@ class CardDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
     :id,
+    :position_in_test,
     :picture,
     :sound,
     :created_at,
@@ -34,6 +36,7 @@ class CardDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
     :id,
+    :position_in_test,
     :picture,
     :sound,
     :description,
@@ -47,6 +50,7 @@ class CardDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
+    :position_in_test,
     :picture,
     :sound,
     :description,
