@@ -274,8 +274,8 @@ function GenerateAnswer(cards, errors) {
       } else {                                                                  // Or create slider
         cards.forEach(function(card) {
           translation(
-            `Word:<p>${card["description"] || "-"}</p>
-            Translation:<p>${card["translation"] || "-"}</p>`,
+            `<p>${card["description"] || "-"}</p>
+             <p>${card["translation"] || "-"}</p>`,
             card["picture"]
           );
         });

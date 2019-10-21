@@ -7,7 +7,7 @@ class GameController < ApplicationController
     @extra_tests = Test.extra(language).to_a
     @extra_tests = Kaminari.paginate_array(@extra_tests).page(params[:extra_tests]).per(15)
 
-    @assigned_tests = current_user.assigned_tests
+    @assigned_tests = current_user&.assigned_tests || []
     @assigned_tests = Kaminari.paginate_array(@assigned_tests).page(params[:assigned_tests]).per(15)
 
     @free_tests = Test.free(language).to_a.sort_by(&:pack_name)

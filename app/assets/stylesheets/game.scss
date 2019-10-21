@@ -207,6 +207,9 @@ input.level[data-toggle="tooltip"], input.part_number[data-toggle="tooltip"] {
 
 table.test_part {
   display: none;
+}
+
+table.test_part, table.cards_part {
   width: calc(100% - 14px);
   max-width: 800px;
   padding: 4px;
@@ -300,5 +303,11 @@ img.card, .description.card.not_drag {
 
   > a {
     color: white;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  div[data-notify="container"] {
+    top: 5px !important;
   }
 }
