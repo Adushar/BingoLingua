@@ -49,16 +49,16 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
-    administrate (0.12.0)
-      actionpack (>= 4.2)
-      actionview (>= 4.2)
-      activerecord (>= 4.2)
+    administrate (0.10.0)
+      actionpack (>= 4.2, < 6.0)
+      actionview (>= 4.2, < 6.0)
+      activerecord (>= 4.2, < 6.0)
       autoprefixer-rails (>= 6.0)
       datetime_picker_rails (~> 0.0.7)
       jquery-rails (>= 4.0)
       kaminari (>= 1.0)
       momentjs-rails (~> 2.8)
-      sassc-rails (~> 2.1)
+      sass-rails (~> 5.0)
       selectize-rails (~> 0.6)
     administrate-field-carrierwave (0.5.0)
       administrate (< 1.0.0)
@@ -215,7 +215,7 @@ GEM
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
       ruby_dep (~> 1.2)
-    loofah (2.3.0)
+    loofah (2.3.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     lumberjack (1.0.13)
@@ -411,7 +411,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers!
-  administrate
+  administrate (~> 0.10.0)
   administrate-field-carrierwave
   administrate-field-ckeditor (~> 0.0.9)
   administrate-field-image

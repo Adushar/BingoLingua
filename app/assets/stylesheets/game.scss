@@ -154,6 +154,8 @@ input.level[data-toggle="tooltip"], input.part_number[data-toggle="tooltip"] {
   }
   .btn-group.slider_controls{
     position: absolute;
+    width: 80px;
+    margin: auto;
     bottom: 15px;
     left: 0;
     right: 0;
@@ -183,6 +185,9 @@ input.level[data-toggle="tooltip"], input.part_number[data-toggle="tooltip"] {
     i {
       line-height: 30vw;
       vertical-align: bottom;
+    }
+    &:hover {
+      color: white;
     }
   }
   .play.mob {

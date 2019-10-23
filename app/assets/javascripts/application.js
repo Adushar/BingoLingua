@@ -291,7 +291,7 @@ function GenerateAnswer(cards, errors) {
       if (pCount == cards.length) {
         setTimeout(function() {
           if ($('.auto_play[active="active"]')[0]) { cards_refresh(); }         // If auto mode is ON, refresh
-          $("#texted_btn.play.btn").removeAttr("active");
+          $('.play').removeAttr("active");
         }, 1000);
       }
     }
