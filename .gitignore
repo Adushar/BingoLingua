@@ -34,5 +34,5 @@ config/secrets.yml
 
 # Ignore uploads
 public/uploads/*
-public/bundle/*
+vendor/bundle/*
 sendgrid.env
