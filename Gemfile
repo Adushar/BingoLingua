@@ -26,7 +26,7 @@ gem 'carrierwave'
 gem "administrate", '~> 0.10.0'
 # For images in admin panel
 gem 'administrate-field-image'
-gem 'administrate-field-carrierwave'
+gem 'administrate-field-carrierwave', "~> 0.3.4"
 # For code generator in admin panel
 gem "administrate-field-ckeditor", "~> 0.0.9"
 # Bootstrap

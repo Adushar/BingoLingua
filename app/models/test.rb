@@ -1,6 +1,6 @@
 class Test < ApplicationRecord
   scope :free, -> (language) { where(free: true, language: [language, nil]) }
-  scope :premium, -> (language) { where(free: true, language: [language, nil]) }
+  scope :premium, -> (language) { where(free: false, language: [language, nil]) }
   scope :extra, -> (language) { where(promote: true, language: [language, nil]) }
 
   mount_uploader :picture, TestUploader
