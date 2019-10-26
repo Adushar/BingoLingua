@@ -47,7 +47,7 @@ class GameController < ApplicationController
     level = cookies[:level].to_i || 1                                           # Parse level
     test_part = params[:test_part].to_i || 1
     test_id = params[:id].to_i
-    
+
     if level == 4 && current_user                                               # Turn on selected mode
       cards = current_user.selected_cards_by_test(test_id).sample(level)
       if cards.length < 4
@@ -61,6 +61,11 @@ class GameController < ApplicationController
       cards = Test.find(test_id).cards                                          # Get all cards of this test
       cards = cards.limit(25*test_part).last(25).sample(level)                  # Get proper card block(0-25, 26-50, 51-75, 75-100)
     end
+
+    logger.debug "Rendering JSON answer for request"
+    logger.debug "level: #{level}, test_part: #{test_part}, test_id: #{test_id}"
+    logger.debug "user: #{current_user.id}, cards: #{cards.pluck(:id)}"
+
     if cards && !cards.empty?
       session[:correct_order] = cards.pluck(:id)
       @answer = cards
