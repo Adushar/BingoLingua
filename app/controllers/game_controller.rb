@@ -73,7 +73,7 @@ class GameController < ApplicationController
       render :json => {
         game: @cards,
         answer: @answer
-       }
+       } and return
     elsif not current_user
       error = "Please log in"
     else
