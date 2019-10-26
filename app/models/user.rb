@@ -19,6 +19,13 @@ class User < ActiveRecord::Base
     return subscribe_ends ? !subscribe_ends.past? : false
   end
 
+  def selected_cards_by_test(test_id)
+    SelectedCard.includes(:card).where(
+      cards: {test_id: test_id},
+      user_id: id
+    )
+  end
+
   def select_card(card_id)
     if has_selected_card? card_id
       SelectedCard.where(user_id: id, card_id: card_id).destroy_all
@@ -28,10 +35,7 @@ class User < ActiveRecord::Base
   end
 
   def remove_selected_cards(test_id)
-    SelectedCard.includes(:card).where(
-      cards: {test_id: test_id},
-      user_id: id
-    ).destroy_all
+    selected_cards_by_test(test_id).destroy_all
   end
 
   def has_selected_card?(card_id)

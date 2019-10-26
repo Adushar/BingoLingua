@@ -44,11 +44,12 @@ class GameController < ApplicationController
 
   def cards_set
     # Output: cards, selected, level
-    level = cookies[:level].to_i                                                # Parse level
+    level = cookies[:level].to_i || 1                                           # Parse level
+    test_part = params[:test_part].to_i || 1
     test_id = params[:id].to_i
-    test_part = params[:test_part].to_i
+    
     if level == 4 && current_user                                               # Turn on selected mode
-      cards = current_user.selected_cards.where(test_id: test_id).sample(level)
+      cards = current_user.selected_cards_by_test(test_id).sample(level)
       if cards.length < 4
         cards = []
         render :json => {
