@@ -50,7 +50,7 @@ class GameController < ApplicationController
     test_id = params[:id].to_i
 
     if level == 4 && current_user                                               # Turn on selected mode
-      cards = current_user.selected_cards_by_test(test_id).sample(level)
+      cards = current_user.cards.where(test_id: test_id).sample(level)
       if cards.length < 4
         cards = []
         render :json => {
