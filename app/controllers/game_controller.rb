@@ -64,7 +64,7 @@ class GameController < ApplicationController
 
     logger.debug "Rendering JSON answer for request"
     logger.debug "level: #{level}, test_part: #{test_part}, test_id: #{test_id}"
-    logger.debug "user: #{current_user.id}, cards: #{cards.pluck(:id)}"
+    logger.debug "user: #{current_user&.id}, cards: #{cards.pluck(:id)}"
 
     if cards && !cards.empty?
       session[:correct_order] = cards.pluck(:id)
