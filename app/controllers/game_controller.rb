@@ -1,6 +1,5 @@
 class GameController < ApplicationController
   before_action :demo_mode, only: :show, if: -> { Test.find(params[:id]).free && !current_user }
-  before_action :authenticate_user!, only: [:cards_set, :check_answer]
 
   def index
     language = current_user ? current_user.language : nil
@@ -75,11 +74,15 @@ class GameController < ApplicationController
         game: @cards,
         answer: @answer
        }
+    elsif not current_user
+      error = "Please log in"
     else
-      render :json => {
-        :errors => 'We can not download enough cards. Sorry us(⌣́_⌣̀)'
-      }, :status => 422 and return
+      error = 'Not enough cards. Sorry(⌣́_⌣̀)'
     end
+
+    render :json => {
+      :errors => error
+    }, :status => 422
   end
 
   def check_answer
@@ -89,18 +92,22 @@ class GameController < ApplicationController
     session[:correct_order] = []                                                # Clean session parameter
     errors_num = errors.compact.length
 
-    if errors_num == 0                                                         # Is array fully correct?
-      score_changes = 1
-      errors = nil
+    if current_user
+      if errors_num == 0                                                         # Is array fully correct?
+        score_changes = 1
+        errors = nil
+      else
+        score_changes = errors.include?(nil) ? 0 : -1                             # Remove point if answer is fully wrong
+      end
+      current_user.increment(:points, score_changes).save
+      TestResult.add_result(                                                      # Send request to custom method in model with:
+        score: 100-(errors_num.to_f/user_answer.length*100),                           # - Percent of correct answers(100%-error percrnt)
+        test_id: params[:id],
+        user_id: current_user.id
+      )
     else
-      score_changes = errors.include?(nil) ? 0 : -1                             # Remove point if answer is fully wrong
+      error = "Please log in"
     end
-    current_user.increment(:points, score_changes).save
-    TestResult.add_result(                                                      # Send request to custom method in model with:
-      score: 100-(errors_num.to_f/user_answer.length*100),                           # - Percent of correct answers(100%-error percrnt)
-      test_id: params[:id],
-      user_id: current_user.id
-    )
 
     respond_to do |format|
       format.json {
