@@ -66,7 +66,9 @@ class GameController < ApplicationController
     logger.debug "level: #{level}, test_part: #{test_part}, test_id: #{test_id}"
     logger.debug "user: #{current_user&.id}, cards: #{cards.pluck(:id)}"
 
-    if cards && !cards.empty?
+    if not current_user
+      error = "Please log in"
+    elsif cards && !cards.empty?
       session[:correct_order] = cards.pluck(:id)
       @answer = cards
       @cards = cards.shuffle
@@ -74,8 +76,6 @@ class GameController < ApplicationController
         game: @cards,
         answer: @answer
        } and return
-    elsif not current_user
-      error = "Please log in"
     else
       error = 'Not enough cards. Sorry(⌣́_⌣̀)'
     end
