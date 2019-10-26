@@ -7,7 +7,7 @@
       %span#score.odometer{'data-score': current_user.scores}= current_user.scores
     %li.level_block
       %span.badge.badge-secondary Level
-      %input.level{type: "text", name: "level", value: cookies[:level], 'data-toggle': "tooltip", 'data-placement': "top"}
+      %input.level{type: "text", name: "level", value: cookie_level, 'data-toggle': "tooltip", 'data-placement': "top"}
     %li.quarter_block
       %span.badge.badge-secondary Part
       %input.part_number{type: "text", name: "level", value: 1, 'data-toggle': "tooltip", 'data-placement': "top"}
@@ -47,7 +47,7 @@
             .b#mob_score.odometer= current_user.points
           %span
             %div Level:
-            .b= cookies[:level]
+            .b= cookie_level
           %span
             %div Part:
             .b 1
@@ -75,7 +75,7 @@
           .btn-group-vertical{"aria-label" => "Basic example", :role => "group"}
             .level_block
               %span.badge.badge-secondary Level
-              %input.level{type: "text", name: "level", value: cookies[:level], 'data-toggle': "tooltip", 'data-placement': "top"}
+              %input.level{type: "text", name: "level", value: cookie_level, 'data-toggle': "tooltip", 'data-placement': "top"}
             .quarter_block
               %span.badge.badge-secondary Part
               %input.part_number{type: "text", name: "level", value: 1, 'data-toggle': "tooltip", 'data-placement': "top"}

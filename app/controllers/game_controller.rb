@@ -44,7 +44,8 @@ class GameController < ApplicationController
 
   def cards_set
     # Output: cards, selected, level
-    level = (cookies[:level] || 1).to_i                                           # Parse level
+    level = cookies[:level].to_i                                                # Parse level
+    level = 1 if level < 1
     test_part = (params[:test_part] || 1).to_i
     test_id = params[:id].to_i
 

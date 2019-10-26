@@ -46,12 +46,3 @@ document.addEventListener 'turbolinks:load', ->
     $(".test_part, .mobile_info, .notification_holder").show();
     $('#texted_btn, button.btn.btn-secondary.mx-3[data-target=".settings-modal-sm"]').removeClass("mx-3")
     $('.col-6.d-from-md-none').not(".text-right").css("padding", "0 5px")
-
-  $('.btn-group-vertical .btn').click ->
-    level = $(this).attr('data-level')
-    if getCookie('level') != level and getCookie('level')
-      setCookie 'level', level, 365
-      $('.btn-active').removeClass 'btn-active'
-      $(this).addClass 'btn-active'
-      $('.settings-modal-sm').modal 'hide'
-    location.reload();
