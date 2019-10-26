@@ -1,5 +1,6 @@
 class GameController < ApplicationController
   before_action :demo_mode, only: :show, if: -> { Test.find(params[:id]).free && !current_user }
+  before_action :authenticate_user!, only: [:cards_set, :check_answer]
 
   def index
     language = current_user ? current_user.language : nil
@@ -44,8 +45,8 @@ class GameController < ApplicationController
 
   def cards_set
     # Output: cards, selected, level
-    level = cookies[:level].to_i || 1                                           # Parse level
-    test_part = params[:test_part].to_i || 1
+    level = (cookies[:level] || 1).to_i                                           # Parse level
+    test_part = (params[:test_part] || 1).to_i
     test_id = params[:id].to_i
 
     if level == 4 && current_user                                               # Turn on selected mode
