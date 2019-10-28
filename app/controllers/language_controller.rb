@@ -5,7 +5,7 @@ class LanguageController < ApplicationController
     if language
       language.users << current_user
       if language.save
-        flash[:notice] = "Your language now is set as #{language.name.downcase}"
+        flash[:notice] = "Your language now is set as #{language.name.capitalize}"
         redirect_to root_path
       end
     end
