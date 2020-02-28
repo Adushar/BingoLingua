@@ -13,4 +13,8 @@ class Test < ApplicationRecord
   def pack_name
     name.split("-")[0].gsub(/[^0-9]/, '').to_i
   end
+
+  def often_shown_cards(user)
+    ShownCard.often_shown(user).where(card: cards).map(&:card)
+  end
 end

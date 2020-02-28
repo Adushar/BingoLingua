@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191021062544) do
+ActiveRecord::Schema.define(version: 20200227215229) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -107,6 +107,16 @@ ActiveRecord::Schema.define(version: 20191021062544) do
     t.index ["user_id", "card_id"], name: "index_selected_cards_on_user_id_and_card_id"
   end
 
+  create_table "shown_cards", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "card_id"
+    t.integer "appearance_number", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["card_id"], name: "index_shown_cards_on_card_id"
+    t.index ["user_id"], name: "index_shown_cards_on_user_id"
+  end
+
   create_table "test_results", force: :cascade do |t|
     t.integer "attempts"
     t.float "score", default: 0.0
@@ -163,4 +173,6 @@ ActiveRecord::Schema.define(version: 20191021062544) do
   add_foreign_key "languages", "users"
   add_foreign_key "learned_words", "cards"
   add_foreign_key "learned_words", "users"
+  add_foreign_key "shown_cards", "cards"
+  add_foreign_key "shown_cards", "users"
 end
