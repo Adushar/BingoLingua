@@ -24,6 +24,9 @@ as well as a link to its edit page.
   </h1>
 
   <div>
+    <% if controller_name == 'groups' %>
+      <%= link_to "Nullify the Repeats", reset_repeat_path(params[:id]), method: :patch, class: 'button', style: 'margin: 0 10px;' %>
+    <% end %>
     <%= link_to(
       t("administrate.actions.edit_resource", name: page.page_title),
       [:edit, namespace, page.resource],

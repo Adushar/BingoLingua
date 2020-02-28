@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   root "game#index"
   resources :game, only: [:index, :show]
   resources :multiple_load, only: [:new, :create]
+  resources :reset_repeats, only: [:update]
+
   get 'cards_set/:id/' => 'game#cards_set', :via => :get
   get 'check_answer/:id' => 'game#check_answer', :via => :get
   get 'finish_test/:id' => 'game#finish_test', :via => :get
