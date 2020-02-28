@@ -59,7 +59,7 @@ class GameController < ApplicationController
       end
     elsif level >= 1
       level += 2
-      cards = test.cards                                                        # Get all cards of this test
+      cards = test.cards.order(:position_in_test)                               # Get all cards of this test
       cards = cards.first(25*test_part).last(25)                                # Get proper card block(0-25, 26-50, 51-75, 75-100)
       cards -= test.often_shown_cards(current_user)                             # Remove often showed
       cards = cards.sample(level)                                               # Select N random
