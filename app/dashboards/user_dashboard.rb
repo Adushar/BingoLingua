@@ -28,6 +28,7 @@ class UserDashboard < Administrate::BaseDashboard
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
     admin: Field::Boolean,
+    disappear_often_shown_cards: Field::Boolean,
     cards: Field::HasMany,
   }.freeze
 
@@ -59,6 +60,7 @@ class UserDashboard < Administrate::BaseDashboard
     :created_at,
     :updated_at,
     :admin,
+    :disappear_often_shown_cards,
     :cards,
   ].freeze
 
@@ -73,6 +75,7 @@ class UserDashboard < Administrate::BaseDashboard
     :password,
     :password_confirmation,
     :admin,
+    :disappear_often_shown_cards,
     :cards,
   ].freeze
 

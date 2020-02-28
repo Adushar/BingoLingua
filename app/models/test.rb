@@ -15,6 +15,7 @@ class Test < ApplicationRecord
   end
 
   def often_shown_cards(user)
+    return [] unless user.disappear_often_shown_cards?
     ShownCard.often_shown(user).where(card: cards).map(&:card)
   end
 end

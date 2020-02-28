@@ -33,5 +33,16 @@ module Admin
 
     # See https://administrate-prototype.herokuapp.com/customizing_controller_actions
     # for more information
+
+    def resource_params
+      permited_params = dashboard.permitted_attributes
+      if params.dig("user", "password").blank?
+        permited_params -= [:password, :password_confirmation]
+      end
+
+      params.require(resource_class.model_name.param_key).
+        permit(permited_params).
+        transform_values { |v| read_param_value(v) }
+    end
   end
 end
