@@ -82,7 +82,7 @@ class GameController < ApplicationController
         answer: @answer
        } and return
     else
-      error = 'Not enough cards. Sorry(⌣́_⌣̀)'
+      error = 'Cards in this part are over. Move to the next one'
     end
 
     render :json => {
