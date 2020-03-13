@@ -23,7 +23,7 @@ gem 'devise'
 gem "mini_magick"
 gem 'carrierwave'
 # For admin panel
-gem "administrate", '~> 0.10.0'
+gem "administrate", '~> 0.13.0'
 # For images in admin panel
 gem 'administrate-field-image'
 gem 'administrate-field-carrierwave', "~> 0.3.4"
