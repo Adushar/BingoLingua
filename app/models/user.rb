@@ -59,6 +59,10 @@ class User < ActiveRecord::Base
     groups.includes(:tests).map(&:tests).flatten
   end
 
+  def demo_user?
+    email == "demo_user@gmail.com"
+  end
+
   def scores() points end
 
   def self.demo_mode
