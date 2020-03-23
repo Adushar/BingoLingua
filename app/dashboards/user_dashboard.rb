@@ -12,7 +12,6 @@ class UserDashboard < Administrate::BaseDashboard
     email: Field::Email,
     first_name: Field::String,
     last_name: Field::String,
-    full_name: Field::String,
     encrypted_password: Field::String,
     password: Field::String.with_options(searchable: false),
     password_confirmation: Field::String.with_options(searchable: false),
@@ -30,6 +29,7 @@ class UserDashboard < Administrate::BaseDashboard
     admin: Field::Boolean,
     disappear_often_shown_cards: Field::Boolean,
     cards: Field::HasMany,
+    groups: Field::HasMany,
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -40,7 +40,9 @@ class UserDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = [
     :id,
     :email,
-    :full_name,
+    :first_name,
+    :last_name,
+    :groups,
     :admin,
     :subscribe_ends,
   ].freeze
@@ -61,6 +63,7 @@ class UserDashboard < Administrate::BaseDashboard
     :updated_at,
     :admin,
     :disappear_often_shown_cards,
+    :groups,
     :cards,
   ].freeze
 
@@ -76,6 +79,7 @@ class UserDashboard < Administrate::BaseDashboard
     :password_confirmation,
     :admin,
     :disappear_often_shown_cards,
+    :groups,
     :cards,
   ].freeze
 
