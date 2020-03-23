@@ -30,6 +30,7 @@ class UserDashboard < Administrate::BaseDashboard
     disappear_often_shown_cards: Field::Boolean,
     cards: Field::HasMany,
     groups: Field::HasMany,
+    group_name: Field::String.with_options(searchable: false),
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -43,6 +44,7 @@ class UserDashboard < Administrate::BaseDashboard
     :first_name,
     :last_name,
     :groups,
+    :group_name,
     :admin,
     :subscribe_ends,
   ].freeze

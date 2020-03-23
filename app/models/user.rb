@@ -46,6 +46,10 @@ class User < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
+  def group_name
+    groups.last.name
+  end
+
   def subscribe_left
     days = subscribe_ends ? (Date.today...subscribe_ends).count : 0
     if days > 0 && Date.today > subscribe_ends
