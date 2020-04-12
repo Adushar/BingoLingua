@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  before_save :set_subscribtion
   validates :first_name, :presence => true
   validates :last_name, :presence => true
 
@@ -17,6 +18,10 @@ class User < ActiveRecord::Base
   def self.subscribe_active(id)
     subscribe_ends = User.find(id).subscribe_ends
     return subscribe_ends ? !subscribe_ends.past? : false
+  end
+
+  def set_subscribtion
+    self.subscribe_ends ||= 1.day.ago
   end
 
   def selected_cards_by_test(test_id)
