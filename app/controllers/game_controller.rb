@@ -10,10 +10,14 @@ class GameController < ApplicationController
     @assigned_tests = current_user&.assigned_tests || []
     @assigned_tests = Kaminari.paginate_array(@assigned_tests).page(params[:assigned_tests]).per(15)
 
-    @free_tests = Test.free(language).to_a.sort_by(&:pack_name)
+    if current_user&.groups.blank?
+      @free_tests = Test.free(language).to_a.sort_by(&:pack_name)
+      @subscribe_tests = Test.premium(language).to_a.sort_by(&:pack_name)
+    else
+      @free_tests = []
+      @subscribe_tests = []
+    end
     @free_tests = Kaminari.paginate_array(@free_tests).page(params[:free_tests]).per(15)
-
-    @subscribe_tests = Test.premium(language).to_a.sort_by(&:pack_name)
     @subscribe_tests = Kaminari.paginate_array(@subscribe_tests).page(params[:subscribe_tests]).per(15)
   end
 

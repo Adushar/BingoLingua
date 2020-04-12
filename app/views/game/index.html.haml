@@ -8,10 +8,12 @@
     = render :partial => 'menu_block', locals: { name: "Assigned", tests: @assigned_tests }
     = paginate @assigned_tests, param_name: :assigned_tests
 
-.container.test_menu
-  = render :partial => 'menu_block', locals: { name: "Let's play", tests: @free_tests }
-  = paginate @free_tests, param_name: :free_tests
+- unless @free_tests.empty?
+  .container.test_menu
+    = render :partial => 'menu_block', locals: { name: "Let's play", tests: @free_tests }
+    = paginate @free_tests, param_name: :free_tests
 
-.container.test_menu
-  = render :partial => 'menu_block', locals: { name: "Premium", tests: @subscribe_tests }
-  = paginate @subscribe_tests, param_name: :subscribe_tests
+- unless @subscribe_tests.empty?
+  .container.test_menu
+    = render :partial => 'menu_block', locals: { name: "Premium", tests: @subscribe_tests }
+    = paginate @subscribe_tests, param_name: :subscribe_tests
