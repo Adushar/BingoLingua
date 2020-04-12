@@ -4,7 +4,7 @@ class ShownCard < ApplicationRecord
   validates_uniqueness_of :user_id, :scope => [:card_id]
 
   scope :often_shown, -> (user) do
-    where("appearance_number > ?", 0).where(user: user)
+    where("appearance_number > ?", 30).where(user: user)
   end
 
   def self.add(user:, card:)
