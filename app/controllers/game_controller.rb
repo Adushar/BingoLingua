@@ -55,6 +55,7 @@ class GameController < ApplicationController
 
     if level == 4 && current_user                                               # Turn on selected mode
       cards = current_user.cards.where(test: test).sample(level)
+      remove_often_shown_cards(cards, test)
       if cards.length < 4
         cards = []
         render :json => {
@@ -65,10 +66,8 @@ class GameController < ApplicationController
       level += 2
       cards = test.cards.order(:position_in_test)                               # Get all cards of this test
       cards = cards.first(25*test_part).last(25)                                # Get proper card block(0-25, 26-50, 51-75, 75-100)
-      cards -= often_shown_cards(user: current_user, test: test)
+      remove_often_shown_cards(cards, test)
       cards = cards.sample(level)                                               # Select N random
-
-      ShownCard.add_cards_set(cards: cards, user: current_user)
     end
 
     logger.debug "Rendering JSON answer for request"
@@ -134,6 +133,11 @@ class GameController < ApplicationController
     return [] if user.demo_user?
 
     test.often_shown_cards(user)
+  end
+
+  def remove_often_shown_cards(cards, test)
+    cards -= often_shown_cards(user: current_user, test: test)
+    ShownCard.add_cards_set(cards: cards, user: current_user)
   end
 
   def find_errors(usr_answ, corr_answ)
