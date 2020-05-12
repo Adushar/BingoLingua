@@ -54,8 +54,9 @@ class GameController < ApplicationController
     test = Test.find(params[:id].to_i)
 
     if level == 4 && current_user                                               # Turn on selected mode
-      cards = current_user.cards.where(test: test).sample(level)
+      cards = current_user.cards.where(test: test)
       cards = remove_often_shown_cards(cards, test)
+      cards = cards.sample(level)
       if cards.length < 4
         cards = []
         render :json => {
@@ -137,6 +138,7 @@ class GameController < ApplicationController
 
   def remove_often_shown_cards(cards, test)
     ShownCard.add_cards_set(cards: cards, user: current_user)
+    byebug
     cards - often_shown_cards(user: current_user, test: test)
   end
 
