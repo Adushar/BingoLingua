@@ -81,6 +81,7 @@ class GameController < ApplicationController
       session[:correct_order] = cards.pluck(:id)
       @answer = cards
       @cards = cards.shuffle
+      ShownCard.add_cards_set(cards: @cards, user: current_user)
       render :json => {
         game: @cards,
         answer: @answer
@@ -137,7 +138,6 @@ class GameController < ApplicationController
   end
 
   def remove_often_shown_cards(cards, test)
-    ShownCard.add_cards_set(cards: cards, user: current_user)
     cards - often_shown_cards(user: current_user, test: test)
   end
 
