@@ -1,11 +1,13 @@
 $medium: 768px;
 
 #personal_account {
+  &> div > .row > div {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
   &> div > div, &> div > .row > div {
     margin: 10px 0 20px 0;
     padding: 10px;
     text-align: center;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     p {
       margin: 0;
     }

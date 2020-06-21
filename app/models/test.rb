@@ -8,6 +8,7 @@ class Test < ApplicationRecord
   has_many :test_results
   has_many :cards
   has_and_belongs_to_many :groups
+  has_many :points
   belongs_to :language, optional: true
 
   def pack_name

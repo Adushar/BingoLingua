@@ -97,6 +97,7 @@ class GameController < ApplicationController
 
   def check_answer
     cards = []
+    test_id = params[:id]
     user_answer = params[:user_answer]
     errors = find_errors(session[:correct_order], user_answer)                  # Find errors in answer. Add correct to LearnedWords
     session[:correct_order] = []                                                # Clean session parameter
@@ -109,10 +110,10 @@ class GameController < ApplicationController
       else
         score_changes = errors.include?(nil) ? 0 : -1                             # Remove point if answer is fully wrong
       end
-      current_user.increment(:points, score_changes).save
+      Point.create!(test_id: test_id, user: current_user, value: score_changes)
       TestResult.add_result(                                                      # Send request to custom method in model with:
         score: 100-(errors_num.to_f/user_answer.length*100),                           # - Percent of correct answers(100%-error percrnt)
-        test_id: params[:id],
+        test_id: test_id,
         user_id: current_user.id
       )
     else

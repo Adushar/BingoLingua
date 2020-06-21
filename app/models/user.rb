@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   has_many :cards, :through => :selected_cards
   has_many :test_results
   has_many :learned_words
+  has_many :points
   has_and_belongs_to_many :groups
   has_one :language
 
@@ -72,7 +73,13 @@ class User < ActiveRecord::Base
     email == "demo_user@gmail.com"
   end
 
-  def scores() points end
+  def scores
+    points.pluck(:value).sum
+  end
+
+  def monthly_score
+    points.monthly.pluck(:value).sum
+  end
 
   def self.demo_mode
     demo_user = User.where(email: "demo_user@gmail.com")[0]

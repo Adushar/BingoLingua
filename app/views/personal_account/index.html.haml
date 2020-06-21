@@ -1,9 +1,15 @@
 .row.mx-0#personal_account
   .row.col-sm-3.col-md-12.mx-auto
-    .user-score.col-md-6
-      %h1 Your score
-      .ring
-        %h2= @score
+    .row.user-score.col-md-3.p-0.pl-2
+      .col-12.p-0.m-0
+        %h1 Total score
+        .ring
+          %h2= @score
+    .row.user-score.col-md-3.p-0.pl-2
+      .col-12.p-0.m-0
+        %h1 Monthly score
+        .ring
+          %h2= @monthly_score
     .notifications-colomn.row.col-md-6.p-0
       .subscribe-ends.w-100.my-sm-0
         %p= @subscribe_days_left.html_safe
@@ -15,7 +21,8 @@
           %li= "#{@result[:tests]} tests"
           %li= "#{@result[:cards]} new words"
           %li= "repeated #{@result[:repeats]} times"
-  .col-sm-9.col-md-12.mx-auto
+  .col-sm-9.col-md-12.mx-auto.mt-3
+    %h5.pl-2 Top Users
     %table.table#top_users
       %thead
         %tr
@@ -23,13 +30,29 @@
           %th{:scope => "col"} Full name
           %th{:scope => "col"} Points
       %tbody
-        - @top_users.each_with_index do |user, index|
+        - @top_users.each_with_index do |top_record, index|
           %tr
             %th{:scope => "row"}= index + 1
-            %td= user.full_name
-            %td= user.scores
+            %td= top_record[:user].full_name
+            %td= top_record[:points]
+
+  .col-sm-9.col-md-12.mx-auto
+    %h5.pl-2 Monthly Top Users
+    %table.table#top_monthly_users
+      %thead
+        %tr
+          %th{:scope => "col"} #
+          %th{:scope => "col"} Full name
+          %th{:scope => "col"} Points
+      %tbody
+        - @top_monthly_users.each_with_index do |top_record, index|
+          %tr
+            %th{:scope => "row"}= index + 1
+            %td= top_record[:user].full_name
+            %td= top_record[:points]
 
     %table.table#learned_words
+      %h5.pl-2 Learned Words
       %thead
         %tr
           %th{:scope => "col"} #
