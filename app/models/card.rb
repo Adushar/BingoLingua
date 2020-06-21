@@ -7,4 +7,8 @@ class Card < ApplicationRecord
   belongs_to :test, optional: true, foreign_key: 'test_id'
   # validates_presence_of :description
   # validates_presence_of :translation
+
+  def repeats_for(user:)
+    shown_cards.where(user: user).pluck(:appearance_number).sum
+  end
 end

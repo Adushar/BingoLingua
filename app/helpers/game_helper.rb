@@ -4,4 +4,12 @@ module GameHelper
 
     cookies[:level]
   end
+
+  def card_image_class(card)
+    shown_card = ShownCard.find_by(user: current_user, card: card)
+    class_name = 'card not_drag'
+    class_name += ' blured_card' if shown_card&.often_shown?
+
+    class_name
+  end
 end

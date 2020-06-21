@@ -1,10 +1,11 @@
 class ShownCard < ApplicationRecord
+  OFTEN_SHOWN_LIMIT = 15
   belongs_to :user
   belongs_to :card
   validates_uniqueness_of :user_id, :scope => [:card_id]
 
   scope :often_shown, -> (user) do
-    where("appearance_number > ?", 15).where(user: user)
+    where("appearance_number > ?", OFTEN_SHOWN_LIMIT).where(user: user)
   end
 
   def self.add(user:, card:)
@@ -18,5 +19,9 @@ class ShownCard < ApplicationRecord
 
   def self.add_cards_set(user:, cards:)
     cards.each { |card| self.add(card: card, user: user) }
+  end
+
+  def often_shown?
+    appearance_number > OFTEN_SHOWN_LIMIT
   end
 end
