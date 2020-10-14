@@ -3,11 +3,12 @@ class User < ActiveRecord::Base
   validates :first_name, :presence => true
   validates :last_name, :presence => true
 
-  has_many :selected_cards
-  has_many :cards, :through => :selected_cards
-  has_many :test_results
-  has_many :learned_words
-  has_many :points
+  has_many :selected_cards, dependent: :destroy
+  has_many :shown_cards, dependent: :destroy
+  has_many :cards, :through => :selected_cards, dependent: :destroy
+  has_many :test_results, dependent: :destroy
+  has_many :learned_words, dependent: :destroy
+  has_many :points, dependent: :destroy
   has_and_belongs_to_many :groups
   has_one :language
 
