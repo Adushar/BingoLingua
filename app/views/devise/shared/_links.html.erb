@@ -10,6 +10,10 @@
   Don't have an account yet? <%= link_to "Sign up", new_registration_path(resource_name) %><br />
 <% end %>
 
+<%- if !devise_mapping.registerable? && controller_name != 'registrations' %>
+  Don't have an account yet? <a href="#" data-toggle="modal" data-target="#sign_up_instructions">Sign Up</a><br />
+<% end %>
+
 <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
   <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) %><br />
 <% end -%>
@@ -23,3 +27,26 @@
     <%= link_to "log in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider) %><br />
   <% end -%>
 <% end -%>
+
+<!--Sign up modal-->
+<div class="modal"  id="sign_up_instructions" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">How to Sign Up?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>
+          If you are not a member of Bingolinguo.club  but you are interested in taking out a subscription to Premium vocabulary packs, please do not hesitate to contact us on
+          <a href="mailto:bingolinguo@gmail.com">bingolinguo@gmail.com</a>.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
