@@ -83,7 +83,7 @@ var playlist = function(audio_arr, onPlay, data, endFunc, e) {
 
   // build up howlerBank:
   playlistUrls.forEach(function(current, i) {
-    howlerBank.push(new Howl({ src: [playlistUrls[i]], onend: onEnd, onplay: onPlay, buffer: true, volume: 1 }))
+    howlerBank.push(new Howl({ src: [playlistUrls[i]], onend: onEnd, onplay: onPlay, buffer: true, volume: 1, html5: true }))
   });
   // initiate the whole :
   howlerBank[0].play();
