@@ -5,4 +5,4 @@
         = card.repeats_for(user: current_user)
       = link_to select_card_path(card_id: card.id), method: :post, remote: true do
         = fa_icon "star-o", class: "star #{'active' if current_user.has_selected_card? card.id}"
-    = image_tag card.picture, class: card_image_class(card), "onclick" => "playSound(\"#{card.sound}\");", id: ("card_#{card.id}")
+    = image_tag 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=', class: card_image_class(card), "onclick" => "playSound(\"#{card.sound}\");", id: "card_#{card.id}", style: "background: url(#{card.picture}) no-repeat; background-size: 100%;"
