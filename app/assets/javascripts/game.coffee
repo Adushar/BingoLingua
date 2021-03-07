@@ -1,3 +1,9 @@
+getTestParts = ->
+  testPartNumbers = $('.block-slide').map(->
+    $(this).data 'test-part'
+  ).get()
+  return testPartNumbers.reduce (a,b) -> Math.max a, b
+
 document.addEventListener 'turbolinks:load', ->
   mobile = $(window).width() < 768
   Howler.unload()
@@ -8,7 +14,7 @@ document.addEventListener 'turbolinks:load', ->
   });
   $(".level, .part_number").TouchSpin({
       min: 1,
-      max: 4,
+      max: getTestParts(),
       buttondown_class: 'btn btn-default',
       buttonup_class: 'btn btn-default',
       stepinterval: 1000
