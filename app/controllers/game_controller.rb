@@ -14,9 +14,7 @@ class GameController < ApplicationController
   end
 
   def premium
-    @subscribe_tests = Test.premium.to_a.sort_by(&:pack_name) if current_user&.groups.blank?
-    @subscribe_tests ||= []
-
+    @subscribe_tests = Test.premium.to_a.sort_by(&:pack_name)
     @subscribe_tests = Kaminari.paginate_array(@subscribe_tests).page(params[:subscribe_tests]).per(15)
   end
 
