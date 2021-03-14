@@ -1,6 +1,7 @@
 ua:
   navbar:
-    choose_pack: Виберіть колоду
+    choose_pack: Всі колоди
+    premium_pack: Колоди для підписників
     top_10: Топ 10 гравців
     log_out: Вийти
     log_in: Увійти

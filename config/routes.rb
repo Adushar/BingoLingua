@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     end
   devise_for :users
   root "game#index"
+  get 'premium', to: 'game#premium', as: :game_premium
   resources :game, only: [:index, :show]
   resources :multiple_load, only: [:new, :create]
   resources :reset_repeats, only: [:update]

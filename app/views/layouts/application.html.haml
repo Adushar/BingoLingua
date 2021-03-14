@@ -24,6 +24,8 @@
           %li.nav-item
             %a.nav-link{:href => "/game"}= t('navbar.choose_pack')
           %li.nav-item
+            %a.nav-link{:href => game_premium_path}= t('navbar.premium_pack')
+          %li.nav-item
             %a.nav-link{:href => "/top"}= t('navbar.top_10')
           - if current_user.try(:admin?)
             %li.nav-item

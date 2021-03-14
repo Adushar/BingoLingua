@@ -1,0 +1,6 @@
+- unless @subscribe_tests.empty?
+  .container.test_menu
+    = render :partial => 'menu_block', locals: { name: t('game.premium_packs'), tests: @subscribe_tests }
+    = paginate @subscribe_tests, param_name: :subscribe_tests
+- else
+  %h1.text-center.m-3 Oops. Nothing to see here yet
