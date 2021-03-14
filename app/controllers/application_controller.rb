@@ -3,18 +3,13 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :configure_account_update_params, if: :devise_controller?
   # I18 locale
-  around_action :switch_locale
-  # Prevent CSRF attacks by raising an exception.
-  # For APIs, you may want to use :null_session instead.
-  protect_from_forgery with: :exception
+  before_action :switch_locale
 
   protected
 
   def switch_locale(&action)
     locale = current_user&.language&.code || I18n.default_locale
     I18n.with_locale(locale, &action)
-  rescue
-    nil
   end
 
   def configure_permitted_parameters
