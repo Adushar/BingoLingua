@@ -1,7 +1,7 @@
 class Test < ApplicationRecord
-  scope :free, -> (language) { where(free: true, language: [language, nil]) }
-  scope :premium, -> (language) { where(free: false, language: [language, nil]) }
-  scope :extra, -> (language) { where(promote: true, language: [language, nil]) }
+  scope :free, -> { where(free: true) }
+  scope :premium, -> { where(free: false) }
+  scope :extra, -> { where(promote: true) }
 
   mount_uploader :picture, TestUploader
   # Relationships

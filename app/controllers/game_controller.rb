@@ -2,17 +2,15 @@ class GameController < ApplicationController
   before_action :demo_mode, only: :show, if: -> { Test.find(params[:id]).free && !current_user }
 
   def index
-    language = current_user ? current_user.language : nil
-
-    @extra_tests = Test.extra(language).to_a
+    @extra_tests = Test.extra.to_a
     @extra_tests = Kaminari.paginate_array(@extra_tests).page(params[:extra_tests]).per(15)
 
     @assigned_tests = current_user&.assigned_tests || []
     @assigned_tests = Kaminari.paginate_array(@assigned_tests).page(params[:assigned_tests]).per(15)
 
     if current_user&.groups.blank?
-      @free_tests = Test.free(language).to_a.sort_by(&:pack_name)
-      @subscribe_tests = Test.premium(language).to_a.sort_by(&:pack_name)
+      @free_tests = Test.free.to_a.sort_by(&:pack_name)
+      @subscribe_tests = Test.premium.to_a.sort_by(&:pack_name)
     else
       @free_tests = []
       @subscribe_tests = []
