@@ -300,6 +300,10 @@ img.card, .description.card.not_drag {
   button {text-align: left;}
 }
 
+.test_menu a.pack_link {
+  @extend h2;
+}
+
 .test_menu .card_block {
   padding: 8px;
   margin: 0;

@@ -12,3 +12,6 @@
   .container.test_menu
     = render :partial => 'menu_block', locals: { name: t('game.lets_play_packs'), tests: @free_tests }
     = paginate @free_tests, param_name: :free_tests
+
+.container.test_menu.p-2
+  = link_to t('game.premium_packs_link'), game_premium_path, class: 'pack_link m-2'

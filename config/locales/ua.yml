@@ -1,6 +1,6 @@
 ua:
   navbar:
-    choose_pack: Всі колоди
+    choose_pack: Доступні колоди
     premium_pack: Колоди для підписників
     top_10: Топ 10 гравців
     log_out: Вийти
@@ -13,6 +13,7 @@ ua:
   game:
     extra_packs: "Вибіркові"
     assigned_packs: 'Назначені'
+    premium_packs_link: '> Бібліотека для підписників <'
     lets_play_packs: "Почнемо!"
     premium_packs: 'Для підписників'
     auto_play_button: Авто
