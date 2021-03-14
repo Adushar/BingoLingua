@@ -1,0 +1,18 @@
+ua:
+  navbar:
+    choose_pack: Виберіть колоду
+    top_10: Топ 10 гравців
+    log_out: Вийти
+    log_in: Увійти
+  footer:
+    lets_play: Зіграємо!
+    vocabulary_account: Особистий словник
+    contact: Контакти
+    products: Послуги
+  game:
+    extra_packs: "Вибіркові"
+    assigned_packs: 'Назначені'
+    lets_play_packs: "Почнемо!"
+    premium_packs: 'Для підписників'
+    auto_play_button: Авто
+    play_button: Почати

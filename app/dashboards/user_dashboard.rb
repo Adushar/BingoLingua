@@ -28,6 +28,7 @@ class UserDashboard < Administrate::BaseDashboard
     updated_at: Field::DateTime,
     admin: Field::Boolean,
     disappear_often_shown_cards: Field::Boolean,
+    language: Administrate::Field::BelongsTo,
     cards: Field::HasMany,
     groups: Field::HasMany,
     group_name: Field::String.with_options(searchable: false),
@@ -65,6 +66,7 @@ class UserDashboard < Administrate::BaseDashboard
     :updated_at,
     :admin,
     :disappear_often_shown_cards,
+    :language,
     :groups,
     :cards,
   ].freeze
@@ -81,6 +83,7 @@ class UserDashboard < Administrate::BaseDashboard
     :password_confirmation,
     :admin,
     :disappear_often_shown_cards,
+    :language,
     :groups,
     :cards,
   ].freeze

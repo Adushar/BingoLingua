@@ -15,6 +15,7 @@ class LanguageDashboard < Administrate::BaseDashboard
       image_on_index: true
     ),
     tests: Field::HasMany,
+    users: Field::HasMany,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -37,6 +38,7 @@ class LanguageDashboard < Administrate::BaseDashboard
     :flag,
     :name,
     :code,
+    :users,
     :tests,
     :created_at,
     :updated_at,
@@ -49,6 +51,7 @@ class LanguageDashboard < Administrate::BaseDashboard
     :flag,
     :name,
     :code,
+    :users,
     :tests,
   ].freeze
 

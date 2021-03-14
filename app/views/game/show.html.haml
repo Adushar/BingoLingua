@@ -15,9 +15,9 @@
       = link_to unselect_all_cards_path(test_id: @test.id), method: :delete, remote: true, class: "btn remove_stars" do
         = image_tag "/unselect_all.svg", class: "unselect_all"
     %li
-      %button.btn.auto_play{:type => "button"} Auto
+      %button.btn.auto_play{:type => "button"}= t('game.auto_play_button')
     %li
-      %button.play.btn#texted_btn{:type => "button"} Play
+      %button.play.btn#texted_btn{:type => "button"}= t('game.play_button')
     / Button trigger modal
   .container.mobnav.mt-2
     .row

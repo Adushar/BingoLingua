@@ -22,9 +22,9 @@
       #navbarNav.collapse.navbar-collapse
         %ul.navbar-nav
           %li.nav-item
-            %a.nav-link{:href => "/game"} Choose your pack
+            %a.nav-link{:href => "/game"}= t('navbar.choose_pack')
           %li.nav-item
-            %a.nav-link{:href => "/top"} Top 10 players
+            %a.nav-link{:href => "/top"}= t('navbar.top_10')
           - if current_user.try(:admin?)
             %li.nav-item
               %a.nav-link{:href => "/admin"} Admin panel
@@ -32,10 +32,10 @@
           - if current_user
             %a.picture.nav-link{:href => "/personal_account"}= (current_user.first_name[0]+current_user.last_name[0]).upcase
             %li.nav-item
-              = link_to "Log Out", destroy_user_session_path, class: "nav-link", method: :get
+              = link_to t('navbar.log_out'), destroy_user_session_path, class: "nav-link", method: :get
           - else
             %li.nav-item
-              = link_to "Log In", new_user_session_path, class: "nav-link"
+              = link_to t('navbar.log_in'), new_user_session_path, class: "nav-link"
     - if notice.present?
       .alert.alert-info.alert-dismissible.fade.show{:role => "alert"}
         = notice
@@ -95,12 +95,12 @@
           / Grid column
           .col-md-2.col-lg-2.col-xl-2.mx-auto.mb-4
             / Links
-            %h6.text-uppercase.font-weight-bold Products
+            %h6.text-uppercase.font-weight-bold= t('footer.products')
             %hr.deep-purple.accent-2.mb-4.mt-0.d-inline-block.mx-auto{:style => "width: 60px;"}/
             %p
-              %a{:href => "/game"} Let's play
+              %a{:href => "/game"}= t('footer.lets_play')
             %p
-              %a{:href => "/personal_account"} Personal vocabulary account
+              %a{:href => "/personal_account"}= t('footer.vocabulary_account')
             - Page.all.each do |page|
               %p
                 %a{:href => "/#{page.url}"}= page.url.humanize
@@ -108,7 +108,7 @@
           / Grid column
           .col-md-4.col-lg-3.col-xl-3.mx-auto.mb-md-0.mb-4
             / Links
-            %h6.text-uppercase.font-weight-bold Contact
+            %h6.text-uppercase.font-weight-bold= t('footer.contact')
             %hr.deep-purple.accent-2.mb-4.mt-0.d-inline-block.mx-auto{:style => "width: 60px;"}/
             %p
               %i.fa.fa-envelope.mr-3
