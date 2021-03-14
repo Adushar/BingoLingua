@@ -23,13 +23,13 @@ class Point < ApplicationRecord
       SELECT user_id,
       SUM (value) as sum
       FROM points
-      WHERE created_at >= ?
+      WHERE created_at >= '#{Time.current.beginning_of_month}'
       GROUP BY user_id
       ORDER BY sum DESC
       LIMIT 100;
     SQL
 
-    top_users = ActiveRecord::Base.connection.execute(sql, Time.current.beginning_of_month).to_a
+    top_users = ActiveRecord::Base.connection.execute(sql).to_a
     top_users.map {|hash| {user: User.find(hash['user_id']), points: hash['sum']} }
   end
 end
