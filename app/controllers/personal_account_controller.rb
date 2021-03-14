@@ -10,7 +10,7 @@ class PersonalAccountController < ApplicationController
       tests: current_user.test_results.distinct.pluck(:test_id).count,
       repeats: @learned_words.sum(:revise_times)
     }
-    @top_users = Point.top_users.first(10)
-    @top_monthly_users = Point.top_monthly_users.first(10)
+    @top_users = Point.top_10_users
+    @top_monthly_users = Point.top_10_users_monthly
   end
 end
