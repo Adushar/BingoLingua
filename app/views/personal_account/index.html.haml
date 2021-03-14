@@ -35,6 +35,7 @@
             %th{:scope => "row"}= index + 1
             %td= top_record[:user].full_name
             %td= top_record[:points]
+  %hr{style: 'width:95%;', class: 'my-3'}
 
   .col-sm-9.col-md-12.mx-auto
     %h5.pl-2 Monthly Top Users
@@ -50,7 +51,26 @@
             %th{:scope => "row"}= index + 1
             %td= top_record[:user].full_name
             %td= top_record[:points]
+  %hr{style: 'width:95%;', class: 'my-3'}
 
+  - @top_10_users_by_group.each do |hash|
+    .col-sm-9.col-md-12.mx-auto
+      %h5.pl-2= "Top '#{hash[:group].name}' Users"
+      %table.table.top_group_users
+        %thead
+          %tr
+            %th{:scope => "col"} #
+            %th{:scope => "col"} Full name
+            %th{:scope => "col"} Points
+        %tbody
+          - hash[:data].each_with_index do |top_record, index|
+            %tr
+              %th{:scope => "row"}= index + 1
+              %td= top_record[:user].full_name
+              %td= top_record[:points]
+    %hr{style: 'width:95%;', class: 'my-3'}
+
+  .col-sm-9.col-md-12.mx-auto
     %table.table#learned_words
       %h5.pl-2 Learned Words
       %thead

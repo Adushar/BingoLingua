@@ -4,4 +4,5 @@
 $(document).on('turbolinks:load', () ->
   $('#top_users, #top_monthly_users').DataTable()
   $('#learned_words').DataTable()
+  $('.top_group_users').DataTable()
 )

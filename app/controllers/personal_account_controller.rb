@@ -12,5 +12,6 @@ class PersonalAccountController < ApplicationController
     }
     @top_users = Point.top_10_users
     @top_monthly_users = Point.top_10_users_monthly
+    @top_10_users_by_group = Point.top_10_users_by_groups(current_user.groups)
   end
 end
