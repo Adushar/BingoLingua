@@ -1,5 +1,5 @@
 class GameController < ApplicationController
-  before_action :demo_mode, only: :show, if: -> { Test.find(params[:id]).free && !current_user }
+  before_action :demo_mode, only: :show, if: -> { !current_user && Test.where(id: params[:id]).exists? }
 
   def index
     @extra_tests = Test.extra.to_a
@@ -19,17 +19,14 @@ class GameController < ApplicationController
   end
 
   def show
+    redirect_to new_user_session_path and return unless current_user
+
     @test = Test.find(params[:id])
+    @assigned_tests = current_user.assigned_tests || []
+    test_assigned = @assigned_tests.include?(@test)
+    render 'no_access', layout: false and return if !current_user.active_subscription? && !test_assigned
+
     @cards = @test.cards.order(:position_in_test)
-    # If user isnt logged in
-    if current_user.nil?
-      redirect_to new_user_registration_url
-    end
-    # Redirect if it isn`t free, user is logged in and subscribe is ended, but this user isn`t admin
-    if ( !@test.free && current_user && !(User.subscribe_active(current_user.id)) && !current_user.admin? )
-      render :file => "#{Rails.root}/public/pay.html",  layout: false
-      return
-    end
     # Set up default cookie; get cookie and transform to integer
     cookies[:level] = { value: 1, :expires => 12.month.from_now } if !cookies.has_key?(:level)
     gon.test_id = params[:id]
