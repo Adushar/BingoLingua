@@ -1,8 +1,8 @@
 ua:
   navbar:
-    choose_pack: Доступні колоди
+    choose_pack: Бібліотека всіх курсів
     premium_pack: Колоди для підписників
-    top_10: Топ 10 гравців
+    top_10: Особистий словник
     log_out: Вийти
     log_in: Увійти
   footer:
