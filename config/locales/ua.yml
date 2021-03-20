@@ -13,7 +13,6 @@ ua:
   game:
     extra_packs: "Вибіркові"
     assigned_packs: 'Назначені'
-    premium_packs_link: '> Бібліотека для підписників <'
     lets_play_packs: "Почнемо!"
     premium_packs: 'Для підписників'
     auto_play_button: Авто

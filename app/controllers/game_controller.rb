@@ -5,15 +5,23 @@ class GameController < ApplicationController
     @extra_tests = Test.extra.to_a
     @extra_tests = Kaminari.paginate_array(@extra_tests).page(params[:extra_tests]).per(15)
 
-    @assigned_tests = current_user&.assigned_tests || []
-    @assigned_tests = Kaminari.paginate_array(@assigned_tests).page(params[:assigned_tests]).per(15)
+    @groups = current_user&.groups || []
+    @groups = @groups.map do |group|
+      tests = group.tests || []
+      paginated_tests = Kaminari.paginate_array(tests).page(params["group_#{group.id}".to_sym]).per(15)
+      {group: group, paginated_tests: paginated_tests}
+    end
 
     @free_tests = Test.free.to_a.sort_by(&:pack_name) if current_user&.groups.blank?
     @free_tests ||= []
     @free_tests = Kaminari.paginate_array(@free_tests).page(params[:free_tests]).per(15)
   end
 
-  def premium
+  def library
+    @free_tests = Test.free.to_a.sort_by(&:pack_name) if current_user&.groups.blank?
+    @free_tests ||= []
+    @free_tests = Kaminari.paginate_array(@free_tests).page(params[:free_tests]).per(15)
+
     @subscribe_tests = Test.premium.to_a.sort_by(&:pack_name)
     @subscribe_tests = Kaminari.paginate_array(@subscribe_tests).page(params[:subscribe_tests]).per(15)
   end
@@ -24,7 +32,7 @@ class GameController < ApplicationController
     @test = Test.find(params[:id])
     @assigned_tests = current_user.assigned_tests || []
     test_assigned = @assigned_tests.include?(@test)
-    render 'no_access', layout: false and return if !current_user.active_subscription? && !test_assigned
+    render 'no_access', layout: false and return if !test_assigned && !current_user.admin?
 
     @cards = @test.cards.order(:position_in_test)
     # Set up default cookie; get cookie and transform to integer

@@ -3,19 +3,19 @@ Rails.application.routes.draw do
   resources :js_log, only: [:create]
 
   namespace :admin do
-      resources :users
-      resources :tests
-      resources :test_results
-      resources :cards
-      resources :languages
-      resources :pages
-      resources :groups
+    resources :users
+    resources :tests
+    resources :test_results
+    resources :cards
+    resources :languages
+    resources :pages
+    resources :groups
 
-      root to: "users#index"
-    end
+    root to: "users#index"
+  end
   devise_for :users
   root "game#index"
-  get 'premium', to: 'game#premium', as: :game_premium
+  get 'library', to: 'game#library', as: :game_library
   resources :game, only: [:index, :show]
   resources :multiple_load, only: [:new, :create]
   resources :reset_repeats, only: [:update]

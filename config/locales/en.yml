@@ -13,7 +13,6 @@ en:
   game:
     extra_packs: 'Extra'
     assigned_packs: 'Assigned'
-    premium_packs_link: '> Library for subscribers <'
     lets_play_packs: "Let's play"
     premium_packs: Premium
     auto_play_button: Auto
