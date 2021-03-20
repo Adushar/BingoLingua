@@ -18,7 +18,7 @@ class GameController < ApplicationController
   end
 
   def library
-    @free_tests = Test.free.to_a.sort_by(&:pack_name) if current_user&.groups.blank?
+    @free_tests = Test.free.to_a.sort_by(&:pack_name)
     @free_tests ||= []
     @free_tests = Kaminari.paginate_array(@free_tests).page(params[:free_tests]).per(15)
 
