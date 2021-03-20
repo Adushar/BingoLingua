@@ -14,7 +14,7 @@ en:
     extra_packs: 'Extra'
     assigned_packs: 'Assigned'
     lets_play_packs: "Let's play"
-    premium_packs: Library of all courses
+    all_packs: Library of all courses
     auto_play_button: Auto
     play_button: Play
   no_access:

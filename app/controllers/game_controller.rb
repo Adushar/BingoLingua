@@ -18,12 +18,8 @@ class GameController < ApplicationController
   end
 
   def library
-    @free_tests = Test.free.to_a.sort_by(&:pack_name)
-    @free_tests ||= []
-    @free_tests = Kaminari.paginate_array(@free_tests).page(params[:free_tests]).per(15)
-
-    @subscribe_tests = Test.premium.to_a.sort_by(&:pack_name)
-    @subscribe_tests = Kaminari.paginate_array(@subscribe_tests).page(params[:subscribe_tests]).per(15)
+    @tests = Test.all.to_a.sort_by(&:pack_name)
+    @tests = Kaminari.paginate_array(@tests).page(params[:all_tests]).per(15)
   end
 
   def show
