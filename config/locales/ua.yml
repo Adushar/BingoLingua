@@ -14,7 +14,7 @@ ua:
     extra_packs: "Вибіркові"
     assigned_packs: 'Назначені'
     lets_play_packs: "Почнемо!"
-    premium_packs: 'Для підписників'
+    premium_packs: Бібліотека всіх курсів
     auto_play_button: Авто
     play_button: Почати
   no_access:
