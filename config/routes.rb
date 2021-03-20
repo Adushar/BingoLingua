@@ -27,7 +27,6 @@ Rails.application.routes.draw do
   post 'selected_cards/select', as: :select_card
   delete 'selected_cards/unselect_all', as: :unselect_all_cards
 
-  resources :top, only: [:index]
   resources :personal_account, only: [:index]
   resources :language, only: :update
 
