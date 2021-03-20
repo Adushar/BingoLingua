@@ -59,6 +59,8 @@ class User < ActiveRecord::Base
 
   def subscribe_left
     if active_subscription?
+      return "Your subscription never ends" if admin?
+
       days = (Date.today...subscribe_ends).count
       "Subscribe ends in <b>#{days}</b> days"
     else
