@@ -18,3 +18,6 @@ en:
     premium_packs: Premium
     auto_play_button: Auto
     play_button: Play
+  no_access:
+    title: These packs are not available for your course
+    text: If you are interested in purchasing them, please contact us
