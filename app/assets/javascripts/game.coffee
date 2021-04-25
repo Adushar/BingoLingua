@@ -5,6 +5,7 @@ getTestParts = ->
   return testPartNumbers.reduce (a,b) -> Math.max a, b
 
 document.addEventListener 'turbolinks:load', ->
+  history.pushState(null, null, window.location.href)
   mobile = $(window).width() < 768
   Howler.unload()
   $('.slider-block').slick({
@@ -38,7 +39,6 @@ document.addEventListener 'turbolinks:load', ->
     fullscreen();
     event.preventDefault();
   $('.play, .auto_play').click ->
-    history.pushState(null, null, window.location.href)
     $('.game_zone').removeAttr("data-learning");
     if $(".auto_play").is("[active]")                                           # if user cancels auto mode
       $(this).removeAttr("active");                                             # remove active status
