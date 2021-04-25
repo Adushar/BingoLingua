@@ -38,6 +38,7 @@ document.addEventListener 'turbolinks:load', ->
     fullscreen();
     event.preventDefault();
   $('.play, .auto_play').click ->
+    history.pushState(null, null, window.location.href)
     $('.game_zone').removeAttr("data-learning");
     if $(".auto_play").is("[active]")                                           # if user cancels auto mode
       $(this).removeAttr("active");                                             # remove active status
