@@ -5,7 +5,6 @@ getTestParts = ->
   return testPartNumbers.reduce (a,b) -> Math.max a, b
 
 document.addEventListener 'turbolinks:load', ->
-  history.pushState(null, null, window.location.href)
   mobile = $(window).width() < 768
   Howler.unload()
   $('.slider-block').slick({
