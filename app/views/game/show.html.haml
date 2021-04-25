@@ -15,7 +15,8 @@
       = link_to unselect_all_cards_path(test_id: @test.id), method: :delete, remote: true, class: "btn remove_stars" do
         = image_tag "/unselect_all.svg", class: "unselect_all"
     %li
-      %button.btn.auto_play{:type => "button"}= t('game.auto_play_button')
+      =link_to t('game.back_button'), game_path(@test), class: 'btn go_back'
+      -#%button.btn.auto_play{:type => "button"}= t('game.auto_play_button')
     %li
       %button.play.btn#texted_btn{:type => "button"}= t('game.play_button')
     / Button trigger modal
@@ -23,7 +24,6 @@
     .row
       .col-6.d-from-md-none
         %button.play#texted_btn.btn.play{:type => "button"} Start
-        %button.auto_play.btn{:type => "button"} Auto
       .col-6.d-from-md-none.text-right
         %button.btn.btn-secondary{:type => "button", "data-toggle" => "modal", "data-target" => ".settings-modal-sm"} Settings
         %button.btn.btn-secondary.fullscreen
@@ -57,9 +57,11 @@
             %button.btn.btn-dark.prev_arrow{:type => "button"} ←
             %button.btn.btn-dark.next_arrow{:type => "button"} →
         .mobile_controll
-          %button.btn.auto_play.mob
-            %span A
-            %i.fa.fa-repeat{"aria-hidden" => "true"}
+          =link_to game_path(@test), class: 'btn go_back mob' do
+            %i.fa.fa-chevron-circle-left{"aria-hidden" => "true"}
+          -#%button.btn.auto_play.mob
+          -#  %span A
+          -#  %i.fa.fa-repeat{"aria-hidden" => "true"}
           %button.btn.play.mob
             %i.fa.fa-repeat{"aria-hidden" => "true"}
           %button.btn.settings.mob{:type => "button", "data-toggle" => "modal", "data-target" => ".settings-modal-sm"}

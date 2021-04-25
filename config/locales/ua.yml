@@ -15,6 +15,7 @@ ua:
     assigned_packs: 'Назначені'
     lets_play_packs: "Почнемо!"
     all_packs: Бібліотека всіх курсів
+    back_button: Назад
     auto_play_button: Авто
     play_button: Почати
   no_access:

@@ -93,14 +93,14 @@ input.level[data-toggle="tooltip"], input.part_number[data-toggle="tooltip"] {
 .game_zone .notification_holder {
   display: none;
 }
-.auto_play, .play.btn {
+.auto_play, .play.btn, .go_back {
   &[active=active] {
     -moz-box-shadow: inset 0 0 10px #0000006e;
     -webkit-box-shadow: inset 0 0 10px #0000006e;
     box-shadow: inset 0 0 10px #0000006e;
   }
 }
-.auto_play {
+.auto_play, .go_back {
   background-color: #f4bc59;
 }
 .play.btn {
@@ -172,7 +172,7 @@ input.level[data-toggle="tooltip"], input.part_number[data-toggle="tooltip"] {
   display: none;
   text-align: center;
   padding-bottom: 20px;
-  button {
+  button, a.btn {
     background: #777777;
     border-radius: 50%;
     width: 30vw;
@@ -189,6 +189,10 @@ input.level[data-toggle="tooltip"], input.part_number[data-toggle="tooltip"] {
     &:hover {
       color: white;
     }
+  }
+  .go_back.mob {
+    margin: 3px;
+    i {transform: none;}
   }
   .play.mob {
     width: 35vw;

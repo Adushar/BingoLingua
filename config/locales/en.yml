@@ -15,6 +15,7 @@ en:
     assigned_packs: 'Assigned'
     lets_play_packs: "Let's play"
     all_packs: Library of all courses
+    back_button: Back
     auto_play_button: Auto
     play_button: Play
   no_access:
