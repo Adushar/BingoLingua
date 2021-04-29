@@ -16,7 +16,7 @@
         = image_tag "/unselect_all.svg", class: "unselect_all"
     %li
       =link_to t('game.back_button'), game_path(@test), class: 'btn go_back'
-      -#%button.btn.auto_play{:type => "button"}= t('game.auto_play_button')
+      %button.btn.auto_play{:type => "button"}= t('game.auto_play_button')
     %li
       %button.play.btn#texted_btn{:type => "button"}= t('game.play_button')
     / Button trigger modal
@@ -44,7 +44,7 @@
         .mobile_info
           %span
             %div Score:
-            .b#mob_score.odometer= current_user.points
+            .b#mob_score.odometer= current_user.scores
           %span
             %div Level:
             .b= cookie_level
@@ -59,9 +59,9 @@
         .mobile_controll
           =link_to game_path(@test), class: 'btn go_back mob' do
             %i.fa.fa-chevron-circle-left{"aria-hidden" => "true"}
-          -#%button.btn.auto_play.mob
-          -#  %span A
-          -#  %i.fa.fa-repeat{"aria-hidden" => "true"}
+          %button.btn.auto_play.mob
+            %span A
+            %i.fa.fa-repeat{"aria-hidden" => "true"}
           %button.btn.play.mob
             %i.fa.fa-repeat{"aria-hidden" => "true"}
           %button.btn.settings.mob{:type => "button", "data-toggle" => "modal", "data-target" => ".settings-modal-sm"}

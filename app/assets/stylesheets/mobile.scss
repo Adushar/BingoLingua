@@ -100,6 +100,16 @@ $screen-xl-min: 1200px;
   .full-width.text-capitalize {
     display: none;
   }
+  .mobile_controll > .btn.mob {
+    width: 23vw;
+    height: 23vw;
+
+    i { line-height: 23vw; }
+    span {
+      width: 23vw;
+      line-height: 23vw;
+    }
+  }
 }
 
 @media screen and (max-width: #{$screen-sm-min}) and (min-width: 475px) {
